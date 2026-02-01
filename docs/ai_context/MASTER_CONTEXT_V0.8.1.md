@@ -1,6 +1,6 @@
-# MASTER CONTEXT: Six Sigma Learning Platform (v0.8.1)
+# MASTER CONTEXT: Six Sigma Learning Platform (v0.8.0)
 **Last Updated**: 2026-02-01
-**Version**: 0.8.1 (UI/UX Pro Max Edition)
+**Version**: 0.8.0 (UI/UX Pro Max Complete)
 
 ## 1. Project Overview
 A professional, bilingual (English/Vietnamese) learning platform for Six Sigma Green Belt certification.

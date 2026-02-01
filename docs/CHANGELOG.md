@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.8.0] - 2026-02-01
+### 🎨 UI/UX Pro Max Complete
+- **Dashboard Cards**: Aligned "Start Learning" buttons using CSS Grid `auto-rows-fr` + `CardFooter`.
+- **Sidebar**: Added `mt-4` spacing between Dashboard and Curriculum sections.
+- **Design System**: Teal (#0D9488) / Orange (#F97316) palette + Fira fonts.
+- **Mobile Layout**: TabsList scrollable, content padding `px-4`.
+- **Card Fixes**: `p-0 overflow-hidden` on AITutor, PythonEditor, Flashcard.
+- **Agent Skills**: Added `ui-ux-pro-max` skill for design pattern audits.
+
 ## [0.7.7] - 2026-02-01
 ### 🎨 UI/UX Pro Max Audit & Fixes
 - **Design System**: Injected Pro Max Teal (#0D9488) / Orange (#F97316) palette and premium shadows into `globals.css`.

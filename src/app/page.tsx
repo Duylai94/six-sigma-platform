@@ -4,34 +4,52 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/contexts/AuthContext";
-import { ArrowRight, Trophy } from "lucide-react";
+import { ArrowRight, Trophy, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
-  const { user, loading, signInWithEmail } = useAuth();
+  const { user, loading, signUp, signIn } = useAuth();
 
-  // Email state
+  // Form state
   const [email, setEmail] = useState("");
-  const [isEmailSent, setIsEmailSent] = useState(false);
-  const [emailLoading, setEmailLoading] = useState(false);
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [isRegistering, setIsRegistering] = useState(false);
+  const [formLoading, setFormLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const handleEmailLogin = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
-    setEmailLoading(true);
-    const { error } = await signInWithEmail(email);
-    setEmailLoading(false);
-    if (!error) {
-      setIsEmailSent(true);
+    if (!email || !password) return;
+
+    setFormLoading(true);
+    setError(null);
+    setSuccess(null);
+
+    if (isRegistering) {
+      // Sign Up
+      const { error } = await signUp(email, password);
+      if (error) {
+        setError(error.message);
+      } else {
+        setSuccess("Account created! You are now logged in.");
+      }
     } else {
-      alert("Error sending magic link: " + error.message);
+      // Sign In
+      const { error } = await signIn(email, password);
+      if (error) {
+        setError(error.message);
+      }
     }
+
+    setFormLoading(false);
   };
 
   return (
@@ -85,36 +103,99 @@ export default function Home() {
               ) : (
                 <div className="w-full space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
 
-                  {/* Email Magic Link (Primary) */}
-                  {isEmailSent ? (
-                    <div className="p-4 rounded-xl bg-green-500/10 text-green-600 border border-green-200 animate-in zoom-in duration-300">
-                      <p className="font-bold text-lg">Check your email!</p>
-                      <p className="text-sm opacity-90 mt-1">We sent a magic link to <span className="font-medium underline">{email}</span>.</p>
-                      <Button variant="ghost" size="sm" onClick={() => setIsEmailSent(false)} className="mt-2 text-xs h-auto py-1 hover:bg-green-500/20 hover:text-green-700">
-                        Try different email
+                  {/* Login/Register Form */}
+                  <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+                    {/* Email Input */}
+                    <Input
+                      type="email"
+                      placeholder="Email"
+                      className="rounded-full pl-6 py-6 bg-background/80 backdrop-blur-sm border-input shadow-sm focus-visible:ring-primary text-base"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      autoFocus
+                    />
+
+                    {/* Password Input */}
+                    <div className="relative">
+                      <Input
+                        type={showPassword ? "text" : "password"}
+                        placeholder="Password"
+                        className="rounded-full pl-6 pr-12 py-6 bg-background/80 backdrop-blur-sm border-input shadow-sm focus-visible:ring-primary text-base"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        minLength={6}
+                      />
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full"
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                       </Button>
                     </div>
-                  ) : (
-                    <form onSubmit={handleEmailLogin} className="flex flex-col gap-3">
-                      <div className="flex gap-2">
-                        <Input
-                          type="email"
-                          placeholder="Enter your email to login..."
-                          className="rounded-full pl-6 py-6 bg-background/80 backdrop-blur-sm border-input shadow-sm focus-visible:ring-primary text-base"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          required
-                          autoFocus
-                        />
-                        <Button type="submit" size="lg" className="rounded-full aspect-square shrink-0 shadow-md" disabled={emailLoading}>
-                          {emailLoading ? <span className="animate-spin">⏳</span> : <ArrowRight className="w-5 h-5" />}
-                        </Button>
+
+                    {/* Error Message */}
+                    {error && (
+                      <div className="p-3 rounded-xl bg-red-500/10 text-red-600 border border-red-200 text-sm animate-in zoom-in duration-300">
+                        {error}
                       </div>
-                      <p className="text-xs text-muted-foreground">
-                        We'll send you a secure magic link. No password needed.
-                      </p>
-                    </form>
-                  )}
+                    )}
+
+                    {/* Success Message */}
+                    {success && (
+                      <div className="p-3 rounded-xl bg-green-500/10 text-green-600 border border-green-200 text-sm animate-in zoom-in duration-300">
+                        {success}
+                      </div>
+                    )}
+
+                    {/* Submit Button */}
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="w-full rounded-full py-6 shadow-md"
+                      disabled={formLoading}
+                    >
+                      {formLoading ? (
+                        <span className="animate-spin">⏳</span>
+                      ) : isRegistering ? (
+                        "Create Account"
+                      ) : (
+                        <>
+                          Sign In
+                          <ArrowRight className="ml-2 w-5 h-5" />
+                        </>
+                      )}
+                    </Button>
+                  </form>
+
+                  {/* Toggle Login/Register */}
+                  <p className="text-sm text-muted-foreground">
+                    {isRegistering ? (
+                      <>
+                        Already have an account?{' '}
+                        <button
+                          onClick={() => { setIsRegistering(false); setError(null); setSuccess(null); }}
+                          className="underline hover:text-primary transition-colors font-medium"
+                        >
+                          Sign In
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        Don't have an account?{' '}
+                        <button
+                          onClick={() => { setIsRegistering(true); setError(null); setSuccess(null); }}
+                          className="underline hover:text-primary transition-colors font-medium"
+                        >
+                          Create Account
+                        </button>
+                      </>
+                    )}
+                  </p>
 
                   <p className="text-xs text-muted-foreground pt-8 border-t border-border/40 mt-6">
                     Just browsing?{' '}

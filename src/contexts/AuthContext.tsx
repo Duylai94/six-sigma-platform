@@ -8,8 +8,8 @@ type AuthContextType = {
     user: User | null;
     session: Session | null;
     loading: boolean;
-    signInWithGoogle: () => Promise<void>;
-    signInWithEmail: (email: string) => Promise<{ error: any }>;
+    signUp: (email: string, password: string) => Promise<{ error: any }>;
+    signIn: (email: string, password: string) => Promise<{ error: any }>;
     signOut: () => Promise<void>;
 };
 
@@ -40,22 +40,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return () => subscription.unsubscribe();
     }, []);
 
-    const signInWithGoogle = async () => {
-        const { error } = await supabase.auth.signInWithOAuth({
-            provider: "google",
-            options: {
-                redirectTo: `${window.location.origin}/dashboard`,
-            },
+    // Sign up with email/password (no verification required)
+    const signUp = async (email: string, password: string) => {
+        const { error } = await supabase.auth.signUp({
+            email,
+            password,
         });
-        if (error) console.error("Login failed:", error.message);
+        return { error };
     };
 
-    const signInWithEmail = async (email: string) => {
-        const { error } = await supabase.auth.signInWithOtp({
+    // Sign in with email/password
+    const signIn = async (email: string, password: string) => {
+        const { error } = await supabase.auth.signInWithPassword({
             email,
-            options: {
-                emailRedirectTo: `${window.location.origin}/dashboard`,
-            },
+            password
         });
         return { error };
     };
@@ -65,7 +63,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
 
     return (
-        <AuthContext.Provider value={{ user, session, loading, signInWithGoogle, signInWithEmail, signOut }}>
+        <AuthContext.Provider value={{ user, session, loading, signUp, signIn, signOut }}>
             {children}
         </AuthContext.Provider>
     );
