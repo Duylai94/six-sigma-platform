@@ -63,26 +63,26 @@ Summary: ${currentModule.summary_vi}
     return (
         <div className="min-h-screen bg-background flex flex-col overflow-x-hidden">
             {/* Top Bar */}
-            <header className="border-b px-6 py-4 flex items-center gap-4 bg-muted/20">
-                <Button variant="ghost" size="icon" onClick={() => router.push("/dashboard")}>
+            <header className="border-b px-3 md:px-6 py-3 md:py-4 flex items-center gap-2 md:gap-4 bg-muted/20 w-full overflow-hidden">
+                <Button variant="ghost" size="icon" onClick={() => router.push("/dashboard")} className="shrink-0">
                     <ArrowLeft className="h-5 w-5" />
                 </Button>
-                <div>
-                    <div className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">
+                <div className="min-w-0 flex-1">
+                    <div className="text-xs text-muted-foreground uppercase tracking-wider font-semibold truncate">
                         {currentChapter?.title_en}
                     </div>
-                    <h1 className="text-xl font-bold">{currentModule.title_en}</h1>
+                    <h1 className="text-lg md:text-xl font-bold truncate">{currentModule.title_en}</h1>
                 </div>
-                <div className="ml-auto flex gap-2 items-center">
-                    <Button variant="outline" size="sm" onClick={toggleLanguage} className="gap-2">
+                <div className="flex gap-1 md:gap-2 items-center shrink-0">
+                    <Button variant="outline" size="sm" onClick={toggleLanguage} className="gap-1 md:gap-2 px-2 md:px-3">
                         {language === 'vn' ? 'VN' : 'ENG'}
                     </Button>
-                    <Badge variant="outline">{currentModule.estimated_time_minutes} min</Badge>
+                    <Badge variant="outline" className="hidden sm:flex">{currentModule.estimated_time_minutes} min</Badge>
                 </div>
             </header>
 
             {/* Main Content */}
-            <main className="flex-1 w-full max-w-6xl mx-auto p-2 md:p-6 h-[calc(100vh-80px)] overflow-x-hidden">
+            <main className="flex-1 w-full max-w-6xl mx-auto px-2 py-2 md:p-6 overflow-x-hidden box-border">
                 <Tabs defaultValue="learn" className="h-full flex flex-col">
                     <TabsList className="inline-flex w-full md:w-auto h-auto p-1 mb-6 gap-2 bg-muted/50 overflow-x-auto flex-nowrap">
                         <TabsTrigger value="learn" className="flex-1 md:flex-none px-2 md:px-4 text-xs md:text-sm"><BookOpen className="h-4 w-4 mr-2" /> {ui.module.detailed_explanation[language]}</TabsTrigger>

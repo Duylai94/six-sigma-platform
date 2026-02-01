@@ -21,6 +21,13 @@ export const metadata: Metadata = {
   description: "Comprehensive bilingual Six Sigma course with Python integration.",
 };
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ProgressProvider } from "@/contexts/ProgressContext";
 import { AuthProvider } from "@/contexts/AuthContext";

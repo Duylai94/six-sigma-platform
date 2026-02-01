@@ -20,7 +20,7 @@ export function FormattedText({ text, className }: FormattedTextProps) {
     const blocks = parseMarkdown(text);
 
     return (
-        <div className={cn("space-y-4 text-foreground/90 leading-relaxed", className)}>
+        <div className={cn("space-y-4 text-foreground/90 leading-relaxed max-w-full overflow-hidden", className)}>
             {blocks.map((block, index) => {
                 if (block.type === 'mermaid') {
                     return <MermaidDiagram key={index} chart={block.content} />;
@@ -41,7 +41,7 @@ export function FormattedText({ text, className }: FormattedTextProps) {
                 const paragraphs = content.split(/\n\s*\n/);
 
                 return (
-                    <div key={index} className="space-y-2">
+                    <div key={index} className="space-y-2 max-w-full overflow-hidden">
                         {paragraphs.map((p, i) => {
                             if (!p.trim()) return null;
 
@@ -49,9 +49,9 @@ export function FormattedText({ text, className }: FormattedTextProps) {
                             if (p.trim().startsWith("- ")) {
                                 const items = p.split("\n").filter((line) => line.trim().startsWith("- "));
                                 return (
-                                    <ul key={i} className="list-disc ml-6 space-y-1">
+                                    <ul key={i} className="list-disc ml-4 md:ml-6 space-y-1 max-w-full">
                                         {items.map((item, j) => (
-                                            <li key={j} className="pl-1">
+                                            <li key={j} className="pl-1 break-words overflow-wrap-anywhere">
                                                 <InlineParser text={item.replace(/^\s*-\s/, "")} />
                                             </li>
                                         ))}
@@ -65,7 +65,7 @@ export function FormattedText({ text, className }: FormattedTextProps) {
                                 return (
                                     <div key={i} className="space-y-2">
                                         {lines.map((line, j) => (
-                                            <p key={j} className="whitespace-pre-line">
+                                            <p key={j} className="whitespace-pre-line break-words overflow-wrap-anywhere">
                                                 <InlineParser text={line} />
                                             </p>
                                         ))}
@@ -75,7 +75,7 @@ export function FormattedText({ text, className }: FormattedTextProps) {
 
                             // Standard Paragraph
                             return (
-                                <p key={i} className="whitespace-pre-line">
+                                <p key={i} className="whitespace-pre-line break-words overflow-wrap-anywhere">
                                     <InlineParser text={p} />
                                 </p>
                             );

@@ -209,4 +209,10 @@
   .glass-panel {
     @apply bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm;
   }
+
+  /* Mobile text wrapping utility */
+  .overflow-wrap-anywhere {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
 }
