@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Bot, Send, X, MessageSquare, Loader2, Trash2 } from "lucide-react";
+import { Bot, Send, X, MessageSquare, Loader2, Trash2, Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAITutor } from "@/contexts/AITutorContext";
 import { FormattedText } from "@/components/FormattedText";
@@ -27,6 +27,7 @@ export function AITutor() {
 
     const [input, setInput] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const [aiLanguage, setAiLanguage] = useState<'en' | 'vn'>('vn'); // Local AI response language
     const scrollRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -68,7 +69,7 @@ export function AITutor() {
                 body: JSON.stringify({
                     message: userMsg,
                     context: moduleContext,
-                    language: language
+                    language: aiLanguage // Use local AI language preference
                 })
             });
 
@@ -111,6 +112,17 @@ export function AITutor() {
                             <CardTitle className="text-base font-mono">AI Tutor</CardTitle>
                         </div>
                         <div className="flex items-center gap-1">
+                            {/* AI Response Language Toggle */}
+                            <Button
+                                variant="ghost"
+                                size="sm"
+                                className="h-6 px-2 text-xs font-mono text-primary-foreground hover:bg-white/20 gap-1"
+                                onClick={() => setAiLanguage(prev => prev === 'vn' ? 'en' : 'vn')}
+                                title={aiLanguage === 'vn' ? 'Switch to English' : 'Đổi sang Tiếng Việt'}
+                            >
+                                <Globe className="h-3 w-3" />
+                                {aiLanguage === 'vn' ? 'VN' : 'EN'}
+                            </Button>
                             <Button
                                 variant="ghost"
                                 size="icon"

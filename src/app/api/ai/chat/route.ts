@@ -9,25 +9,29 @@ export async function POST(req: Request) {
     }
 
     try {
-        const { message, context } = await req.json();
+        const { message, context, language } = await req.json();
 
         // Perplexity API Configuration
         const PERPLEXITY_URL = "https://api.perplexity.ai/chat/completions";
         const systemPrompt = iasscGreenBeltCourse.ai_config.system_prompt_vi;
+
+        // Language instruction based on toggle
+        const languageInstruction = language === 'en'
+            ? "IMPORTANT: You MUST respond ENTIRELY in English. Do not use any Vietnamese."
+            : "IMPORTANT: Bạn PHẢI trả lời HOÀN TOÀN bằng Tiếng Việt. Không sử dụng Tiếng Anh.";
 
         const payload = {
             model: iasscGreenBeltCourse.ai_config.model_name,
             messages: [
                 {
                     role: "system",
-                    content: systemPrompt
+                    content: `${systemPrompt}\n\n${languageInstruction}`
                 },
                 {
                     role: "user",
                     content: `
 [CONTEXT]
 ${context || "No specific context provided."}
-(IMPORTANT: Please reply in the language specified in the context above, or default to the language of the user's question.)
 [/CONTEXT]
 
 User Question: ${message}
