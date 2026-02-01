@@ -709,6 +709,10 @@ for index, row in df.iterrows():
                     ai_tutor_available: true
                 }
             ],
+            faq: [],
+            mastery_threshold: 80,
+            estimated_time_minutes: 40,
+            prerequisites_ids: ["mod_define_02"]
         },
         {
             id: "mod_define_04",
@@ -911,94 +915,167 @@ else:
                     ai_tutor_available: true
                 }
             ],
+            faq: [],
+            mastery_threshold: 80,
+            estimated_time_minutes: 45,
+            prerequisites_ids: ["mod_define_03"]
         },
         {
             id: "mod_define_fmea",
             order: 5,
-            title_en: "Process Failure Analysis (FMEA)",
-            summary_vi: "Phân tích sai hỏng (Failure Mode) và đánh giá rủi ro (RPN).",
-            summary_en: "Failure Mode Effects Analysis and Risk Priority Number (RPN).",
-            key_metrics_en: ["RPN (Risk Priority Number)", "Severity", "Occurrence", "Detection"],
+            title_en: "Process Failure Mode & Effects Analysis (FMEA)",
+            summary_vi: "Công cụ chủ động để xác định rủi ro và ưu tiên chúng bằng chỉ số RPN.",
+            summary_en: "A proactive tool used to identify potential risks and prioritize them using the Risk Priority Number (RPN).",
+            key_metrics_en: ["RPN", "Severity", "Occurrence", "Detection"],
             key_points_en: [
-                "FMEA: Systematic method to identify failures BEFORE they happen.",
-                "RPN = Severity × Occurrence × Detection.",
-                "Action Threshold: RPN > 100 needs immediate action.",
-                "Logic: Identify Failure -> Effect -> Cause -> Controls."
+                "Proactive vs Reactive: FMEA is about finding failures BEFORE they happen.",
+                "Logic: Failure Mode -> Failure Effect -> Cause -> Controls.",
+                "Formula: RPN = Severity (S) × Occurrence (O) × Detection (D).",
+                "Rule: High Severity (9 or 10) MUST be fixed first, regardless of RPN total.",
+                "Corrective Action: Reduce Occurrence (Best) > Improve Detection (Good) > Reduce Severity (Hardest)."
             ],
             explanation_vi: `
-**1. FMEA là gì?**
-Là công cụ "vắc-xin" của Six Sigma. Thay vì đợi cháy rồi chữa, ta tìm nguy cơ cháy và dập tắt từ trong trứng nước.
-- **Quy trình 5 bước:** Tìm Lỗi -> Tìm Hậu quả -> Tìm Nguyên nhân -> Tính RPN -> Hành động.
+**1. Các Định Nghĩa & Phân Loại**
+FMEA là cách tiếp cận từng bước để tìm rủi ro.
+- **DFMEA (Design):** Phân tích lỗi thiết kế sản phẩm (pha Measure/Analyze của DMADV).
+- **PFMEA (Process):** Phân tích lỗi quy trình (pha Measure/Analyze của DMAIC).
+- **Luồng Logic:**
+  - *Failure Mode (Lỗi):* Cách nó hỏng (VD: Quá nhiệt).
+  - *Effect (Hệ quả):* Ảnh hưởng đến KH (VD: Bỏng tay).
+  - *Cause (Nguyên nhân):* Tại sao hỏng? (VD: Hỏng cảm biến).
+  - *Control (Kiểm soát):* Làm sao để chặn? (VD: Tự ngắt).
 
-**2. Công thức RN (Risk Priority Number)**
-\`RPN = Severity (S) * Occurrence (O) * Detection (D)\`
-Thang điểm 1-10 (Lưu ý: 10 là TỆ nhất, 1 là TỐT nhất).
-- **Severity (Nghiêm trọng):** Hậu quả tệ thế nào? (10 = Chết người/Mất khách hàng).
-- **Occurrence (Tần suất):** Có hay bị không? (10 = Ngày nào cũng bị).
-- **Detection (Khả năng phát hiện):** Có dễ phát hiện không? (10 = Không thể phát hiện cho đến khi khách dùng).
+━━━━━━
 
-**3. Quy tắc hành động**
-- **RPN > 100:** BẮT BUỘC phải hành động (Action Plan).
-- Hãy ưu tiên giảm **Occurrence** (Nguyên nhân) trước, rồi đến **Detection** (Kiểm soát), cuối cùng là **Severity** (Thiết kế lại).
+**2. Điểm Số RPN (Thang 1-10) - CẦN NHỚ**
+Bạn phải nhớ ý nghĩa của điểm 1 và 10:
+
+- **Severity (S - Mức độ nghiêm trọng):** Ảnh hưởng tệ thế nào?
+  - *10:* Nguy hiểm tính mạng / Phạm pháp không báo trước.
+  - *1:* Không ảnh hưởng gì đáng kể.
+
+- **Occurrence (O - Tần suất):** Có hay xảy ra không?
+  - *10:* Chắc chắn xảy ra (Inevitable).
+  - *1:* Cực kỳ hiếm khi xảy ra.
+
+- **Detection (D - Khả năng phát hiện):** Khó phát hiện cỡ nào? *(Dễ nhầm lẫn)*
+  - *10 (Tệ):* Không thể phát hiện (Không có cách kiểm tra).
+  - *1 (Tốt):* Chắc chắn phát hiện (Tự động chặn lỗi).
+
+━━━━━━
+
+**3. Tính Toán & Ưu Tiên (RPN)**
+- **Công thức:** $ RPN = S \\times O \\times D $ (Max 1000).
+- **Quy tắc Ưu tiên (Quan trọng cho thi):**
+  - *Quy tắc cũ:* Sửa mọi lỗi RPN > 100.
+  - *Quy tắc mới:* Luôn ưu tiên **Severity cao (9-10)** trước, bất kể RPN là bao nhiêu. An toàn là số 1.
+- **Chiến lược khắc phục:**
+  1. Giảm **Occurrence** (Tốt nhất): Ngăn chặn nguyên nhân (Poka-yoke).
+  2. Tăng **Detection** (Khá): Thêm kiểm tra/cảm biến.
+  3. Giảm **Severity** (Khó nhất): Phải đổi thiết kế sản phẩm.
             `,
             explanation_en: `
-**1. What is FMEA?**
-It is the "Vaccine" of Six Sigma. Systematic prevention of failure.
-- **Logic:** Step -> Failure Mode -> Effect -> Cause -> Current Controls.
+**1. Definitions & Types**
+FMEA is a step-by-step approach for identifying failures.
+- **DFMEA (Design):** Product design risks (DMADV).
+- **PFMEA (Process):** Process step risks (DMAIC).
+- **Logic Flow:** Process Step → Failure Mode (How it fails) → Failure Effect (Impact) → Cause → Controls.
 
-**2. The RPN Formula**
-\`RPN = Severity (S) * Occurrence (O) * Detection (D)\`
-Rated 1-10 (10 is BAD, 1 is GOOD).
-- **Severity:** How bad is the impact? (10 = Hazardous/Safety).
-- **Occurrence:** How often does the cause happen? (10 = Frequent).
-- **Detection:** How good is our control? (10 = No detection, Client finds it).
+━━━━━━
 
-**3. Action Rules**
-- **RPN > 100:** Mandatory Action Required.
-- **Priority:** First reduce Occurrence (Prevent cause), then improve Detection (Better alarms). Severity is hardest to change (Requires Redesign).
+**2. The RPN Variables (Scale 1-10)**
+Memorize the extremes:
+
+- **Severity (S):** Impact on customer.
+  - *Score 10:* Hazardous/Safety issue without warning.
+  - *Score 1:* No discernible effect.
+
+- **Occurrence (O):** Frequency of the cause.
+  - *Score 10:* Inevitable / Failure is certain.
+  - *Score 1:* Extremely unlikely.
+
+- **Detection (D):** Ability to detect failure BEFORE it reaches customer.
+  - *Score 10 (Bad):* Absolute uncertainty / No controls.
+  - *Score 1 (Good):* Certain to detect (Automatic error proofing).
+
+━━━━━━
+
+**3. Calculating & Prioritizing RPN**
+- **Formula:** $ RPN = S \\times O \\times D $.
+- **Range:** 1 to 1000.
+- **Prioritization Rule (Exam Tip):**
+  - ALWAYS prioritize high **Severity (9 or 10)** first, even if the total RPN is low. Safety first.
+- **Corrective Action Strategy:**
+  1. **Reduce Occurrence** (Best): Prevent the cause (Poka-yoke).
+  2. **Improve Detection**: Add sensors/inspection.
+  3. **Reduce Severity** (Hardest): Change the physical design.
             `,
-            recommended_tools_en: ["FMEA Template"],
-            python_focus_en: ["Calculation"],
+            recommended_tools_en: ["FMEA Template", "Risk Assessment Matrix"],
+            python_focus_en: ["Risk Analysis"],
             code_blocks: [
                 {
                     id: "code_define_fmea",
-                    title_en: "Calculating RPN",
-                    description_vi: "Tính chỉ số RPN và xác định mức độ ưu tiên.",
-                    code_template: `def calculate_rpn(sev, occ, det):
-    rpn = sev * occ * det
+                    title_en: "RPN Calculator & Prioritizer",
+                    description_vi: "Tính RPN và tự động đề xuất ưu tiên xử lý.",
+                    concept_explanation_en: `This script calculates the Risk Priority Number (RPN).
+It also applies the **Safety First Rule**: If Severity >= 9, it flags it as CRITICAL regardless of the RPN score.`,
+                    concept_explanation_vi: `Mã này tính chỉ số RPN.
+Nó cũng áp dụng **Quy tắc An toàn**: Nếu Severity >= 9, nó sẽ báo là NGUY HIỂM (Critical) bất kể điểm RPN là bao nhiêu.`,
+                    code_template: `def analyze_risk(severity, occurrence, detection):
+    rpn = severity * occurrence * detection
     
-    status = "Safe"
-    if rpn > 100:
-        status = "CRITICAL ACTION REQUIRED"
-    elif rpn > 50:
-        status = "Monitor Closely"
-        
-    return rpn, status
+    status = "Low Risk"
+    action = "Monitor"
 
-# Scenario:
-# Severity: 8 (Customer very angry)
-# Occurrence: 5 (Happens occasionally)
-# Detection: 7 (Hard to catch, manual check)
-s, o, d = 8, 5, 7
+    # PRIORITIZATION LOGIC
+    if severity >= 9:
+        status = "CRITICAL (Safety Issue)"
+        action = "Redesign Mandatory - Fix Immediately!"
+    elif rpn > 100:
+        status = "High Risk"
+        action = "Take Action to Reduce Occurrence/Detection"
+    
+    return rpn, status, action
 
-rpn, action = calculate_rpn(s, o, d)
-print(f"Severity: {s} | Occurrence: {o} | Detection: {d}")
-print(f"Risk Priority Number (RPN): {rpn}")
-print(f"Status: {action}")`,
-                    expected_output_en: "RPN Score: 280 (Critical).",
+# Example Risk: Machine Overheating
+s = 9  # Hazardous (Fire risk)
+o = 2  # Low occurrence
+d = 2  # Easy to detect (Sensors)
+
+rpn, risk_status, rec_action = analyze_risk(s, o, d)
+
+print(f"Risk Profile (S={s}, O={o}, D={d})")
+print(f"RPN Score: {rpn}")
+print(f"Status: {risk_status}")
+print(f"Recommended Action: {rec_action}")`,
+                    expected_output_en: "RPN calculation and priority warning.",
+                    expected_output_vi: "Tính RPN và cảnh báo ưu tiên.",
                     datasets_used: [],
-                    learning_points_en: ["Risk Logic", "Conditionals"],
-                    difficulty_en: "Beginner"
+                    learning_points_en: ["RPN Logic", "Prioritization Rules"],
+                    difficulty_en: "Beginner",
+                    ai_tutor_prompts: ["Why is High Detection score (10) bad?", "How to reduce Severity?"],
+                    challenges: [
+                        {
+                            id: "ch_rpn_01",
+                            prompt_en: "Calculate a scenario with S=4, O=10, D=10.",
+                            prompt_vi: "Tính toán kịch bản với S=4, O=10, D=10.",
+                            hint_en: "Change variables s, o, d.",
+                            solution_code: "s=4\no=10\nd=10\nrpn, st, ac = analyze_risk(s, o, d)"
+                        }
+                    ]
                 }
             ],
             ai_tutor_context: {
                 enabled: true,
-                system_prompt_en: "Quiz me on FMEA ratings.",
+                system_prompt_en: "Act as an FMEA moderator. Help prioritize risks.",
                 suggested_questions: [
-                    { question_vi: "Điểm Detection = 10 nghĩa là gì?", question_en: "What does Detection score = 10 mean?" },
-                    { question_vi: "Nếu RPN = 120 thì làm gì?", question_en: "What to do if RPN = 120?" }
+                    { question_vi: "Detection (D) bằng 10 nghĩa là gì?", question_en: "What does Detection score of 10 mean?" },
+                    { question_vi: "Quy tắc ưu tiên RPN hiện đại là gì?", question_en: "What is the modern RPN prioritization rule?" },
+                    { question_vi: "Làm sao để giảm Severity?", question_en: "How to reduce Severity?" },
+                    { question_vi: "DFMEA khác gì PFMEA?", question_en: "Difference between DFMEA and PFMEA?" },
+                    { question_vi: "Tính RPN: S=9, O=2, D=1?", question_en: "Calc RPN: S=9, O=2, D=1?" }
                 ],
-                hint_levels: ["Can you see the defect?", "Mandatory action threshold"],
+                hint_levels: ["Can you see the failure?", "Safety vs Frequency", "Design change vs Process change"],
                 max_hints_per_question: 3
             },
             references_en: [
@@ -1006,11 +1083,43 @@ print(f"Status: {action}")`,
             ],
             flashcards: [
                 {
-                    id: "fc_fmea_01",
-                    question_en: "In FMEA, which rating is '10' if the defect is impossible to detect?",
-                    answer_vi: "Detection (Khả năng phát hiện).",
-                    tags_en: ["FMEA", "Risk"],
+                    id: "fc_define_05_01",
+                    question_en: "What is the RPN formula?",
+                    answer_vi: "RPN = Severity x Occurrence x Detection.",
+                    tags_en: ["RPN", "Formula"],
+                    difficulty_en: "Easy",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_define_05_02",
+                    question_en: "If Severity is 9 or 10, what must you do regardless of RPN?",
+                    answer_vi: "Prioritize it immediately (Safety Issue).",
+                    tags_en: ["RPN", "Prioritization"],
+                    difficulty_en: "High",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_define_05_03",
+                    question_en: "Does a high Detection score (10) mean you are GOOD or BAD at finding the defect?",
+                    answer_vi: "BAD. 10 means 'Absolute Uncertainty' (Cannot detect).",
+                    tags_en: ["RPN", "Scoring"],
                     difficulty_en: "Medium",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_define_05_04",
+                    question_en: "Which type of action is preferred: Reducing Occurrence or Improving Detection?",
+                    answer_vi: "Reducing Occurrence (Preventing the cause is better than finding the defect).",
+                    tags_en: ["Corrective Action"],
+                    difficulty_en: "Medium",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_define_05_05",
+                    question_en: "What does DFMEA stand for?",
+                    answer_vi: "Design Failure Mode and Effects Analysis.",
+                    tags_en: ["Definitions"],
+                    difficulty_en: "Easy",
                     ai_tutor_available: true
                 }
             ],
