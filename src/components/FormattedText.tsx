@@ -211,13 +211,13 @@ function TableParser({ block }: { block: string }) {
     const bodyRows = bodyLines.map(line => parseCells(line));
 
     return (
-        // Pro Max Fix: w-full and overflow-x-auto with min-w-0 parent to prevent flex blowout
-        <div className="w-full overflow-x-auto my-4 rounded-lg border border-border bg-muted/20">
-            <table className="min-w-full divide-y divide-border">
+        // Pro Max Fix: max-w-full and overflow-x-auto for mobile/chat contexts
+        <div className="w-full max-w-full overflow-x-auto my-2 rounded-lg border border-border bg-muted/20">
+            <table className="w-full divide-y divide-border text-xs">
                 <thead className="bg-muted/50">
                     <tr>
                         {headerCells.map((cell, i) => (
-                            <th key={i} className="px-4 py-3 text-left font-semibold text-sm whitespace-nowrap text-muted-foreground uppercase tracking-wider">
+                            <th key={i} className="px-2 py-1.5 text-left font-semibold text-xs text-muted-foreground uppercase tracking-wider break-words">
                                 <InlineParser text={cell} />
                             </th>
                         ))}
@@ -227,7 +227,7 @@ function TableParser({ block }: { block: string }) {
                     {bodyRows.map((row, rowIndex) => (
                         <tr key={rowIndex} className={cn("transition-colors hover:bg-muted/30", rowIndex % 2 === 0 ? "bg-card" : "bg-muted/10")}>
                             {row.map((cell, cellIndex) => (
-                                <td key={cellIndex} className="px-4 py-3 text-sm whitespace-normal min-w-[120px]">
+                                <td key={cellIndex} className="px-2 py-1.5 text-xs break-words">
                                     <InlineParser text={cell} />
                                 </td>
                             ))}

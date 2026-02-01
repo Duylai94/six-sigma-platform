@@ -149,15 +149,15 @@ export function AITutor() {
                                 {messages.map((m, i) => (
                                     <div key={i} className={cn("flex w-full", m.role === "user" ? "justify-end" : "justify-start")}>
                                         <div className={cn(
-                                            "max-w-[85%] rounded-2xl px-4 py-2 text-sm shadow-sm",
+                                            "max-w-[85%] rounded-2xl px-3 py-2 text-sm shadow-sm overflow-hidden",
                                             m.role === "user"
                                                 ? "bg-primary text-primary-foreground rounded-br-none"
                                                 : "bg-white dark:bg-slate-800 border-border text-foreground rounded-bl-none"
                                         )}>
                                             {m.role === "user" ? (
-                                                <p className="whitespace-pre-wrap font-sans">{m.content}</p>
+                                                <p className="whitespace-pre-wrap font-sans break-words">{m.content}</p>
                                             ) : (
-                                                <FormattedText text={m.content} className="text-sm space-y-2 [&_p]:leading-normal min-w-0" />
+                                                <FormattedText text={m.content} className="text-sm space-y-2 [&_p]:leading-normal min-w-0 max-w-full overflow-hidden [&_*]:max-w-full" />
                                             )}
                                         </div>
                                     </div>
