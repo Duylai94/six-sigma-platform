@@ -385,7 +385,6 @@ Summary: ${currentModule.summary_vi}
                                             <Flashcard
                                                 key={i}
                                                 index={i}
-                                                isFlipped={false} // Component handles its own state
                                                 question={card.question_en}
                                                 answer={language === 'vn' ? card.answer_vi : (card.answer_en || card.answer_vi)}
                                                 difficulty={card.difficulty_en}

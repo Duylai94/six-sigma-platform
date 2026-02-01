@@ -312,82 +312,86 @@ if payback < 1:
             explanation_vi: `
 **1. Voice of Customer (VOC)**
 VOC là "tiếng nói thô" từ khách hàng. Nó mô tả khách hàng MUỐN gì, chứ không phải làm thế nào để đạt được.
-- **Định nghĩa:** Nhu cầu và mong đợi của khách hàng, bao gồm cả những điều nói ra (Explicit) và không nói ra (Implicit).
-- **Loại dữ liệu (Data Types):**
-  - **Reactive Data (Phản ứng):** Khiếu nại, Yêu cầu bảo hành, Trả hàng. *Cho biết bạn đã làm sai ở đâu.*
-  - **Proactive Data (Chủ động):** Khảo sát, Phỏng vấn, Focus Groups, Thử nghiệm Beta. *Tìm hiểu khách hàng muốn gì trong tương lai.*
+
+📍 **So sánh Dữ liệu VOC:**
+
+| Đặc điểm | Reactive Data (Phản ứng) | Proactive Data (Chủ động) |
+| :--- | :--- | :--- |
+| **Nguồn** | Khiếu nại, Trả hàng, Bảo hành | Khảo sát, Phỏng vấn, Focus Group |
+| **Thời điểm** | Sau khi chuyện đã xảy ra | Trước hoặc trong quá trình phát triển |
+| **Thông tin** | Cho biết "Bạn đã sai ở đâu" | Cho biết "Khách hàng muốn gì sắp tới" |
+| **Chi phí** | Rất đắt (Mất khách, sửa chữa) | Rẻ (Chỉ tốn công thám sát) |
 
 ━━━━━━
 
 **2. CTQ Tree (Cây chất lượng quan trọng)**
 VOC thường mơ hồ. Bạn phải dịch nó thành Yêu cầu kỹ thuật (Requirement).
-- **Cấu trúc:** Customer Need -> Drivers -> Requirements (CTQs).
-- **Ví dụ:**
-  - **Need (Nhu cầu):** "Tôi muốn dịch vụ tuyệt vời" *(Mơ hồ)*.
-  - **Driver (Yếu tố dẫn dắt):** "Sự phản hồi nhanh".
-  - **Requirement (CTQ):** "Điện thoại phải được trả lời trong vòng 3 tiếng chuông" *(Cụ thể, Đo lường được)*.
-- *Lưu ý:* Một CTQ hợp lệ phải có Giới hạn/Mục tiêu (Limit/Target).
+- **Need (Nhu cầu):** "Tôi muốn pizza ngon." *(Quá chung chung)*
+- **Driver (Yếu tố):** "Độ nóng", "Hương vị", "Thời gian".
+- **CTQ (Yêu cầu đo được):** "Pizza phải giao trên 60 độ C."
 
 ━━━━━━
 
-**3. Kano Model (Mô hình Kano)**
-Phân loại yêu cầu khách hàng thành 3 nhóm để xác định tác động đến sự hài lòng:
+**3. Mô hình Kano (Ưu tiên tính năng)**
+Không phải tính năng nào cũng tạo ra sự hài lòng giống nhau.
 
-🟢 **Must-Be / Basic Quality (Phải có):**
-- **Thiếu:** Khách hàng KHÔNG hài lòng (Dissatisfied).
-- **Có:** Khách hàng thấy bình thường (Neutral) - Họ coi đó là điều hiển nhiên.
-- *Ví dụ:* Khăn trải giường sạch ở khách sạn, phanh xe hơi.
+🔴 **Must-Be (Phải có):**
+- Đây là tiêu chuẩn tối thiểu.
+- Có thì khách **không khen**, nhưng thiếu thì khách **sẽ chửi**.
+- *VD:* Nhà vệ sinh sạch, Bánh xe cho ô tô.
 
-🔵 **Performance / Expected Quality (Hiệu suất):**
-- **Đặc điểm:** Tuyến tính (Linear). Có càng nhiều càng tốt.
-- *Ví dụ:* Thời lượng pin, tốc độ internet, tiết kiệm xăng.
+🔵 **Performance (Hiệu suất):**
+- Càng nhiều càng tốt. Tỉ lệ thuận với sự hài lòng.
+- Đây là nơi các công ty cạnh tranh nhau.
+- *VD:* Tốc độ internet, Thời lượng pin, Dung lượng GB.
 
-🔥 **Delighters / Exciting Quality (Gây thích thú):**
-- **Thiếu:** Khách hàng thấy bình thường (Họ không mong đợi nó).
-- **Có:** Khách hàng cực kỳ vui sướng (Delighted).
-- *Ví dụ:* Bánh quy nóng miễn phí khi check-in.
-
-*The Kano Shift:* Theo thời gian, Delighters sẽ trở thành Performance, và cuối cùng trở thành Must-Be (VD: Wifi ở khách sạn).
+🟡 **Delighters (Gây thích thú):**
+- Khách hàng không ngờ tới.
+- Thiếu cũng không sao, nhưng có thì **Wow!**.
+- *VD:* Quà tặng bất ngờ, Gói nâng cấp miễn phí.
             `,
             explanation_en: `
 **1. Voice of Customer (VOC)**
 VOC is the "raw" feedback from the customer. It describes WHAT the customer wants, not HOW to achieve it.
-- **Definition:** Customer's explicit (stated) and implicit (unspoken) needs and expectations.
-- **Data Types:**
-  - **Reactive Data:** Complaints, Warranty Claims, Returns. *Tells you where you failed.*
-  - **Proactive Data:** Surveys, Focus Groups, Interviews, Beta Testing. *Finds out what customers want in the future.*
+
+📍 **VOC Data Comparison:**
+
+| Feature | Reactive Data | Proactive Data |
+| :--- | :--- | :--- |
+| **Source** | Complaints, Returns, Warranty Claims | Surveys, Interviews, Focus Groups |
+| **Timing** | After the meaningful event (Failure) | Before or during development |
+| **Insight** | Tells you "Where you failed" | Tells you "What they want next" |
+| **Cost** | High (Lost loyalty, rework) | Low (Research cost only) |
 
 ━━━━━━
 
 **2. CTQ Tree (Critical to Quality)**
-VOC is vague. You must translate it into a Requirement.
-- **Structure:** Customer Need -> Drivers -> Requirements (CTQs).
-- **Example:**
-  - **Need:** "I want excellent service" *(Vague/Hard to measure)*.
-  - **Driver:** "Responsiveness" *(The area we focus on)*.
-  - **Requirement (CTQ):** "Phone must be answered within 3 rings" *(Specific, Measurable)*.
-- *Note:* A valid CTQ must have a Limit (Limit/Target).
+VOC is typically vague. You must translate it into measurable Requirements.
+- **Need:** "I want a good pizza." *(Too Vague)*
+- **Driver:** "Temperature", "Taste", "Speed".
+- **CTQ (Measurable):** "Pizza delivered at > 60°C temp."
 
 ━━━━━━
 
-**3. Kano Model**
-Classifies customer requirements into three categories to determine satisfaction impact:
+**3. Kano Model (Feature Prioritization)**
+Not all features create satisfaction equally.
 
-🟢 **Must-Be / Basic Quality (Dissatisfiers):**
-- **If missing:** Customer is Dissatisfied.
-- **If present:** Customer is Neutral (They take it for granted).
-- *Example:* Clean sheets in a hotel; brakes on a car.
+🔴 **Must-Be (Threshold Attributes):**
+- The minimum entry requirement.
+- If present: Customer is **Neutral**.
+- If missing: Customer is **Dissatisfied**.
+- *Ex:* Clean restrooms, Brakes on a car.
 
-🔵 **Performance / Expected Quality (Linear):**
-- **Characteristics:** More is Better. Satisfaction rises linearly with performance.
-- *Example:* Battery life, internet speed, gas mileage.
+🔵 **Performance (Linear Attributes):**
+- "More is Better." Satisfaction increases linearly with performance.
+- Direct competitive battleground.
+- *Ex:* Internet speed, MPG, Battery life.
 
-🔥 **Delighters / Exciting Quality (Exciters):**
-- **If missing:** Customer is Neutral (They didn't expect it).
-- **If present:** Customer is Delighted.
-- *Example:* Free warm cookies at check-in.
-
-*The Kano Shift:* Over time, Delighters become Performance features, and eventually become Must-Be features (e.g., Wi-Fi in hotels).
+🟡 **Delighters (Exciters):**
+- Unexpected features. The "Wow" factor.
+- If missing: Customer is **Neutral** (didn't expect it).
+- If present: Customer is **Delighted**.
+- *Ex:* Free upgrade, Unexpected gift.
             `,
             recommended_tools_en: ["CTQ Tree", "Kano Survey", "Likert Scale"],
             python_focus_en: ["Data Visualization"],
@@ -398,45 +402,50 @@ Classifies customer requirements into three categories to determine satisfaction
                     title_vi: "Trực quan hóa Mô hình Kano",
                     description_vi: "Mô phỏng và vẽ biểu đồ 3 loại yêu cầu trong Mô hình Kano bằng Python.",
                     concept_explanation_en: `This code simulates and plots the **Kano Model** curves.
-- **Must-Be**: Satisfaction drops rapidly if performance is low, but flattens out (maxes at Neutral) even with high performance.
-- **Performance**: Linear relationship. Better performance = Higher satisfaction.
-- **Delighters**: Satisfaction creates a "Wow" factor exponentially as performance increases.`,
+- **Must-Be (Red)**: Satisfaction drops rapidly if performance is low. It never goes above Neutral (0).
+- **Performance (Blue)**: Linear relationship. Better performance = Higher satisfaction.
+- **Delighters (Green)**: Satisfaction grows exponentially ("Wow" factor) as performance increases.`,
                     concept_explanation_vi: `Mã này mô phỏng và vẽ các đường cong **Mô hình Kano**.
-- **Must-Be**: Sự hài lòng giảm nhanh nếu hiệu suất thấp, nhưng chỉ đạt mức Trung lập (Neutral) ngay cả khi hiệu suất cao.
-- **Performance**: Quan hệ tuyến tính. Hiệu suất tốt hơn = Hài lòng cao hơn.
-- **Delighters**: Sự hài lòng tăng theo cấp số nhân (Wow factor) khi hiệu suất tăng.`,
+- **Must-Be (Đỏ)**: Hài lòng giảm thê thảm nếu hiệu suất kém. Không bao giờ vượt quá mức Trung lập (0).
+- **Performance (Xanh dương)**: Tuyến tính. Tốt hơn = Hài lòng hơn.
+- **Delighters (Xanh lá)**: Hài lòng tăng theo cấp số nhân (Yếu tố Wow).`,
                     code_template: `import matplotlib.pyplot as plt
 import numpy as np
 
 # Create data range (Performance: Low to High)
 x = np.linspace(0.1, 10, 100)
 
-# 1. Must-Be (Phải có): Logarithmic curve aiming for Neutral (0)
+# 1. Must-Be (Red): Logarithmic curve aiming for Neutral (0)
 # If x is low, y is very negative. If x is high, y approaches 0.
 y_must_be = -10 / x 
 
-# 2. Performance (Hiệu suất): Linear
-y_performance = x - 5  # Centered
+# 2. Performance (Blue): Linear
+y_performance = x - 5  # Centered at 0
 
-# 3. Delighter (Thích thú): Exponential
+# 3. Delighter (Green): Exponential start
 y_delighter = np.exp(x/3) - 1
 
-# Plot
+# Plot Setup
 plt.figure(figsize=(10, 6))
-plt.plot(x, y_must_be, 'r-', linewidth=2, label='Must-Be (Basic)')
-plt.plot(x, y_performance, 'b-', linewidth=2, label='Performance (Linear)')
-plt.plot(x, y_delighter, 'g-', linewidth=2, label='Delighter (Exciter)')
 
-# Add Neutral Line
-plt.axhline(0, color='gray', linestyle='--')
-plt.text(0.5, 0.5, 'Neutral Satisfaction', color='gray')
+# Plot Lines
+plt.plot(x, y_must_be, 'r-', linewidth=3, label='Must-Be (Basic)')
+plt.plot(x, y_performance, 'b-', linewidth=3, label='Performance (Linear)')
+plt.plot(x, y_delighter, 'g-', linewidth=3, label='Delighter (Exciter)')
 
-plt.title('Kano Model Visualization')
-plt.xlabel('Degree of Implementation (Performance)')
-plt.ylabel('Customer Satisfaction')
-plt.ylim(-10, 10)
+# Add Neutral Line (y=0)
+plt.axhline(0, color='gray', linestyle='--', alpha=0.5)
+plt.text(0.5, 0.2, 'Neutral Zone', color='gray')
+
+# Styling
+plt.title('Kano Model Visualization', fontsize=14)
+plt.xlabel('Degree of Implementation (Performance)', fontsize=12)
+plt.ylabel('Customer Satisfaction', fontsize=12)
 plt.legend()
 plt.grid(True, alpha=0.3)
+
+# Show Plot
+plt.ylim(-10, 15)
 plt.show()`,
                     expected_output_en: "A plot showing the three distinct Kano curves.",
                     expected_output_vi: "Biểu đồ hiển thị 3 đường cong Kano riêng biệt.",
@@ -449,19 +458,19 @@ plt.show()`,
                             id: "ch_kano_01",
                             prompt_en: "Challenge: Add the 'Indifferent' Line. Create a 4th category called 'Indifferent' where Satisfaction does not change regardless of Performance (y = 0). Plot it in Yellow.",
                             hint_en: "Use plt.axhline or create a y_indifferent array of zeros.",
-                            solution_code: "y_indifferent = np.zeros_like(x)\nplt.plot(x, y_indifferent, 'y-', label='Indifferent')"
+                            solution_code: "y_indifferent = np.zeros_like(x)\nplt.plot(x, y_indifferent, 'y-', linewidth=3, label='Indifferent')"
                         }
                     ]
                 }
             ],
             ai_tutor_context: {
                 enabled: true,
-                system_prompt_en: "You are a Product Manager expert in VOC and Kano Model.",
+                system_prompt_en: "You are a Product Manager expert in VOC and Kano Model. Explain differences between Reactive and Proactive data.",
                 suggested_questions: [
                     { question_vi: "Wifi miễn phí là Must-be hay Delighter?", question_en: "Is free Wifi a Must-be or Delighter?" },
                     { question_vi: "Ví dụ về Proactive Data?", question_en: "Example of Proactive Data?" },
                     { question_vi: "CTQ Tree khác gì với VOC?", question_en: "How is CTQ Tree different from VOC?" },
-                    { question_vi: "Khi nào Delighter trở thành Must-Be?", question_en: "When does a Delighter become a Must-Be?" },
+                    { question_vi: "Tại sao Must-Be không bao giờ tạo ra sự hài lòng?", question_en: "Why does Must-Be never create satisfaction?" },
                     { question_vi: "Làm sao để đo lường VOC?", question_en: "How to measure VOC?" }
                 ],
                 hint_levels: ["Context dependent", "Future needs vs Past complaints", "Measurable vs Vague"],
@@ -497,10 +506,10 @@ plt.show()`,
                 },
                 {
                     id: "fc_define_02_04",
-                    question_en: "What defines a 'Proactive' VOC collection method?",
-                    answer_vi: "Seeking input BEFORE a problem occurs (e.g., Surveys, Focus Groups).",
-                    tags_en: ["VOC", "Data Types"],
-                    difficulty_en: "Medium",
+                    question_en: "Which Kano category does 'Performance' (Blue line) represent?",
+                    answer_vi: "More is Better (Càng nhiều càng tốt). Satisfaction increases linearly.",
+                    tags_en: ["Kano"],
+                    difficulty_en: "Easy",
                     ai_tutor_available: true
                 },
                 {
