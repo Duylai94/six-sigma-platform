@@ -13,6 +13,7 @@ import { PythonEditor } from "@/components/PythonEditor";
 import { ChapterQuiz } from "@/components/quiz/ChapterQuiz";
 import { useAITutor } from "@/contexts/AITutorContext";
 import { FormattedText } from "@/components/FormattedText";
+import { Flashcard } from "@/components/Flashcard";
 import { LessonCompletion, getNextModuleId } from "@/components/layout/LessonCompletion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { UI_STRINGS } from "@/data/i18n";
@@ -381,42 +382,17 @@ Summary: ${currentModule.summary_vi}
                                 {currentModule.flashcards && currentModule.flashcards.length > 0 ? (
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         {currentModule.flashcards.map((card, i) => (
-                                            <Card key={i} className="group hover:shadow-lg transition-all duration-300 border-primary/20">
-                                                <CardHeader className="pb-2">
-                                                    <div className="flex justify-between items-start">
-                                                        <Badge variant="outline" className="mb-2">Card #{i + 1}</Badge>
-                                                        {card.difficulty_en && (
-                                                            <Badge variant={card.difficulty_en === 'Easy' ? 'secondary' : card.difficulty_en === 'Hard' ? 'destructive' : 'default'} className="text-xs">
-                                                                {card.difficulty_en}
-                                                            </Badge>
-                                                        )}
-                                                    </div>
-                                                    <CardTitle className="text-lg font-medium leading-normal">
-                                                        {card.question_en}
-                                                    </CardTitle>
-                                                </CardHeader>
-                                                <CardContent>
-                                                    <div className="pt-4 border-t mt-4">
-                                                        <p className="font-semibold text-primary mb-1">
-                                                            {language === 'vn' ? 'Đáp án:' : 'Answer:'}
-                                                        </p>
-                                                        <p className="text-muted-foreground group-hover:text-foreground transition-colors">
-                                                            {language === 'vn' ? card.answer_vi : (card.answer_en || card.answer_vi)}
-                                                        </p>
-                                                    </div>
-                                                    {card.ai_tutor_available && (
-                                                        <Button
-                                                            variant="ghost"
-                                                            size="sm"
-                                                            className="w-full mt-4 text-xs text-muted-foreground hover:text-primary gap-1"
-                                                            onClick={() => sendQuestion(`Explain this flashcard concept: ${card.question_en}`)}
-                                                        >
-                                                            <Activity className="h-3 w-3" />
-                                                            {language === 'vn' ? 'Giải thích thêm' : 'Explain Concept'}
-                                                        </Button>
-                                                    )}
-                                                </CardContent>
-                                            </Card>
+                                            <Flashcard
+                                                key={i}
+                                                index={i}
+                                                isFlipped={false} // Component handles its own state
+                                                question={card.question_en}
+                                                answer={language === 'vn' ? card.answer_vi : (card.answer_en || card.answer_vi)}
+                                                difficulty={card.difficulty_en}
+                                                aiTutorAvailable={card.ai_tutor_available}
+                                                language={language}
+                                                onExplain={() => sendQuestion(`Explain this flashcard concept: ${card.question_en}`)}
+                                            />
                                         ))}
                                     </div>
                                 ) : (
