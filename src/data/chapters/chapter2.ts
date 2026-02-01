@@ -530,164 +530,387 @@ plt.show()`,
             id: "mod_define_03",
             order: 3,
             title_en: "Project Charter & SIPOC",
-            summary_vi: "Xác định phạm vi dự án bằng SIPOC và chốt Project Charter.",
-            summary_en: "Defining project scope using SIPOC and finalizing the Project Charter.",
-            key_metrics_en: ["In-Scope", "Out-of-Scope", "SIPOC"],
+            summary_vi: "Xác định phạm vi dự án bằng SIPOC và chính thức hóa thỏa thuận giữa các bên bằng Hiến chương Dự án (Project Charter).",
+            summary_en: "Defining project boundaries using SIPOC and formalizing the agreement via the Project Charter (The Contract).",
+            key_metrics_en: ["Scope Creep", "SMART Goals", "Cycle Time"],
             key_points_en: [
-                "Project Charter: The 'Contract' for the project.",
-                "Problem Statement: 4W description (What, Where, When, Cost). No solutions/blame.",
-                "Goal Statement: SMART targets.",
-                "SIPOC: Suppliers -> Inputs -> Process -> Outputs -> Customers.",
-                "Scope Creep: The project slowly getting bigger without approval (SIPOC prevents this)."
+                "Charter: The official authorization 'Contract'. No Sponsor signature = No Project.",
+                "Problem Statement: Focuses on the Symptom (Y), NOT the Cause (x) or Solution. Must utilize the 4Ws (What, Where, When, Magnitude).",
+                "Scope Creep: The tendency for a project to expand beyond original objectives. Defense: Clear 'Out-of-Scope' list.",
+                "SIPOC: High-level map (30,000 ft view) to define 'Start' and 'Stop' points. Often filled P->O->C->I->S."
             ],
             explanation_vi: `
-**1. Project Charter Elements**
-- **Problem Statement:** Mô tả nỗi đau. Phải có dữ liệu. KHÔNG được đoán mò nguyên nhân.
-  * *Sai:* "Máy hỏng do bảo trì kém." (Đổ lỗi)
-  * *Đúng:* "Tỷ lệ chết máy line 1 là 5% trong tháng 6, tốn $2000."
-- **Goal Statement:** Phải SMART. "Giảm tỷ lệ chết máy xuống 2% vào tháng 12."
-- **Scope:** Cái gì làm (In) và cái gì CẤM làm (Out). "Chỉ làm line 1, không làm line 2."
+**1. Các Thành Phần Của Hiến Chương (Project Charter Elements)**
+Hiến chương là một "văn bản sống" và là hợp đồng của dự án.
+- **Business Case:** Tại sao làm dự án này ngay bây giờ? Liên kết với chiến lược công ty và tác động tài chính (ROI).
+- **Problem Statement (Tuyên bố vấn đề):** Mô tả "nỗi đau". Phải chứa 4W:
+  - **What:** Cái gì sai?
+  - **Where:** Xảy ra ở đâu?
+  - **When:** Từ khi nào?
+  - **Magnitude:** Mức độ thế nào (Bao nhiêu tiền)?
+  - ⚠️ *Quy tắc:* **Không Giải pháp (No Solutions)** và **Không Đổ lỗi (No Blame)**.
+  - *Ví dụ:* "Quy trình thanh toán (Where) có tỷ lệ lỗi 15% (Magnitude) từ tháng 1/2023 (When), gây thiệt hại $20k/tháng (Impact)."
+- **Goal Statement:** Xác định "Trạng thái mong muốn". Phải **SMART** (Specific, Measurable, Attainable, Relevant, Time-bound).
+- **Scope (Phạm vi):** Dùng "In-Scope" và "Out-of-Scope" để định ranh giới. Ngăn chặn **Scope Creep** (dự án phình to không kiểm soát).
+- **Team:** **Sponsor** (Cấp vốn/Phê duyệt) và **Process Owner** (Nhận bàn giao sau dự án).
 
-**2. SIPOC (High-Level Map)**
-Dùng để xác định biên giới dự án (Start/Stop).
+━━━━━━
+
+**2. Sơ Đồ SIPOC (SIPOC Diagram)**
+Cái nhìn tổng quan (30,000-foot view) để xác minh phạm vi.
 - **S**uppliers: Ai cung cấp đầu vào?
-- **I**nputs: Cần gì để làm (7M - Man, Machine, Material...)?
-- **P**rocess: 5-7 bước chính thôi.
-- **O**utputs: Sản phẩm đầu ra là gì?
-- **C**ustomers: Ai nhận đầu ra?
+- **I**nputs: Nguyên liệu, thông tin cần thiết.
+- **P**rocess: Các bước chính (Giới hạn 5-7 bước).
+- **O**utputs: Sản phẩm/Dịch vụ đầu ra.
+- **C**ustomers: Ai nhận đầu ra? (Nội bộ hoặc Bên ngoài).
+
+💡 *Mẹo:* SIPOC thường được điền ngược: **P → O → C → I → S** để đảm bảo quy trình thực sự phục vụ khách hàng.
             `,
             explanation_en: `
 **1. Project Charter Elements**
-- **Problem Statement:** Describes the pain. Must include 4 W's (What, Where, When, magnitude). NO solutions, NO blame.
-- **Goal Statement:** SMART Targets (Specific, Measurable, Attainable, Relevant, Time-bound).
-- **Scope:** Define boundaries. What is IN and what is OUT. Prevents **Scope Creep**.
+The Charter is a "living document" and a contract.
+- **Business Case:** Why do this project now? Connects to organizational strategy and financial impact (ROI).
+- **Problem Statement:** Describes the "pain". Must contain the 4 Ws:
+  - **What** is wrong?
+  - **Where** does it happen?
+  - **When** did it start?
+  - **Magnitude** (How much/Cost).
+  - ⚠️ *Critical Rule:* **No Solutions** and **No Blame** in the statement.
+  - *Example:* "The billing process (Where) has a 15% error rate (Magnitude) since Jan 2023 (When), costing $20k/month."
+- **Goal Statement:** Defines the "Desired State". Must be **SMART** (Specific, Measurable, Attainable, Relevant, Time-bound).
+- **Scope:** Uses "In-Scope" and "Out-of-Scope" to define boundaries. Prevents **Scope Creep** (project slowly expanding without approval).
+- **Team:** **Sponsor** (Provides resources/approves charter) and **Process Owner** (Takes over after project ends).
 
-**2. SIPOC (High-Level Map)**
-SIPOC is used to verify the project scope.
-- **S**uppliers: Providers of inputs.
-- **I**nputs: Materials/Info needed.
-- **P**rocess: High-level steps (5-7).
-- **O**utputs: Delieverables.
-- **C**ustomers: Recipients of outputs.
+━━━━━━
+
+**2. SIPOC Diagram**
+A high-level view (30,000-foot view) of the process used to verify scope.
+- **S**uppliers: Who provides the inputs?
+- **I**nputs: Material, info, resources needed.
+- **P**rocess: High-level steps (Limit to 5-7 steps).
+- **O**utputs: The service or product produced.
+- **C**ustomers: Who receives the outputs?
+
+💡 *Note:* SIPOC is often filled out in reverse: **P → O → C → I → S** to ensure the process serves the customer.
             `,
-            recommended_tools_en: ["SIPOC Diagram", "SMART Checklist"],
+            recommended_tools_en: ["SIPOC Diagram", "SMART Checklist", "Project Charter Template"],
             python_focus_en: ["Visualization"],
             code_blocks: [
                 {
                     id: "code_define_sipoc",
-                    title_en: "Creating a SIPOC Table",
-                    description_vi: "Tạo bảng SIPOC dùng Pandas.",
+                    title_en: "Creating a Structured SIPOC Table",
+                    description_vi: "Tạo bảng SIPOC có cấu trúc bằng Pandas.",
+                    concept_explanation_en: `**SIPOC** stands for Suppliers, Inputs, Process, Outputs, Customers.
+It is a high-level view of a process.
+- **Suppliers**: Provide inputs to the process.
+- **Inputs**: Resources required by the process.
+- **Process**: Top-level steps (usually 5-7).
+- **Outputs**: Deliverables to the customer.
+- **Customers**: Receivers of the outputs.`,
+                    concept_explanation_vi: `**SIPOC** là viết tắt của Nhà cung cấp, Đầu vào, Quy trình, Đầu ra, Khách hàng.
+Đây là cái nhìn tổng quan về quy trình.
+- **Suppliers**: Cung cấp đầu vào.
+- **Inputs**: Nguồn lực cần thiết.
+- **Process**: Các bước chính (thường 5-7 bước).
+- **Outputs**: Sản phẩm bàn giao.
+- **Customers**: Người nhận đầu ra.`,
                     code_template: `import pandas as pd
 
-data = {
-    'Suppliers': ['Vendor X', 'Internal IT', 'Customer'],
-    'Inputs': ['Raw Parts', 'Server Access', 'Order Spec'],
-    'Process': ['1. Receive', '2. Assemble', '3. Test'],
-    'Outputs': ['Inventory', 'Log', 'Finished Unit'],
-    'Customers': ['Assembly', 'Audit', 'Shipping']
+# Define the SIPOC data
+sipoc_data = {
+    'Category': ['Suppliers', 'Inputs', 'Process', 'Outputs', 'Customers'],
+    'Details': [
+        'Raw Material Vendor, IT Dept', 
+        'Steel, Software License, Specs', 
+        '1. Cut -> 2. Mold -> 3. Assembly -> 4. Test -> 5. Pack', 
+        'Finished Widget, Test Report', 
+        'Distributor, End User'
+    ]
 }
 
-# Note: Arrays must be same length for simple DF, so we pad with empty strings if needed
-df = pd.DataFrame(data)
-print(df)`,
-                    expected_output_en: "SIPOC dataframe display.",
+# Create DataFrame
+df = pd.DataFrame(sipoc_data)
+
+# Display properly
+print("--- SIPOC DIAGRAM ---")
+for index, row in df.iterrows():
+    print(f"{row['Category']:<12} | {row['Details']}")`,
+                    expected_output_en: "Formatted text table of SIPOC components.",
                     datasets_used: [],
-                    learning_points_en: ["Data Structuring"],
-                    difficulty_en: "Beginner"
+                    learning_points_en: ["Data Structuring", "Process Definition"],
+                    difficulty_en: "Beginner",
+                    ai_tutor_prompts: ["Why limit Process to 7 steps?", "What happens if Inputs are missing?"],
+                    challenges: [
+                        {
+                            id: "ch_sipoc_01",
+                            prompt_en: "Modify the Process step to include a decision point (e.g., 'Check Quality').",
+                            prompt_vi: "Sửa bước Process để bao gồm một điểm quyết định (VD: 'Kiểm tra chất lượng').",
+                            hint_en: "Just edit the string in the 'Process' row.",
+                            solution_code: "# Update the string in data list"
+                        }
+                    ]
                 }
             ],
             ai_tutor_context: {
                 enabled: true,
-                system_prompt_en: "Critique a Problem Statement.",
+                system_prompt_en: "Critique a Problem Statement. Act as a Master Black Belt reviewing a Charter.",
                 suggested_questions: [
                     { question_vi: "Scope Creep là gì?", question_en: "What is Scope Creep?" },
-                    { question_vi: "SIPOC giúp gì cho Scope?", question_en: "How does SIPOC help with Scope?" }
+                    { question_vi: "Quy tắc 4W cho Problem Statement?", question_en: "What is the 4W rule for Problem Statements?" },
+                    { question_vi: "Tại sao nên điền SIPOC ngược?", question_en: "Why fill SIPOC in reverse order?" },
+                    { question_vi: "Tôi có được đưa giải pháp vào Problem Statement không?", question_en: "Can I put solutions in the Problem Statement?" },
+                    { question_vi: "Ai là người ký Project Charter?", question_en: "Who signs the Project Charter?" }
                 ],
-                hint_levels: ["Moving goalposts", "Defining boundaries", "Inputs/Outputs validation"],
+                hint_levels: ["Moving goalposts", "What/Where/When/Magnitude", "Focus on Customer first", "Symptom vs Solution"],
                 max_hints_per_question: 3
             },
             references_en: [
                 { source_type: "pdf", label_en: "Master Cheat Sheet - Section 3", location_hint_en: "Project Charter" }
             ],
-            flashcards: [],
-            faq: [],
-            mastery_threshold: 80,
-            estimated_time_minutes: 30,
-            prerequisites_ids: ["mod_define_02"]
+            flashcards: [
+                {
+                    id: "fc_define_03_01",
+                    question_en: "What is the primary role of the Project Charter?",
+                    answer_vi: "It is the official contract/authorization for the project (signed by Sponsor).",
+                    tags_en: ["Charter"],
+                    difficulty_en: "Easy",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_define_03_02",
+                    question_en: "Which 4 elements (Ms) must a Problem Statement contain?",
+                    answer_vi: "What, Where, When, Magnitude (4Ws).",
+                    tags_en: ["Charter", "Problem Statement"],
+                    difficulty_en: "Medium",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_define_03_03",
+                    question_en: "What should NEVER be in a Problem Statement?",
+                    answer_vi: "Solutions or Blame.",
+                    tags_en: ["Charter", "Rules"],
+                    difficulty_en: "Medium",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_define_03_04",
+                    question_en: "What mechanism in the Charter prevents the project from expanding uncontrollably?",
+                    answer_vi: "Scope (In-Scope vs. Out-of-Scope lists). Prevents Scope Creep.",
+                    tags_en: ["Charter", "Scope"],
+                    difficulty_en: "Easy",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_define_03_05",
+                    question_en: "Why is SIPOC often filled out in reverse (P->O->C->I->S)?",
+                    answer_vi: "To ensure the process output actually meets the Customer's needs first.",
+                    tags_en: ["SIPOC"],
+                    difficulty_en: "Hard",
+                    ai_tutor_available: true
+                }
+            ],
         },
         {
             id: "mod_define_04",
             order: 4,
             title_en: "Process Mapping Fundamentals",
-            summary_vi: "Các cấp độ bản đồ quy trình: L1 (Macro) đến L3 (Micro/Detailed).",
-            summary_en: "Process mapping levels: from L1 (Macro) to L3 (Micro/Detailed).",
-            key_metrics_en: ["Process Map Levels"],
+            summary_vi: "Trực quan hóa dòng chảy quy trình, các ký hiệu tiêu chuẩn và phát hiện lãng phí.",
+            summary_en: "Visualizing the process flow using standard symbols to identify waste, decision points, and bottle-necks.",
+            key_metrics_en: ["Takt Time", "Cycle Time", "Lead Time"],
             key_points_en: [
-                "Process Map: A visual representation of steps.",
-                "Rectangles: Steps/Operations.",
-                "Diamonds: Decision points (Yes/No).",
-                "Ovals: Start/Stop points.",
-                "Level 1: High Level (Management view, like SIPOC).",
-                "Level 2: Standard Worker view.",
-                "Level 3: Micro Detailed (for SOPs and debugging)."
+                "Symbols: Diamond = Decision (Yes/No); Rectangle = Activity; 'D' = Delay (Waste).",
+                "Levels: L1 (Macro/SIPOC) -> L2 (Swimlane/Handoffs) -> L3 (Micro/Detailed SOPs).",
+                "As-Is vs To-Be: Map reality first (As-Is) to find waste, then map the future (To-Be).",
+                "Rule: If Cycle Time > Takt Time, you cannot meet customer demand."
             ],
             explanation_vi: `
-**Bản đồ quy trình (Process Map / Flowchart)**
-Để cải tiến quy trình, bạn phải NHÌN THẤY nó.
-- **Ký hiệu chuẩn:**
-  - Hình chữ nhật: Hành động (Bước).
-  - Hình thoi: Quyết định (Kiểm tra, Nếu sai thì quay lại đâu?).
-  - Hình bầu dục: Bắt đầu / Kết thúc.
+**1. Các Ký Hiệu Chuẩn (Standard Symbols)**
+Bạn phải thuộc lòng các ký hiệu ANSI này cho kỳ thi:
+- **Oval (Bầu dục):** Start/End (Bắt đầu/Kết thúc).
+- **Rectangle (Chữ nhật):** Operation/Activity (Hành động).
+- **Diamond (Hình thoi):** Decision (Quyết định Yes/No). *Mẹo thi: Nơi tạo ra vòng lặp làm lại (Rework Loops).*
+- **"D" Shape:** Delay (Sự chờ đợi). *Quan trọng để tìm lãng phí.*
+- **Arrow:** Hướng đi của dòng chảy.
+- **Parallelogram (Hình bình hành):** Input/Output (Dữ liệu/Vật liệu vào ra).
 
-**Các cấp độ (Levels):**
-- **Level 1 (Macro):** Cái nhìn của Giám đốc. Chỉ 3-5 bước lớn.
-- **Level 2 (Process):** Cái nhìn của Trưởng chuyền. Các bước chính để hoàn thành việc.
-- **Level 3 (Micro):** Cái nhìn của Công nhân/Kỹ thuật viên. Chi tiết từng thao tác bấm nút. Dùng để viết SOP.
-            
-            **3. Time Metrics (Thời gian)**
-            - **Cycle Time:** Tốc độ làm việc tại 1 bước.
-            - **Lead Time:** Tổng thời gian từ đặt hàng -> nhận hàng.
-            - **Takt Time:** Nhịp độ yêu cầu của khách hàng.
+━━━━━━
+
+**2. Các Cấp Độ Bản Đồ (Mapping Levels)**
+- **Level 1 - Macro Map:** Góc nhìn từ 30,000 feet (như SIPOC). Chỉ 5-7 bước lớn. Dùng cho Lãnh đạo xem.
+- **Level 2 - Swimlane (Sơ đồ bơi):** Chia các bước theo "Làn bơi" của từng Phòng ban/Vai trò.
+  - *Mục tiêu:* Nhìn thấy sự chuyển giao (hand-offs) giữa các bộ phận - nơi lỗi hay xảy ra nhất.
+- **Level 3 - Micro Map:** Góc nhìn mặt đất. Hướng dẫn công việc chi tiết (SOP). Từng cú click chuột, từng vòng quay ốc.
+
+━━━━━━
+
+**3. As-Is vs. To-Be**
+- **As-Is Map:** Thực tế đang diễn ra thế nào (có cả lỗi, làm tắt, sửa lại). *Vẽ cái này trước.*
+- **To-Be Map:** Trạng thái tương lai sau khi đã loại bỏ lãng phí.
+
+━━━━━━
+
+**4. Chỉ Số Thời Gian (Time Metrics)**
+- **Cycle Time (C/T):** Thời gian để hoàn thành 1 sản phẩm/bước (thời gian thao tác).
+- **Lead Time (L/T):** Tổng thời gian từ khi Khách đặt hàng -> Giao hàng (Bao gồm cả chờ đợi).
+- **Takt Time:** Nhịp đập của khách hàng.
+  - *Công thức:* Takt = Thời gian sản xuất khả dụng / Nhu cầu khách hàng.
+  - *Quy tắc:* Nếu **Cycle Time > Takt Time** → Bạn không kịp giao hàng (Bottle-neck).
             `,
             explanation_en: `
-**Process Mapping**
-To improve a process, you must see it.
-- **Symbols:**
-  - Rectangle: Activity/Step.
-  - Diamond: Decision (Yes/No).
-  - Oval: Start/Stop.
+**1. Standard Process Map Symbols**
+Memorize these ANSI symbols:
+- **Oval / Terminator:** Start and Stop points.
+- **Rectangle:** Process Step / Activity.
+- **Diamond:** Decision Point (Yes/No). *Exam Tip: Decisions often create rework loops.*
+- **"D" Shape:** Delay (Waiting). *Crucial for finding Waste.*
+- **Arrow:** Direction of flow.
+- **Parallelogram:** Input/Output.
 
-**Mapping Levels:**
-- **Level 1 (Macro):** Management view. 3-5 major steps.
-- **Level 2 (Process):** Standard view. Shows key hand-offs.
-- **Level 3 (Micro):** Detailed instruction view (Work Instructions).
+━━━━━━
 
-**Time Metrics:**
-- **Cycle Time:** Time to complete one unit at one step.
-- **Lead Time:** Total time from order to delivery.
-- **Takt Time:** The rate at which you MUST produce to meet customer demand (Available Time / Demand).
+**2. Mapping Levels**
+- **Level 1 - Macro Map:** 30,000-foot view (like SIPOC). 5-7 major steps. For Management.
+- **Level 2 - Swimlane (Deployment Map):**
+  - Shows "Who does what". Separates steps into lanes by Department/Role.
+  - *Goal:* Identify bad hand-offs between teams where errors occur.
+- **Level 3 - Micro Map:** Ground level. Detailed Work Instructions (SOPs). Every click or turn.
+
+━━━━━━
+
+**3. As-Is vs. To-Be**
+- **As-Is Map:** How it works TODAY (warts and all). Map reality, not fantasy.
+- **To-Be Map:** The improved future state.
+
+━━━━━━
+
+**4. Time Metrics**
+- **Cycle Time (C/T):** Time to complete one step/unit (hands-on).
+- **Lead Time (L/T):** Total time from Work Order to Delivery (includes Delays).
+- **Takt Time:** The "heartbeat" of customer demand.
+  - *Formula:* Takt = Available Production Time / Customer Demand.
+  - *Rule:* If **Cycle Time > Takt Time**, you cannot meet demand (Need more resources/efficiency).
             `,
-            recommended_tools_en: ["Flowchart standard symbols"],
-            python_focus_en: [],
-            code_blocks: [],
+            recommended_tools_en: ["Swimlane Diagram", "Value Stream Map", "Stopwatch"],
+            python_focus_en: ["Metric Calculation"],
+            code_blocks: [
+                {
+                    id: "code_define_takt",
+                    title_en: "Takt Time Calculator",
+                    title_vi: "Tính toán nhịp Takt Time",
+                    description_vi: "Tính Takt Time và so sánh với Cycle Time để tìm điểm nghẽn.",
+                    concept_explanation_en: `**Takt Time** is the required pace of production to meet customer demand.
+Formula: $ Takt = \\frac{\\text{Available Time}}{\\text{Customer Demand}} $
+
+If your **Cycle Time** (actual speed) is slower (higher number) than Takt Time, you have a bottleneck.`,
+                    concept_explanation_vi: `**Takt Time** là nhịp độ sản xuất cần thiết để đáp ứng nhu cầu khách hàng.
+Công thức: $ Takt = \\frac{\\text{Thời gian khả dụng}}{\\text{Nhu cầu khách}} $
+
+Nếu **Cycle Time** (tốc độ thực) chậm hơn (số lớn hơn) Takt Time, bạn đang bị nghẽn (bottleneck).`,
+                    code_template: `def calculate_takt_time(mins_per_shift, shifts_per_day, breaks_mins, demand_per_day):
+    # 1. Provide Available Time (Total Mins - Breaks)
+    total_mins = (mins_per_shift * shifts_per_day) - breaks_mins
+    
+    # 2. Calculate Takt (Time allowed per unit)
+    takt_time = total_mins / demand_per_day
+    
+    return total_mins, takt_time
+
+# Example Data
+shift_mins = 480    # 8 hours
+shifts = 1
+breaks = 30         # 30 min lunch
+daily_demand = 400  # Customers want 400 units/day
+
+avail_time, takt = calculate_takt_time(shift_mins, shifts, breaks, daily_demand)
+
+print(f"Available Time: {avail_time} minutes")
+print(f"Customer Demand: {daily_demand} units")
+print(f"Takt Time: {takt:.2f} minutes/unit")
+print(f"Review: You must finish one unit every {takt * 60:.0f} seconds.")
+
+# Comparison check
+cycle_time = 1.5 # It takes us 1.5 mins to make one
+print(f"\\nCurrent Cycle Time: {cycle_time} mins")
+
+if cycle_time > takt:
+    print("WARNING: Cycle Time > Takt Time. You cannot meet demand! (Bottleneck)")
+else:
+    print("GOOD: Production is fast enough to meet demand.")`,
+                    expected_output_en: "Calculation of Takt Time and Bottleneck warning.",
+                    expected_output_vi: "Kết quả tính Takt Time và cảnh báo điểm nghẽn.",
+                    datasets_used: [],
+                    learning_points_en: ["Takt Time Formula", "Capacity Analysis"],
+                    difficulty_en: "Beginner",
+                    ai_tutor_prompts: ["How do we fix Cycle Time > Takt?", "Does Takt Time depend on machine speed?"],
+                    challenges: [
+                        {
+                            id: "ch_takt_01",
+                            prompt_en: "Recalculate with 2 shifts per day.",
+                            prompt_vi: "Tính lại với 2 ca làm việc mỗi ngày (shifts = 2).",
+                            hint_en: "Change the 'shifts' variable to 2.",
+                            solution_code: "shifts = 2\navail_time, takt = calculate_takt_time(shift_mins, shifts, breaks, daily_demand)"
+                        }
+                    ]
+                }
+            ],
             ai_tutor_context: {
                 enabled: true,
-                system_prompt_en: "Explain standard flowchart symbols.",
+                system_prompt_en: "Explain the difference between Cycle Time and Takt Time.",
                 suggested_questions: [
-                    { question_vi: "Hình thoi dùng để làm gì?", question_en: "What is the diamond shape used for?" },
-                    { question_vi: "Level 3 khác gì Level 1?", question_en: "How is Level 3 different from Level 1?" }
+                    { question_vi: "Swimlane giúp gì cho việc tìm lỗi?", question_en: "How do Swimlanes help find errors?" },
+                    { question_vi: "Làm gì nếu Cycle Time > Takt Time?", question_en: "What if Cycle Time > Takt Time?" },
+                    { question_vi: "Hình thoi (Diamond) có ý nghĩa gì?", question_en: "What does the Diamond symbol mean?" },
+                    { question_vi: "Sự khác biệt giữa As-Is và To-Be?", question_en: "Difference between As-Is and To-Be?" },
+                    { question_vi: "Ký hiệu 'D' là gì?", question_en: "What is the 'D' symbol?" }
                 ],
-                hint_levels: ["Visual shape meaning", "Granularity of detail", "Decision paths"],
+                hint_levels: ["Demand vs Capability", "Handoffs are risky", "Decision points create branches"],
                 max_hints_per_question: 3
             },
             references_en: [
-                { source_type: "pdf", label_en: "Master Cheat Sheet - Section 17", location_hint_en: "Process Mapping" }
+                { source_type: "pdf", label_en: "Master Cheat Sheet - Section 4", location_hint_en: "Process Maps" }
             ],
-            flashcards: [],
-            faq: [],
-            mastery_threshold: 80,
-            estimated_time_minutes: 25,
-            prerequisites_ids: ["mod_define_03"]
+            flashcards: [
+                {
+                    id: "fc_define_04_01",
+                    question_en: "Which map level uses 'Swimlanes' to show department responsibilities?",
+                    answer_vi: "Level 2 (Deployment Map).",
+                    tags_en: ["Process Map", "Levels"],
+                    difficulty_en: "Medium",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_define_04_02",
+                    question_en: "What shape represents a 'Decision Point' (Yes/No) in a flowchart?",
+                    answer_vi: "Diamond (Hình thoi).",
+                    tags_en: ["Symbols"],
+                    difficulty_en: "Easy",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_define_04_03",
+                    question_en: "If Cycle Time (10m) > Takt Time (8m), what happens?",
+                    answer_vi: "You cannot meet customer demand (Bottleneck/Overtime needed).",
+                    tags_en: ["Metrics", "Takt Time"],
+                    difficulty_en: "Hard",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_define_04_04",
+                    question_en: "What does the 'D' symbol typically stand for?",
+                    answer_vi: "Delay (A form of Waste).",
+                    tags_en: ["Symbols", "Waste"],
+                    difficulty_en: "Easy",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_define_04_05",
+                    question_en: "Should you map the 'To-Be' process first?",
+                    answer_vi: "No. Map 'As-Is' first to identify current waste and reality.",
+                    tags_en: ["Process Map", "Methodology"],
+                    difficulty_en: "Medium",
+                    ai_tutor_available: true
+                }
+            ],
         },
         {
             id: "mod_define_fmea",
