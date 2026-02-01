@@ -16,134 +16,300 @@ export const chapterMeasureData: Chapter = {
         {
             id: "mod_measure_01",
             order: 1,
-            title_en: "Process Definition",
-            summary_vi: "Sử dụng bản đồ quy trình chi tiết (Process Maps), FMEA và Ma trận X-Y.",
-            summary_en: "Detailing the process using Process Maps, FMEA, and C&E Matrix.",
-            key_metrics_en: ["RPN (Risk Priority Number)", "Severity", "Occurrence", "Detection"],
+            title_en: "Measure Phase: Process Definition & Filtering",
+            summary_vi: "Xác lập sự hiểu biết chi tiết về quy trình 'As-Is' bằng bản đồ quy trình, ưu tiên đầu vào bằng Ma trận C&E, và đánh giá rủi ro bằng FMEA.",
+            summary_en: "Establishing a detailed understanding of the 'As-Is' process using Process Maps, prioritizing inputs using the C&E Matrix, and assessing risk using FMEA.",
+            key_metrics_en: ["C&E Matrix", "RPN", "Value-Added Time"],
             key_points_en: [
-                "Process Map: Visualizes the sequence of events (Flowchart).",
-                "FMEA (Failure Mode & Effects Analysis): Proactive risk assessment.",
-                "RPN = Severity x Occurrence x Detection.",
-                "Use FMEA to prioritize which risks to fix first.",
-                "Quick Wins: Low effort, high impact improvements found during mapping."
+                "Process Maps: Visualizes tasks. Swimlanes show 'who', Spaghetti shows 'motion', VSM shows 'flow'.",
+                "C&E Matrix (X-Y Diagram): Prioritizes Inputs (X) based on impact to Customer Outputs (Y).",
+                "FMEA: Proactive risk assessment (Severity x Occurrence x Detection).",
+                "FMEA Rule: High Severity (9-10) is always priority #1."
             ],
             explanation_vi: `
-**1. Process Maps & Flowcharts**
-Để đếm hạt gạo, bạn phải nhìn thấy chúng. Để cải tiến quy trình, bạn phải vẽ nó ra.
-- **Process Map:** Chỉ ra dòng chảy vật lý.
-- **Value Stream Map (VSM):** Chỉ ra cả dòng chảy thông tin và vật liệu, tập trung tìm lãng phí (Waste).
+**1. Bản Đồ Quy Trình (Process Maps & Flowcharts)**
+Để đo lường một quy trình, bạn phải xác định điểm Bắt đầu, Kết thúc và các Bước.
+- **Process Map (Flowchart):** Hình chữ nhật (Bước), Hình thoi (Quyết định), Hình "D" (Chờ đợi/Lãng phí).
+- **Swimlane Map (Sơ đồ bơi):** Phân chia bước theo Phòng ban/Người. *Tốt nhất để tìm lỗ hổng trách nhiệm và chuyển giao (hand-offs).*
+- **Spaghetti Diagram:** Vẽ lại đường đi vật lý của người/vật liệu. *Tuyệt vời để tìm lãng phí Di chuyển (Motion).*
+- **Value Stream Map (VSM):** Bản đồ dòng giá trị. Chỉ ra cả dòng chảy vật liệu VÀ thông tin. Phân biệt thời gian Có giá trị (VA) và Không giá trị (NVA).
 
-**2. FMEA (Failure Mode & Effects Analysis)**
-Công cụ quan trọng nhất để phòng ngừa rủi ro. Chúng ta chấm điểm 3 yếu tố (thang 1-10):
-- **Severity (S):** Hậu quả nghiêm trọng không? (10 = Chết người/Mất khách).
-- **Occurrence (O):** Có hay xảy ra không? (10 = Ngày nào cũng bị).
-- **Detection (D):** Có dễ phát hiện không? (10 = Không thể phát hiện cho đến khi khách nhận hàng).
-**RPN = S x O x D**. RPN càng cao -> Phải xử lý gấp.
+━━━━━━
+
+**2. Ma Trận Nguyên Nhân & Kết Quả (C&E Matrix / X-Y Diagram)**
+Sau khi vẽ bản đồ, bạn có rất nhiều Đầu vào (X). Cái nào quan trọng?
+- **Mục đích:** Ưu tiên các Input (X) dựa trên tác động của chúng tới Output của khách hàng (Y).
+- **Phương pháp:**
+  1. Liệt kê Key Outputs (Y's) và trọng số (1-10).
+  2. Liệt kê Key Inputs (X's) từ bản đồ quy trình.
+  3. Chấm điểm tương quan (Correlation) của mỗi X với mỗi Y (0, 1, 3, 9).
+  4. Tính tổng điểm. Những X điểm cao sẽ được đưa vào FMEA.
+
+━━━━━━
+
+**3. FMEA (Failure Mode & Effects Analysis)**
+Công cụ đánh giá rủi ro chủ động.
+- **Scoring (Thang 1-10):**
+  - **Severity (S):** Hậu quả. (10 = An toàn/Chết người).
+  - **Occurrence (O):** Tần suất. (10 = Ngày nào cũng bị).
+  - **Detection (D):** Khả năng phát hiện. (10 = Không có kiểm soát / Không thể phát hiện).
+- **RPN = S x O x D**.
+- **Quy tắc ưu tiên:**
+  1. **High Severity (9-10)** phải xử lý đầu tiên, bất kể RPN.
+  2. RPN cao xử lý tiếp theo.
+- **Hành động khắc phục:** Tốt nhất là giảm O (Ngăn chặn), sau đó là cải thiện D (Phát hiện). Rất khó giảm S (Phải thiết kế lại).
             `,
             explanation_en: `
 **1. Process Maps & Flowcharts**
-To fix a process, you must see it.
-- **Process Map:** Shows the physical flow order.
-- **Value Stream Map (VSM):** Shows material AND information flow, focused on Waste.
+To measure a process, you must define its start, stop, and steps.
+- **Process Map:** Visualizes task sequence. Remember: Diamonds = Decisions, 'D' = Delay.
+- **Swimlane Map:** Separates steps by Department/Role. *Best for identifying unclear hand-offs.*
+- **Spaghetti Diagram:** Traces physical movement. *Best for Motion and Transportation waste.*
+- **Value Stream Map (VSM):** Lean tool showing Material AND Information flow. Distinguishes Value-Added vs Non-Value-Added time.
 
-**2. FMEA (Failure Mode & Effects Analysis)**
-A proactive tool to identify potential failures and prevent them.
-Score 3 factors (1-10 scale):
-- **Severity (S):** Impact of failure (10 = Hazardous/Safety).
-- **Occurrence (O):** Probability of failure (10 = Frequent).
-- **Detection (D):** Ability to find failure before it reaches customer (10 = Cannot detect).
-**RPN = S x O x D**. High RPN -> Priority Action.
+━━━━━━
+
+**2. Cause & Effect Matrix (C&E / X-Y Diagram)**
+After mapping, you have many inputs (X's). Which ones matter?
+- **Purpose:** Prioritize Inputs (X's) based on impact on Customer Outputs (Y's).
+- **Method:**
+  1. List Output Y's & Weight them (1-10).
+  2. List Input X's.
+  3. Rate Correlation (0, 1, 3, 9).
+  4. Calculate Score. High scoring X's -> Move to FMEA.
+
+━━━━━━
+
+**3. FMEA (Risk Assessment)**
+Proactive tool to find failures *before* they happen.
+- **Scoring (1-10):**
+  - **Severity (S):** Impact. (10 = Hazardous).
+  - **Occurrence (O):** Frequency. (10 = Inevitable).
+  - **Detection (D):** Visibility. (**10 = Cannot Detect/No Controls**).
+- **RPN = S x O x D**.
+- **Priority:** Safety first (High S), then High RPN.
+- **Strategy:** Reduce Occurrence (Prevention) > Improve Detection (Final Inspection).
             `,
-            recommended_tools_en: ["Process Cycle Efficiency", "FMEA Template"],
-            python_focus_en: ["Data Structuring"],
-            code_blocks: [],
+            recommended_tools_en: ["C&E Matrix", "Swimlane Map", "VSM"],
+            python_focus_en: ["Matrix Calculation"],
+            code_blocks: [
+                {
+                    id: "code_measure_ce_matrix",
+                    title_en: "Cause & Effect (C&E) Matrix Calculator",
+                    title_vi: "Máy tính Ma trận Nguyên nhân & Kết quả",
+                    description_vi: "Tính điểm ưu tiên cho các đầu vào (X) dựa trên trọng số đầu ra (Y).",
+                    concept_explanation_en: `The **C&E Matrix** creates a weighted score for each Input.
+Score = $\\sum (XY\_Correlation \\times Y\_Importance)$
+
+High scoring inputs are the "Vital Few" variables you should focus on in Analyze phase.`,
+                    concept_explanation_vi: `**Ma trận C&E** tính điểm trọng số cho từng Đầu vào.
+Điểm = $\\sum (Tương\_quan\_XY \\times Độ\_quan\_trọng\_Y)$
+
+Đầu vào điểm cao là những biến số "Vital Few" bạn cần tập trung trong pha Phân tích.`,
+                    code_template: `import pandas as pd
+import numpy as np
+
+# 1. Define Outputs (Y) and their Importance (1-10)
+outputs = ['Safety', 'Customer Sat', 'Cost']
+weights = np.array([10, 9, 5])
+
+# 2. Define Inputs (X) from Process Map
+inputs = ['Temperature', 'Pressure', 'Raw Material']
+
+# 3. Define Correlations (0, 1, 3, 9)
+# Row = Input X, Col = Output Y
+# Shape: (3 inputs, 3 outputs)
+correlations = np.array([
+    [9, 3, 1],  # Temperature affects Safety(9), Sat(3), Cost(1)
+    [3, 9, 3],  # Pressure affects Safety(3), Sat(9), Cost(3)
+    [1, 3, 9]   # Material affects Safety(1), Sat(3), Cost(9)
+])
+
+# 4. Calculate Weighted Scores
+# Matrix Multiplication: (3x3) dot (3x1)
+scores = np.dot(correlations, weights)
+
+# Display Results
+df = pd.DataFrame({
+    'Input (X)': inputs,
+    'Score': scores
+})
+
+print("--- C&E Matrix Prioritization ---")
+print(df.sort_values(by='Score', ascending=False))`,
+                    expected_output_en: "Ranked list of inputs based on weighted scores.",
+                    expected_output_vi: "Danh sách xếp hạng đầu vào dựa trên điểm trọng số.",
+                    datasets_used: [],
+                    learning_points_en: ["Weighted Scoring", "Matrix Multiplication"],
+                    difficulty_en: "Intermediate",
+                    ai_tutor_prompts: ["Why use 0, 1, 3, 9 scale?", "What if all X's have high scores?"],
+                    challenges: [
+                        {
+                            id: "ch_ce_01",
+                            prompt_en: "Add a new Input 'Operator Skill' with correlations [9, 9, 3].",
+                            hint_en: "Update inputs list and add a row to correlations array.",
+                            solution_code: "inputs.append('Operator Skill')\nnew_row = [9, 9, 3]\ncorrelations = np.vstack([correlations, new_row])"
+                        }
+                    ]
+                }
+            ],
             ai_tutor_context: {
                 enabled: true,
-                system_prompt_en: "Explain FMEA RPN calculation.",
+                system_prompt_en: "Explain C&E Matrix and FMEA connection.",
                 suggested_questions: [
-                    { question_vi: "Làm sao để làm giảm điểm RPN?", question_en: "How to reduce RPN score?" },
-                    { question_vi: "Detection điểm cao là tốt hay xấu?", question_en: "Is a high Detection score good or bad?" }
+                    { question_vi: "Khi nào dùng Swimlane map?", question_en: "When to use a Swimlane map?" },
+                    { question_vi: "C&E Matrix giúp gì cho FMEA?", question_en: "How does C&E Matrix help FMEA?" },
+                    { question_vi: "Tại sao điểm Detection 10 lại xấu?", question_en: "Why is Detection score 10 bad?" }
                 ],
-                hint_levels: ["Reduce Occurrence is best", "High Detection score means BAD visibility", "Safety issues always priority"],
+                hint_levels: ["Clarify responsibilities", "Filter inputs", "Visibility of defects"],
                 max_hints_per_question: 3
             },
             references_en: [
-                { source_type: "pdf", label_en: "Master Cheat Sheet - Section 16", location_hint_en: "FMEA" }
+                { source_type: "pdf", label_en: "Master Cheat Sheet - Section 6", location_hint_en: "C&E Matrix" }
             ],
             flashcards: [
                 {
                     id: "fc_measure_01_01",
-                    question_en: "In FMEA, which strategy is most effective for reducing risk?",
-                    answer_vi: "Reducing Occurrence (Giảm tần suất xảy ra).",
-                    tags_en: ["FMEA", "Risk"],
-                    difficulty_en: "Hard",
+                    question_en: "Which mapping tool is best for identifying physical motion waste?",
+                    answer_vi: "Spaghetti Diagram.",
+                    tags_en: ["Process Map", "Waste"],
+                    difficulty_en: "Easy",
                     ai_tutor_available: true
                 },
                 {
                     id: "fc_measure_01_02",
-                    question_en: "Calculate RPN if Severity=8, Occurrence=5, Detection=2.",
-                    answer_vi: "RPN = 8 * 5 * 2 = 80.",
-                    tags_en: ["FMEA", "Calculation"],
+                    question_en: "What is the primary purpose of the Cause & Effect (C&E) Matrix?",
+                    answer_vi: "To prioritize Inputs (X's) based on their impact on Customer Outputs (Y's).",
+                    tags_en: ["C&E Matrix", "Prioritization"],
                     difficulty_en: "Medium",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_measure_01_03",
+                    question_en: "In FMEA, if you cannot detect a defect at all (no controls), what is the Detection score?",
+                    answer_vi: "10 (Bad/Absolute Uncertainty).",
+                    tags_en: ["FMEA", "Scoring"],
+                    difficulty_en: "Medium",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_measure_01_04",
+                    question_en: "What specific risk must act on immediately regardless of the RPN score?",
+                    answer_vi: "High Severity (9 or 10) - Safety/Hazardous issues.",
+                    tags_en: ["FMEA", "Rules"],
+                    difficulty_en: "High",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_measure_01_05",
+                    question_en: "Should you map the 'As-Is' or 'To-Be' process in the Measure Phase?",
+                    answer_vi: "As-Is (Current State). You must measure reality, not the ideal.",
+                    tags_en: ["Process Map", "Phases"],
+                    difficulty_en: "Easy",
                     ai_tutor_available: true
                 }
             ],
             faq: [],
             mastery_threshold: 80,
             estimated_time_minutes: 30,
-            prerequisites_ids: ["mod_define_04"]
+            prerequisites_ids: ["mod_define_fmea"]
         },
         {
             id: "mod_measure_02",
             order: 2,
             title_en: "Six Sigma Statistics & Normality Testing",
-            summary_vi: "Thống kê mô tả, Phân loại dữ liệu và Kiểm định phân phối chuẩn.",
-            summary_en: "Descriptive Statistics, Data Types, and Normality Testing.",
-            key_metrics_en: ["Mean", "Standard Deviation", "P-value", "Anderson-Darling"],
+            summary_vi: "Hiểu về loại dữ liệu, thống kê mô tả và kiểm định chuẩn (P-value).",
+            summary_en: "Understanding Data Types, Descriptive Statistics, and validating Normal Distribution.",
+            key_metrics_en: ["Mean vs Median", "Standard Deviation", "P-value", "Skewness"],
             key_points_en: [
-                "Mean (Average): Sensitive to outliers.",
-                "Standard Deviation: Average distance from the mean.",
-                "Normality Test: Essential BEFORE running any parametric test.",
-                "Decision Rule: If P-value < 0.05, data is NOT Normal -> Use Non-Parametric tests."
+                "Data Types: Continuous (Rich info) vs Discrete (Nominal/Ordinal).",
+                "Central Tendency: Mean (Sensitive to outliers) vs Median (Robust).",
+                "Normality Rule: 'If P is low, the Null must go'. (P < 0.05 = Not Normal).",
+                "Visual Check: Histogram (Bell Curve) & P-Plot (Fat Pencil Test).",
+                "Central Limit Theorem: n > 30 tends to normalize averages."
             ],
             explanation_vi: `
-**1. Các loại dữ liệu (Data Types)**
-- **Continuous (Liên tục):** Đo được (Thời gian, Nhiệt độ, Tiền). -> Thông tin nhiều nhất.
-- **Discrete (Rời rạc):** Đếm được (Số người, Số lỗi).
-  - **Nominal:** Định danh (Nam/Nữ, Đỏ/Xanh). Không thứ tự.
-  - **Ordinal:** Thứ tự (Hài lòng 1-5, Tốt/Xấu). Có xếp hạng.
+**1. Các Loại Dữ Liệu (Data Types)**
+Phân loại đúng là bước đầu tiên để chọn phương pháp kiểm định.
+- **Continuous (Biến đổi/Liên tục):** Đo trên thang liên tục. Có số thập phân.
+  - *Ví dụ:* Thời gian, Cân nặng, Áp suất, Tiền. -> *Giàu thông tin nhất.*
+- **Discrete (Thuộc tính/Rời rạc):** Đếm hoặc phân loại.
+  - *Nominal (Danh nghĩa):* Nhãn không có thứ tự logic (Đạt/Hỏng, Xanh/Đỏ, Tên phòng ban).
+  - *Ordinal (Thứ bậc):* Có thứ tự xếp hạng (Hài lòng 1-5, Tốt/Khá/TB). Khoảng cách không đều.
+  - *Discrete Counts:* Số nguyên đếm được (Số lỗi, Số nhân viên).
 
-**2. Kiểm định phân phối chuẩn (Normality Testing)**
-Hầu hết các kiểm định mạnh (T-test, ANOVA, Cp/Cpk) đều *giả định* dữ liệu tuân theo Phân phối chuẩn (Hình chuông).
-- **Cách kiểm tra:** Dùng Anderson-Darling Test (hoặc Shapiro-Wilk).
-- **Quy tắc quyết định (P-value):**
-  - **P < 0.05:** Dữ liệu KHÔNG chuẩn (Reject H0: Data is Normal). -> *Hành động: Phải dùng kiểm định Phi tham số hoặc chuyển đổi dữ liệu.*
-  - **P >= 0.05:** Dữ liệu Chuẩn. -> *Hành động: An tâm dùng T-test.*
-- **Kiểm tra bằng mắt:** Biểu đồ Histogram phải hình chuông, Q-Q Plot phải nằm trên đường chéo.
+━━━━━━
+
+**2. Thống Kê Mô Tả (Descriptive Statistics)**
+- **Đo lường Xu hướng tập trung:**
+  - **Mean (μ):** Trung bình cộng. *Nhạy cảm với giá trị ngoại lai (Outliers).*
+  - **Median (x̃):** Giá trị ở giữa. *Kháng nhiễu tốt (Dùng cho dữ liệu lệch).*
+  - **Mode:** Giá trị xuất hiện nhiều nhất.
+- **Đo lường Độ phân tán:**
+  - **Range:** Max - Min.
+  - **Standard Deviation (σ):** Khoảng cách trung bình từ các điểm dữ liệu đến Mean.
+  - **Variance (σ²):** Bình phương độ lệch chuẩn (Dùng trong ANOVA).
+
+━━━━━━
+
+**3. Kiểm Định Chuẩn (Normality Testing)**
+Hầu hết các kiểm định (T-test, Capability) giả định dữ liệu phân phối chuẩn (Hình chuông).
+- **Kiểm định:** Anderson-Darling (Chuẩn) hoặc Shapiro-Wilk.
+  - *H0 (Null):* Dữ liệu LÀ Chuẩn.
+  - *Ha (Alternate):* Dữ liệu KHÔNG Chuẩn.
+- **Quy tắc P-value (Quy tắc Vàng):**
+  - **P-value < 0.05:** Bác bỏ H0. -> Dữ liệu **KHÔNG CHUẨN**. (Phải dùng Non-Parametric hoặc Box-Cox).
+  - **P-value ≥ 0.05:** Chấp nhận H0. -> Dữ liệu **LÀ CHUẨN**.
+- **Kiểm tra bằng mắt:**
+  - *Histogram:* Hình chuông đối xứng.
+  - *Probability Plot (P-Plot):* "Fat Pencil Test" - Các điểm dữ liệu phải nằm dọc theo đường chéo đậm.
             `,
             explanation_en: `
 **1. Data Types**
-- **Continuous:** Measured values (Time, Weight). Rich information.
-- **Discrete:** Counted values.
-  - **Nominal:** Names (Male/Female). No order.
-  - **Ordinal:** Ranked (Satisfaction 1-5). Order matters.
+Classifying data determines which statistical test you can use.
+- **Continuous / Variable:** Measured on continuous scale. Infinite divisibility.
+  - *Ex:* Time, Weight, Height. *Exam Tip: Continuous data is "richer" than attribute data.*
+- **Discrete / Attribute:** Counted or categorized.
+  - *Nominal:* Names/Labels with NO logical order (Pass/Fail, Red/Blue).
+  - *Ordinal:* Categories WITH logical order (Likert 1-5, S/M/L) but unequal distance.
+  - *Discrete Counts:* Integers only (Defect counts).
 
-**2. Normality Testing**
-Most powerful tools (T-test, ANOVA, Cpk) *assume* Normal Distribution (Bell Curve).
-- **Test:** Anderson-Darling (standard) or Shapiro-Wilk (n < 50).
-- **The Golden Rule:**
-  - **P < 0.05:** Data is **NOT Normal**. -> *Must use Non-Parametric tests or Transform (Box-Cox).*
-  - **P >= 0.05:** Data **IS Normal**. -> *Proceed with standard tests.*
-- **Visual Check:** Histogram is bell-shaped; Q-Q Plot dots hug the straight line.
+━━━━━━
+
+**2. Descriptive Statistics**
+- **Measures of Central Tendency:**
+  - **Mean (μ):** Arithmetic average. *Sensitive to outliers.*
+  - **Median (x̃):** Middle value. *Robust to outliers (Best for skewed data).*
+  - **Mode:** Most frequent value.
+- **Measures of Dispersion:**
+  - **Range:** Max - Min.
+  - **Standard Deviation (σ):** Average distance of data points from Mean.
+  - **Variance (σ²):** Std Dev squared (Used in ANOVA).
+
+━━━━━━
+
+**3. Normality Testing**
+Parametric tests (T-test, ANOVA) assume data follows Normal Distribution (Bell Curve).
+- **Test:** Anderson-Darling or Shapiro-Wilk.
+  - *H0 (Null):* Data is Normal.
+  - *Ha (Alternate):* Data is NOT Normal.
+- **The P-value Rule (Golden Rule):**
+  - **P-value < 0.05:** Reject H0. Data is **NOT Normal**. -> Action: Box-Cox or Non-Parametric.
+  - **P-value ≥ 0.05:** Fail to reject H0. Data **IS Normal**.
+- **Visual Check:**
+  - *Histogram:* Look for Bell Shape.
+  - *Probability Plot:* "Fat Pencil Test" — data falls within thick diagonal lines.
             `,
-            recommended_tools_en: ["Anderson-Darling Test", "Q-Q Plot"],
-            python_focus_en: ["scipy.stats.shapiro", "scipy.stats.probplot"],
+            recommended_tools_en: ["Minitab", "Python (Scipy)"],
+            python_focus_en: ["Descriptive Stats", "Normality Test"],
             code_blocks: [
                 {
                     id: "code_measure_stats",
                     title_en: "Normality Test (Shapiro-Wilk)",
-                    context_en: "Goal: Check if our cycle time data is Normal before running a T-test.",
+                    title_vi: "Kiểm định chuẩn Shapiro-Wilk",
                     description_vi: "Đoạn code kiểm tra xem dữ liệu có phân phối chuẩn không.\n\n- Nếu P-value > 0.05: Dữ liệu chuẩn (Tốt).\n- Nếu P-value < 0.05: Dữ liệu bị méo (Skewed) -> Cẩn thận!",
+                    concept_explanation_en: "Goal: Check if our cycle time data is Normal before running a T-test.",
+                    concept_explanation_vi: "Mục tiêu: Kiểm tra xem dữ liệu thời gian chu kỳ có Chuẩn không trước khi chạy T-test.",
                     code_template: `import numpy as np
 from scipy import stats
 import matplotlib.pyplot as plt
@@ -167,10 +333,13 @@ check_normality(normal_data, "Dataset A")
 check_normality(skewed_data, "Dataset B")
 
 # Visual Check (Q-Q Plot)
-stats.probplot(normal_data, dist="norm", plot=plt)
+fig = plt.figure()
+ax = fig.add_subplot(111)
+stats.probplot(normal_data, dist="norm", plot=ax)
 plt.title("Q-Q Plot (Normal Data)")
 plt.show()`,
                     expected_output_en: "P-value analysis -> Pass/Fail.",
+                    expected_output_vi: "Kết quả phân tích P-value -> Đạt/Không đạt.",
                     datasets_used: [],
                     learning_points_en: ["Shapiro-Wilk syntax", "Interpreting P-values"],
                     difficulty_en: "Intermediate"
@@ -227,41 +396,41 @@ plt.show()`,
                 "CRITICAL: %GR&R < 10% (Pass), 10-30% (Conditional), > 30% (Fail)."
             ],
             explanation_vi: `
-**1. Tại sao cần MSA?**
-Trước khi tin vào dữ liệu, phải tin vào thước đo.
+    ** 1. Tại sao cần MSA ?**
+        Trước khi tin vào dữ liệu, phải tin vào thước đo.
 
-**2. Các thành phần sai số**
-- **Accuracy (Độ chính xác):** Bias, Linearity, Stability.
-- **Precision (Độ chụm):** Repeatability + Reproducibility.
+** 2. Các thành phần sai số **
+- ** Accuracy(Độ chính xác):** Bias, Linearity, Stability.
+- ** Precision(Độ chụm):** Repeatability + Reproducibility.
 
-**3. Gage R&R Study (Tiêu chuẩn)**
-- **Thiết kế chuẩn:** 10 mẫu x 3 người đo x 3 lần lặp = 90 dữ liệu.
-- **Repeatability (Equipment):** Do thiết bị. Khắc phục: Sửa máy, kẹp chặt hơn.
-- **Reproducibility (Appraiser):** Do con người. Khắc phục: Đào tạo (SOP), dùng dưỡng đo.
+** 3. Gage R & R Study(Tiêu chuẩn) **
+- ** Thiết kế chuẩn:** 10 mẫu x 3 người đo x 3 lần lặp = 90 dữ liệu.
+- ** Repeatability(Equipment):** Do thiết bị.Khắc phục: Sửa máy, kẹp chặt hơn.
+- ** Reproducibility(Appraiser):** Do con người.Khắc phục: Đào tạo(SOP), dùng dưỡng đo.
 
-**4. Acceptance Criteria (Tiêu chuẩn Chấp nhận) - Thuộc lòng!**
-- **< 10%:** Hệ thống tuyệt vời (Excellent). -> **Dùng ngay.**
-- **10% - 30%:** Tạm chấp nhận (Marginal). -> **Dùng có điều kiện** (tùy vào chi phí sửa chữa).
-- **> 30%:** Không chấp nhận (Unacceptable). -> **DỪNG LẠI**. Phải sửa hệ thống đo trước khi làm tiếp.
+** 4. Acceptance Criteria(Tiêu chuẩn Chấp nhận) - Thuộc lòng! **
+- ** <10%:** Hệ thống tuyệt vời(Excellent). -> ** Dùng ngay.**
+- ** 10 % - 30 %:** Tạm chấp nhận(Marginal). -> ** Dùng có điều kiện ** (tùy vào chi phí sửa chữa).
+- **> 30 %:** Không chấp nhận(Unacceptable). -> ** DỪNG LẠI **.Phải sửa hệ thống đo trước khi làm tiếp.
             `,
             explanation_en: `
-**1. Why MSA?**
-validate the measurement system before collecting project data.
+    ** 1. Why MSA ?**
+        validate the measurement system before collecting project data.
 
-**2. Precision Components**
-- **Repeatability (EV):** Equipment Variation. Same operator, same part.
-- **Reproducibility (AV):** Appraiser Variation. Different operators, same part.
+** 2. Precision Components **
+- ** Repeatability(EV):** Equipment Variation.Same operator, same part.
+- ** Reproducibility(AV):** Appraiser Variation.Different operators, same part.
 
-**3. Standard Study Design**
-- 10 Parts (representing process range)
-- 3 Operators
-- 3 Trials (Blind measurement)
-- Total: 90 Data points.
+** 3. Standard Study Design **
+    - 10 Parts(representing process range)
+        - 3 Operators
+            - 3 Trials(Blind measurement)
+                - Total: 90 Data points.
 
-**4. Acceptance Criteria (MEMORIZE THIS)**
-- **%GR&R < 10%:** Excellent. System is capable.
-- **%GR&R 10% - 30%:** Marginal. Acceptable depending on application/cost.
-- **%GR&R > 30%:** **FAIL.** System needs improvement. Do NOT proceed to Analyze phase.
+** 4. Acceptance Criteria(MEMORIZE THIS) **
+- **% GR & R < 10 %:** Excellent.System is capable.
+- **% GR & R 10 % - 30 %:** Marginal.Acceptable depending on application / cost.
+- **% GR & R > 30 %:** ** FAIL.** System needs improvement.Do NOT proceed to Analyze phase.
             `,
             recommended_tools_en: ["Gage R&R Crossed", "Calibration"],
             python_focus_en: ["ANOVA Logic"],
@@ -317,8 +486,8 @@ validate the measurement system before collecting project data.
                 "Cpk 1.67: Six Sigma Level."
             ],
             explanation_vi: `
-**1. Cp vs Cpk**
-- **Cp (Tiềm năng):** "Xe có lọt cửa không?" (Không quan tâm lệch tâm). \`Cp = (USL-LSL)/6σ\`
+    ** 1. Cp vs Cpk **
+- ** Cp(Tiềm năng):** "Xe có lọt cửa không?"(Không quan tâm lệch tâm).\`Cp = (USL-LSL)/6σ\`
 - **Cpk (Thực tế):** "Xe có đang lọt cửa không?" (Phạt nếu lệch tâm). \`Cpk = Min(Cpu, Cpl)\`
 
 **2. Các ngưỡng đánh giá Cpk**
