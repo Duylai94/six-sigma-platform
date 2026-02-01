@@ -1095,7 +1095,7 @@ print(f"Recommended Action: {rec_action}")`,
                     question_en: "If Severity is 9 or 10, what must you do regardless of RPN?",
                     answer_vi: "Prioritize it immediately (Safety Issue).",
                     tags_en: ["RPN", "Prioritization"],
-                    difficulty_en: "High",
+                    difficulty_en: "Hard",
                     ai_tutor_available: true
                 },
                 {

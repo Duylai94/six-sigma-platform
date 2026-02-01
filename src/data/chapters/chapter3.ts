@@ -197,7 +197,7 @@ print(df.sort_values(by='Score', ascending=False))`,
                     question_en: "What specific risk must act on immediately regardless of the RPN score?",
                     answer_vi: "High Severity (9 or 10) - Safety/Hazardous issues.",
                     tags_en: ["FMEA", "Rules"],
-                    difficulty_en: "High",
+                    difficulty_en: "Hard",
                     ai_tutor_available: true
                 },
                 {
