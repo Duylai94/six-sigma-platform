@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.7.7] - 2026-02-01
+### 🎨 UI/UX Pro Max Audit & Fixes
+- **Design System**: Injected Pro Max Teal (#0D9488) / Orange (#F97316) palette and premium shadows into `globals.css`.
+- **Typography**: Upgraded to Fira Sans (Body) and Fira Code (Headings) via Google Fonts.
+- **AI Tutor Fixes**:
+    - Made chat width responsive (`w-[90vw]` on mobile).
+    - Fixed scroll bleeding with `overscroll-contain`.
+    - Fixed header gap with `p-0 overflow-hidden` on Card.
+- **Mobile Layout Fixes**:
+    - TabsList now scrollable on mobile (`overflow-x-auto flex-nowrap`).
+    - Increased content padding from `px-2` to `px-4` for mobile.
+    - All tabs (Theory, Python, Flashcards) now accessible on 375px screens.
+- **Card Padding Fixes**:
+    - `PythonEditor.tsx`: Added `p-0` to eliminate py-6 gap.
+    - `Flashcard.tsx`: Added `p-0 overflow-hidden` to both faces.
+- **Agent Skills**: Added `ui-ux-pro-max` skill with CSV databases for design patterns, UX guidelines, and component libraries.
+
 ## [0.7.6] - 2026-01-31
 ### 🤖 AI Tutor Language Synchronization
 - **Feature**: "Ask AI Tutor" suggestions now respect the global Language Toggle.

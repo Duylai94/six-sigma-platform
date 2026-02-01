@@ -6,18 +6,19 @@
     - `/learn/[moduleId]`: DYNAMIC Player.
         - **Tabs**: Theory (Content), Code (Pyodide), Flashcards (Review), Quiz (Assessment).
         - **Details Tab**: Now includes contextual "Ask AI Tutor" prompt badges at the bottom.
+        - **Mobile**: TabsList is horizontally scrollable (`overflow-x-auto flex-nowrap`).
 - **Core Components**:
-    - `PythonEditor.tsx`: Monaco Editor + `src/lib/pyodide.ts` hook.
+    - `PythonEditor.tsx`: Monaco Editor + `src/lib/pyodide.ts` hook. *Card uses `p-0` to fix padding gap.*
     - `QuizRunner.tsx`: Assessment logic with hints/scoring (Self-contained results screen).
-    - `AITutor.tsx`: Global floating chat widget. Uses `AITutorContext` for state persistence. *Supports language-aware responses via `page.tsx` suggestions.*
+    - `AITutor.tsx`: Global floating chat widget. Uses `AITutorContext` for state persistence. *Mobile: `w-[90vw]`, `overscroll-contain`, Card `p-0 overflow-hidden`.*
     - `FormattedText.tsx`: Lightweight Markdown parser with table support.
-    - `Flashcard.tsx` (Component): Reusable 3D flip card (Question Front / Answer Back) with "Explain Concept" AI integration.
-    - `AnalyticsCard.tsx`: [NEW] Collapsible dashboard widget showing DMAIC Phase retention.
+    - `Flashcard.tsx`: Reusable 3D flip card. *Card uses `p-0 overflow-hidden` on both faces.*
+    - `AnalyticsCard.tsx`: Collapsible dashboard widget showing DMAIC Phase retention.
     - `ui/*`: Shadcn components (Button, Card, Badge, etc.).
 - **Global Context**:
     - `LanguageContext.tsx`: Provides `language` (vn/en) state.
     - `ProgressContext.tsx`: Tracks Lesson Completion AND Topic Scores (Category/Mastery).
-    - `AITutorContext.tsx`: [NEW] Global AI Tutor state (isOpen, messages, pendingQuestion). Persists chat across page navigation.
+    - `AITutorContext.tsx`: Global AI Tutor state (isOpen, messages, pendingQuestion). Persists chat across page navigation.
 
 ### Backend (Next.js API Routes)
 - **Endpoints**:
@@ -39,7 +40,11 @@
     *   `measure-phase-quizzes.ts`: M1-M70 (Data Types, MSA, Capability).
     *   `analyze-phase-quizzes.ts`: A1-A80 (Hypothesis, ANOVA, Regression).
     *   `control-phase-quizzes.ts`: C1-C70 (SPC, Control Plans).
+    *   `control-phase-quizzes.ts`: C1-C70 (SPC, Control Plans).
     *   `define/improve/general`: Placeholders awaiting data.
+        *   M9.1: Define (Baseline, Charter).
+        *   M9.2: Measure/Analyze (Normality, Correlation, T-test).
+        *   M9.3: Improve/Control (Regression, Xbar-R).
 
 ### AI-Enhanced Python Sandbox (v0.7)
 The Python Focus tab now includes 6 interactive learning sections:
