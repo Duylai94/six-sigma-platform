@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.7.6] - 2026-01-31
+### 🤖 AI Tutor Language Synchronization
+- **Feature**: "Ask AI Tutor" suggestions now respect the global Language Toggle.
+	- Clicking an English suggestion sends the English text to the AI, ensuring an English response.
+	- Clicking a Vietnamese suggestion sends the Vietnamese text.
+- **Content**: Translated all AI suggestions for Chapter 1 (Foundations) and Chapter 2 (Define).
+- **Fixes**:
+	- **Scroll Chaining**: AI Tutor chat no longer scrolls the background page (Fixed `overscroll-behavior`).
+	- **Table Rendering**: Improved `FormattedText` to handle complex/messy Markdown tables.
+	- **Syntax**: Fixed double-nested array error in data files.
+
 ## [0.7.5] - 2026-01-31
 ### 🧠 Lesson Review & Contextual AI
 - **Details Tab**: Added "Ask AI Tutor" section.

@@ -9,7 +9,7 @@
 - **Core Components**:
     - `PythonEditor.tsx`: Monaco Editor + `src/lib/pyodide.ts` hook.
     - `QuizRunner.tsx`: Assessment logic with hints/scoring (Self-contained results screen).
-    - `AITutor.tsx`: Global floating chat widget. Uses `AITutorContext` for state persistence.
+    - `AITutor.tsx`: Global floating chat widget. Uses `AITutorContext` for state persistence. *Supports language-aware responses via `page.tsx` suggestions.*
     - `FormattedText.tsx`: Lightweight Markdown parser with table support.
     - `FlashcardTab.tsx` (Inline in page.tsx): Renders bilingual flashcards with "Explain Concept" AI link.
     - `AnalyticsCard.tsx`: [NEW] Collapsible dashboard widget showing DMAIC Phase retention.
@@ -34,7 +34,7 @@
 *   **`useDeepSeek`**: Interface for AI Tutor chat (Streaming).
 
 ### 4. Data Layer (`src/data/`)
-*   **`chapters/`**: Content-heavy structs (Theory, Python examples).
+*   **`chapters/`**: Content-heavy structs (Theory, Python examples). *AI Prompts are now bilingual objects.*
 *   **`quizzes/`**: [NEW] Centralized Question Bank (TypeScript).
     *   `measure-phase-quizzes.ts`: M1-M70 (Data Types, MSA, Capability).
     *   `analyze-phase-quizzes.ts`: A1-A80 (Hypothesis, ANOVA, Regression).
