@@ -56,7 +56,7 @@ export function CourseSidebar({ className }: SidebarProps) {
 
                     {/* Chapters List */}
                     <div className="space-y-1">
-                        <div className="px-2 mb-2">
+                        <div className="px-2 mb-2 mt-4">
                             <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Curriculum</h3>
                         </div>
                         {iasscGreenBeltCourse.chapters.map((chapter) => {

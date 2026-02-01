@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { iasscGreenBeltCourse } from "@/data/course_content";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -127,10 +127,10 @@ export default function DashboardPage() {
                                 {language === 'vn' ? chapter.goal_vi : (chapter.goal_en || chapter.goal_vi)}
                             </p>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ml-11">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ml-11 auto-rows-fr">
                                 {chapter.modules.map((module) => (
                                     <Card key={module.id} className={cn(
-                                        "hover:shadow-md transition-shadow cursor-pointer border-l-4 group relative overflow-hidden",
+                                        "hover:shadow-md transition-shadow cursor-pointer border-l-4 group relative overflow-hidden flex flex-col min-h-[280px]",
                                         getLessonStatus(module.id)?.completed
                                             ? "border-l-green-500 bg-green-50/50"
                                             : "border-l-transparent hover:border-l-primary"
@@ -150,10 +150,12 @@ export default function DashboardPage() {
                                                 {module.title_en}
                                             </CardTitle>
                                         </CardHeader>
-                                        <CardContent>
-                                            <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
+                                        <CardContent className="flex-1">
+                                            <p className="text-sm text-muted-foreground line-clamp-2">
                                                 {language === 'vn' ? module.summary_vi : (module.summary_en || module.summary_vi)}
                                             </p>
+                                        </CardContent>
+                                        <CardFooter className="pt-0">
                                             <Link href={module.id === 'mod_final_exam' ? '/mock-exam' : `/learn/${module.id}`} className="w-full">
                                                 <Button
                                                     variant={getLessonStatus(module.id)?.completed ? "outline" : "secondary"}
@@ -169,7 +171,7 @@ export default function DashboardPage() {
                                                     )}
                                                 </Button>
                                             </Link>
-                                        </CardContent>
+                                        </CardFooter>
                                     </Card>
                                 ))}
                             </div>
