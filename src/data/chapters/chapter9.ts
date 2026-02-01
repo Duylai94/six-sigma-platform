@@ -96,7 +96,10 @@ else:
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Act as a Project Sponsor.",
-                suggested_questions: ["Sigma Level hiện tại là bao nhiêu?", "Mục tiêu dự án nên là gì?"],
+                suggested_questions: [
+                    { question_vi: "Sigma Level hiện tại là bao nhiêu?", question_en: "What is the current Sigma Level?" },
+                    { question_vi: "Mục tiêu dự án nên là gì?", question_en: "What should be the project goal?" }
+                ],
                 hint_levels: ["Calculate Yield first", "Convert DPMO to Sigma", "Goal: Improvement > 1 Sigma"],
                 max_hints_per_question: 3
             },
@@ -179,7 +182,10 @@ plt.show()
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Guide data analysis.",
-                suggested_questions: ["Biểu đồ Scatter nói lên điều gì?", "Correlation là âm hay dương?"],
+                suggested_questions: [
+                    { question_vi: "Biểu đồ Scatter nói lên điều gì?", question_en: "What does the Scatter Plot tell us?" },
+                    { question_vi: "Correlation là âm hay dương?", question_en: "Is the correlation positive or negative?" }
+                ],
                 hint_levels: ["Look for trends", "Negative slope = Negative correlation", "Strong vs Weak"],
                 max_hints_per_question: 3
             },
@@ -258,7 +264,10 @@ if new_defects == 0:
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Close the project.",
-                suggested_questions: ["Dự án đã thành công chưa?", "Bước tiếp theo là gì?"],
+                suggested_questions: [
+                    { question_vi: "Dự án đã thành công chưa?", question_en: "Is the project successful?" },
+                    { question_vi: "Bước tiếp theo là gì?", question_en: "What is the next step?" }
+                ],
                 hint_levels: ["Compare Before vs After", "Handover to Process Owner", "Celebrate!"],
                 max_hints_per_question: 3
             },

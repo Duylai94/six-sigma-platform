@@ -88,7 +88,10 @@ print(df.sort_values(by='Score', ascending=False))
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Act as a facilitator for Pugh Matrix.",
-                suggested_questions: ["Baseline là gì?", "Nếu hai giải pháp điểm bằng nhau thì sao?"],
+                suggested_questions: [
+                    { question_vi: "Baseline là gì?", question_en: "What is a Baseline?" },
+                    { question_vi: "Nếu hai giải pháp điểm bằng nhau thì sao?", question_en: "What if two solutions have equal scores?" }
+                ],
                 hint_levels: ["Standard to compare against", "Combine them", "Check feasibility"],
                 max_hints_per_question: 3
             },
@@ -154,7 +157,10 @@ OFAT is blind to interactions. DOE is built to find them.
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Explain Factor vs Level vs Response using a Coffee example.",
-                suggested_questions: ["Factor là gì?", "Tại sao OFAT tốn kém?"],
+                suggested_questions: [
+                    { question_vi: "Factor là gì?", question_en: "What is a Factor?" },
+                    { question_vi: "Tại sao OFAT tốn kém?", question_en: "Why is OFAT expensive?" }
+                ],
                 hint_levels: ["Factor = Sugar amount", "Level = 1 spoon vs 2 spoons", "Response = Sweetness taste"],
                 max_hints_per_question: 3
             },
@@ -255,7 +261,10 @@ plt.show()`,
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Explain Main Effect vs Interaction.",
-                suggested_questions: ["Main Effect là gì?", "Nếu có Interaction thì tối ưu hóa thế nào?"],
+                suggested_questions: [
+                    { question_vi: "Main Effect là gì?", question_en: "What is a Main Effect?" },
+                    { question_vi: "Nếu có Interaction thì tối ưu hóa thế nào?", question_en: "How to optimize if there is an Interaction?" }
+                ],
                 hint_levels: ["Single factor impact", "Combined factor impact", "Set factors together"],
                 max_hints_per_question: 3
             },
@@ -312,7 +321,10 @@ After Pilot, you generally need a Paired t-test (Before vs After) to statistical
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Why is Piloting critical?",
-                suggested_questions: ["Pilot khác gì sản xuất thật?", "Khi nào thì kết thúc Pilot?"],
+                suggested_questions: [
+                    { question_vi: "Pilot khác gì sản xuất thật?", question_en: "How is a Pilot different from actual production?" },
+                    { question_vi: "Khi nào thì kết thúc Pilot?", question_en: "When does the Pilot end?" }
+                ],
                 hint_levels: ["Controlled environment", "Limit risk", "When success criteria met"],
                 max_hints_per_question: 3
             },
@@ -383,7 +395,10 @@ Automated method to pick the "Dream Team" of variables.
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Explain Multicollinearity.",
-                suggested_questions: ["VIF bao nhiêu là cao?", "Tại sao R-squared lại lừa dối?"],
+                suggested_questions: [
+                    { question_vi: "VIF bao nhiêu là cao?", question_en: "What VIF value is considered high?" },
+                    { question_vi: "Tại sao R-squared lại lừa dối?", question_en: "Why can R-squared be misleading?" }
+                ],
                 hint_levels: ["Redundant information", "Inflation of variance", "Use Adjusted R-sq"],
                 max_hints_per_question: 3
             },

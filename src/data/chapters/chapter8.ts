@@ -122,7 +122,10 @@ else:
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Explain the Western Electric Rules for stability.",
-                suggested_questions: ["Quy tắc 7 điểm liên tiếp là gì?", "Tại sao giới hạn là 3 Sigma?"],
+                suggested_questions: [
+                    { question_vi: "Quy tắc 7 điểm liên tiếp là gì?", question_en: "What is the rule of 7 consecutive points?" },
+                    { question_vi: "Tại sao giới hạn là 3 Sigma?", question_en: "Why is the limit 3 Sigma?" }
+                ],
                 hint_levels: ["Probability of randomness", "Shift in mean detected", "99.7% confidence"],
                 max_hints_per_question: 3
             },
@@ -239,7 +242,10 @@ plt.show()`,
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Quiz me on selecting P, NP, C, U charts.",
-                suggested_questions: ["Đếm số lỗi trên vải, khổ vải khác nhau?", "Đếm số đơn hàng trễ mỗi ngày?"],
+                suggested_questions: [
+                    { question_vi: "Đếm số lỗi trên vải, khổ vải khác nhau?", question_en: "Counting defects on fabric of different widths?" },
+                    { question_vi: "Đếm số đơn hàng trễ mỗi ngày?", question_en: "Counting late orders per day?" }
+                ],
                 hint_levels: ["Defects vs Defectives", "Constant vs Variable Area/Size"],
                 max_hints_per_question: 3
             },
@@ -321,7 +327,10 @@ plt.show()`,
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Explain the importance of the Sustain step in 5S.",
-                suggested_questions: ["Phản ứng (Reaction Plan) cụ thể là gì?", "Tại sao 5S không chỉ là dọn vệ sinh?"],
+                suggested_questions: [
+                    { question_vi: "Phản ứng (Reaction Plan) cụ thể là gì?", question_en: "What specifically is the Reaction Plan?" },
+                    { question_vi: "Tại sao 5S không chỉ là dọn vệ sinh?", question_en: "Why is 5S not just cleaning?" }
+                ],
                 hint_levels: ["Actionable steps", "It's about efficiency and safety", "Standardization reduces variation"],
                 max_hints_per_question: 3
             },

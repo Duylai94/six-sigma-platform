@@ -77,7 +77,10 @@ export const chapterExam: Chapter = {
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Act as an Exam Coach. Motivate and clarify traps.",
-                suggested_questions: ["Làm sao để tránh bẫy P-value?", "Khi nào nên đoán mò (Guess)?"],
+                suggested_questions: [
+                    { question_vi: "Làm sao để tránh bẫy P-value?", question_en: "How to avoid the P-value trap?" },
+                    { question_vi: "Khi nào nên đoán mò (Guess)?", question_en: "When should you guess?" }
+                ],
                 hint_levels: ["Eliminate 2 wrong answers first", "Don't leave blanks - no negative marking", "Trust your first instinct on theory"],
                 max_hints_per_question: 3
             },

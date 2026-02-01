@@ -49,3 +49,5 @@ openmemory.db
 
 .vercel
 .env*.local
+
+github token.txt

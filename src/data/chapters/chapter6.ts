@@ -100,7 +100,10 @@ plt.show()`,
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Explain Weighted Pareto.",
-                suggested_questions: ["Khi nào dùng Weighted Pareto?", "Nếu các cột bằng nhau thì sao?"],
+                suggested_questions: [
+                    { question_vi: "Khi nào dùng Weighted Pareto?", question_en: "When to use Weighted Pareto?" },
+                    { question_vi: "Nếu các cột bằng nhau thì sao?", question_en: "What if the bars are equal?" }
+                ],
                 hint_levels: ["Use when costs differ", "Stratify data further", "No vital few exists"],
                 max_hints_per_question: 3
             },
@@ -186,7 +189,10 @@ A "Convergent" tool to drill down to the Root Cause.
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Facilitate a Fishbone session.",
-                suggested_questions: ["Nếu nguyên nhân là 'Con người', ta nên làm gì?", "Làm sao biết đã tìm ra Root Cause thật sự?"],
+                suggested_questions: [
+                    { question_vi: "Nếu nguyên nhân là 'Con người', ta nên làm gì?", question_en: "If the cause is 'Man', what should we do?" },
+                    { question_vi: "Làm sao biết đã tìm ra Root Cause thật sự?", question_en: "How to know if the Real Root Cause is found?" }
+                ],
                 hint_levels: ["Look at training/SOP", "Can you turn the problem on/off?", "Statistical validation"],
                 max_hints_per_question: 3
             },
@@ -229,7 +235,10 @@ A "Convergent" tool to drill down to the Root Cause.
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Explain difference between Lead Time and Cycle Time.",
-                suggested_questions: ["VA là gì?", "NVA-Necessary là gì?"],
+                suggested_questions: [
+                    { question_vi: "VA là gì?", question_en: "What is VA?" },
+                    { question_vi: "NVA-Necessary là gì?", question_en: "What is NVA-Necessary?" }
+                ],
                 hint_levels: ["Customer willingness to pay", "Regulatory requirements (e.g., Tax reporting)", "Total door-to-door time vs Process time"],
                 max_hints_per_question: 3
             },
@@ -300,7 +309,10 @@ Lãng phí tồi tệ nhất là **Overproduction** (Sản xuất thừa) vì n�
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Quiz the student on identifying wastes in scenarios.",
-                suggested_questions: ["Ví dụ về Waste of Motion?", "Tại sao Overproduction là tệ nhất?"],
+                suggested_questions: [
+                    { question_vi: "Ví dụ về Waste of Motion?", question_en: "Example of Waste of Motion?" },
+                    { question_vi: "Tại sao Overproduction là tệ nhất?", question_en: "Why is Overproduction the worst?" }
+                ],
                 hint_levels: ["Movement of people vs things", "Hides other wastes", "Creates inventory"],
                 max_hints_per_question: 3
             },

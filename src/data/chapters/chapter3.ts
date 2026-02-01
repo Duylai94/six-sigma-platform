@@ -60,7 +60,10 @@ Score 3 factors (1-10 scale):
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Explain FMEA RPN calculation.",
-                suggested_questions: ["Làm sao để làm giảm điểm RPN?", "Detection điểm cao là tốt hay xấu?"],
+                suggested_questions: [
+                    { question_vi: "Làm sao để làm giảm điểm RPN?", question_en: "How to reduce RPN score?" },
+                    { question_vi: "Detection điểm cao là tốt hay xấu?", question_en: "Is a high Detection score good or bad?" }
+                ],
                 hint_levels: ["Reduce Occurrence is best", "High Detection score means BAD visibility", "Safety issues always priority"],
                 max_hints_per_question: 3
             },
@@ -176,7 +179,10 @@ plt.show()`,
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Explain why Normality matters.",
-                suggested_questions: ["Nếu dữ liệu không chuẩn thì sao?", "Nominal khác Ordinal chỗ nào?"],
+                suggested_questions: [
+                    { question_vi: "Nếu dữ liệu không chuẩn thì sao?", question_en: "What if the data is not Normal?" },
+                    { question_vi: "Nominal khác Ordinal chỗ nào?", question_en: "What is the difference between Nominal and Ordinal?" }
+                ],
                 hint_levels: ["Statistical assumptions", "Parametric vs Non-Parametric", "Order matters for Ordinal"],
                 max_hints_per_question: 3
             },
@@ -263,7 +269,10 @@ validate the measurement system before collecting project data.
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Explain Repeatability vs Reproducibility.",
-                suggested_questions: ["Nếu Repeatability kém thì sửa cái gì?", "Gage R&R > 30% có dùng được không?"],
+                suggested_questions: [
+                    { question_vi: "Nếu Repeatability kém thì sửa cái gì?", question_en: "What to fix if Repeatability is poor?" },
+                    { question_vi: "Gage R&R > 30% có dùng được không?", question_en: "Can we use Gage R&R > 30%?" }
+                ],
                 hint_levels: ["Equipment issue", "Training issue", "Reject measuring system"],
                 max_hints_per_question: 3
             },
@@ -396,7 +405,10 @@ else:
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Contrast Cp and Cpk.",
-                suggested_questions: ["Nếu Cp = 2.0 mà Cpk = 0.5 thì vấn đề là gì?", "Cpk bao nhiêu thì đạt 6 Sigma?"],
+                suggested_questions: [
+                    { question_vi: "Nếu Cp = 2.0 mà Cpk = 0.5 thì vấn đề là gì?", question_en: "If Cp = 2.0 but Cpk = 0.5, what is the problem?" },
+                    { question_vi: "Cpk bao nhiêu thì đạt 6 Sigma?", question_en: "What Cpk value corresponds to 6 Sigma?" }
+                ],
                 hint_levels: ["Off-center process", "Cpk = 2.0 corresponds to 6 Sigma", "DPMO = 3.4"],
                 max_hints_per_question: 3
             },

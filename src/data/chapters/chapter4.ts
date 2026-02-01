@@ -46,7 +46,10 @@ A tool to visually pinpoint the source of variation. It reduces the number of po
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Explain the three families of variation in Multi-Vari.",
-                suggested_questions: ["Biến động trong một sản phẩm (Within-piece) là gì?", "Làm sao vẽ Multi-Vari Chart?"],
+                suggested_questions: [
+                    { question_vi: "Biến động trong một sản phẩm (Within-piece) là gì?", question_en: "What is Within-piece variation?" },
+                    { question_vi: "Làm sao vẽ Multi-Vari Chart?", question_en: "How to draw a Multi-Vari Chart?" }
+                ],
                 hint_levels: ["Left vs Right side", "Consecutive pieces", "Shift to Shift"],
                 max_hints_per_question: 3
             },
@@ -169,7 +172,10 @@ else:
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Explain Central Limit Theorem using dice rolls.",
-                suggested_questions: ["Tại sao cần n >= 30?", "Khi nào dùng Mann-Whitney?"],
+                suggested_questions: [
+                    { question_vi: "Tại sao cần n >= 30?", question_en: "Why is n >= 30 required?" },
+                    { question_vi: "Khi nào dùng Mann-Whitney?", question_en: "When to use Mann-Whitney?" }
+                ],
                 hint_levels: ["Average of averages", "Non-normal data", "Alternative to t-test"],
                 max_hints_per_question: 3
             },
@@ -285,7 +291,10 @@ plt.show()`,
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Explain 'Correlation does not imply Causation'.",
-                suggested_questions: ["VIF là gì?", "Tại sao Residual phải ngẫu nhiên?"],
+                suggested_questions: [
+                    { question_vi: "VIF là gì?", question_en: "What is VIF?" },
+                    { question_vi: "Tại sao Residual phải ngẫu nhiên?", question_en: "Why must Residuals be random?" }
+                ],
                 hint_levels: ["VIF measures Multicollinearity", "Patterns indicate missing variables", "Randomness = Good Model"],
                 max_hints_per_question: 3
             },

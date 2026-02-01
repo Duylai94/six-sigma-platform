@@ -102,7 +102,10 @@ else:
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Explain P-value simply.",
-                suggested_questions: ["P-value là xác suất gì?", "Làm sao để tăng Power của kiểm định?"],
+                suggested_questions: [
+                    { question_vi: "P-value là xác suất gì?", question_en: "What probability is the P-value?" },
+                    { question_vi: "Làm sao để tăng Power của kiểm định?", question_en: "How to increase Power of a test?" }
+                ],
                 hint_levels: ["Probability of seeing data if H0 is true", "Increase Sample Size", "Reduce Noise"],
                 max_hints_per_question: 3
             },
@@ -231,7 +234,10 @@ if p_val_anova < 0.05:
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Explain why we can't just compare averages visually.",
-                suggested_questions: ["ANOVA khác gì T-test?", "Levene's Test dùng để làm gì?"],
+                suggested_questions: [
+                    { question_vi: "ANOVA khác gì T-test?", question_en: "How is ANOVA different from T-test?" },
+                    { question_vi: "Levene's Test dùng để làm gì?", question_en: "What is Levene's Test used for?" }
+                ],
                 hint_levels: ["Variation overlaps", "T-test is for 2, ANOVA for 3+", "Check equal variance assumption"],
                 max_hints_per_question: 3
             },
@@ -317,7 +323,10 @@ print(f"Kruskal-Wallis P-value: {p_val_kw:.5f}")`,
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Why use Median for non-normal data?",
-                suggested_questions: ["Mann-Whitney so sánh cái gì?", "Kruskal-Wallis giống test nào?"],
+                suggested_questions: [
+                    { question_vi: "Mann-Whitney so sánh cái gì?", question_en: "What does Mann-Whitney compare?" },
+                    { question_vi: "Kruskal-Wallis giống test nào?", question_en: "What test is Kruskal-Wallis similar to?" }
+                ],
                 hint_levels: ["Mean is sensitive to outliers", "Compares ranks/medians", "ANOVA equivalent"],
                 max_hints_per_question: 3
             },
@@ -401,7 +410,10 @@ else:
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Explain Observed vs Expected frequencies.",
-                suggested_questions: ["Khi nào dùng Chi-Square?", "Expected value tính thế nào?"],
+                suggested_questions: [
+                    { question_vi: "Khi nào dùng Chi-Square?", question_en: "When to use Chi-Square?" },
+                    { question_vi: "Expected value tính thế nào?", question_en: "How to calculate Expected value?" }
+                ],
                 hint_levels: ["Categorical data", "Calculated assuming independence", "Counts not measurements"],
                 max_hints_per_question: 3
             },
