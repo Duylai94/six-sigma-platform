@@ -81,40 +81,39 @@ Summary: ${currentModule.summary_vi}
             </header>
 
             {/* Main Content */}
-            <main className="flex-1 container mx-auto max-w-6xl p-6 h-[calc(100vh-80px)]">
+            <main className="flex-1 w-full max-w-6xl mx-auto p-2 md:p-6 h-[calc(100vh-80px)]">
                 <Tabs defaultValue="learn" className="h-full flex flex-col">
                     <TabsList className="inline-flex w-full md:w-auto h-auto p-1 mb-6 flex-wrap gap-2 bg-muted/50">
-                        <TabsTrigger value="learn" className="flex-1 md:flex-none px-4"><BookOpen className="h-4 w-4 mr-2" /> {ui.module.detailed_explanation[language]}</TabsTrigger>
-                        <TabsTrigger value="code" className="flex-1 md:flex-none px-4"><Code className="h-4 w-4 mr-2" /> {ui.module.python_focus[language]}</TabsTrigger>
+                        <TabsTrigger value="learn" className="flex-1 md:flex-none px-2 md:px-4 text-xs md:text-sm"><BookOpen className="h-4 w-4 mr-2" /> {ui.module.detailed_explanation[language]}</TabsTrigger>
+                        <TabsTrigger value="code" className="flex-1 md:flex-none px-2 md:px-4 text-xs md:text-sm"><Code className="h-4 w-4 mr-2" /> {ui.module.python_focus[language]}</TabsTrigger>
                         {/* Quiz Tab Trigger - Only show if module has a quiz defined */}
                         {currentModule.quiz && (
-                            <TabsTrigger value="quiz" className="flex-1 md:flex-none px-4"><Trophy className="h-4 w-4 mr-2" /> Quiz</TabsTrigger>
+                            <TabsTrigger value="quiz" className="flex-1 md:flex-none px-2 md:px-4 text-xs md:text-sm"><Trophy className="h-4 w-4 mr-2" /> Quiz</TabsTrigger>
                         )}
-                        {/* Optional Mini Project */}
                         {/* Optional Mini Project REPLACED by Flashcards */}
-                        <TabsTrigger value="flashcards" className="flex-1 md:flex-none px-4"><Activity className="h-4 w-4 mr-2" /> Flashcards</TabsTrigger>
+                        <TabsTrigger value="flashcards" className="flex-1 md:flex-none px-2 md:px-4 text-xs md:text-sm"><Activity className="h-4 w-4 mr-2" /> Flashcards</TabsTrigger>
                     </TabsList>
 
                     {/* Tab: Theory */}
                     <TabsContent value="learn" className="flex-1 overflow-hidden">
-                        <ScrollArea className="h-full pr-4">
-                            <div className="max-w-3xl mx-auto space-y-8 pb-20">
+                        <ScrollArea className="h-full pr-2 md:pr-4">
+                            <div className="max-w-3xl mx-auto space-y-6 md:space-y-8 pb-20">
                                 {/* Summary */}
                                 <Card className="bg-primary/5 border-primary/20">
-                                    <CardHeader>
+                                    <CardHeader className="px-4 md:px-6">
                                         <CardTitle className="text-lg text-primary">
                                             {language === 'vn' ? 'Tổng quan' : 'Summary'}
                                         </CardTitle>
                                     </CardHeader>
-                                    <CardContent>
-                                        <p className="leading-relaxed text-lg">
+                                    <CardContent className="px-4 md:px-6">
+                                        <p className="leading-relaxed text-base md:text-lg">
                                             {language === 'vn' ? currentModule.summary_vi : (currentModule.summary_en || currentModule.summary_vi)}
                                         </p>
                                     </CardContent>
                                 </Card>
 
                                 {/* Explanation */}
-                                <div className="prose dark:prose-invert max-w-none">
+                                <div className="prose dark:prose-invert max-w-none px-1">
                                     <h3>{ui.module.detailed_explanation[language]}</h3>
                                     <FormattedText text={language === 'vn' ? currentModule.explanation_vi : (currentModule.explanation_en || currentModule.explanation_vi)} />
                                 </div>
@@ -122,16 +121,16 @@ Summary: ${currentModule.summary_vi}
                                 {/* Key Metrics */}
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <Card>
-                                        <CardHeader><CardTitle className="text-base">{ui.module.key_metrics[language]}</CardTitle></CardHeader>
-                                        <CardContent>
+                                        <CardHeader className="px-4 md:px-6"><CardTitle className="text-base">{ui.module.key_metrics[language]}</CardTitle></CardHeader>
+                                        <CardContent className="px-4 md:px-6">
                                             <ul className="list-disc ml-5 space-y-1">
                                                 {currentModule.key_metrics_en.map((m, i) => <li key={i}>{m}</li>)}
                                             </ul>
                                         </CardContent>
                                     </Card>
                                     <Card>
-                                        <CardHeader><CardTitle className="text-base">{ui.module.key_takeaways[language]}</CardTitle></CardHeader>
-                                        <CardContent>
+                                        <CardHeader className="px-4 md:px-6"><CardTitle className="text-base">{ui.module.key_takeaways[language]}</CardTitle></CardHeader>
+                                        <CardContent className="px-4 md:px-6">
                                             <ul className="list-disc ml-5 space-y-1 text-muted-foreground">
                                                 {currentModule.key_points_en.map((p, i) => <li key={i}>{p}</li>)}
                                             </ul>
@@ -156,7 +155,7 @@ Summary: ${currentModule.summary_vi}
                                                 <Badge
                                                     key={i}
                                                     variant="outline"
-                                                    className="cursor-pointer hover:bg-primary/10 transition-colors p-2 text-sm active:scale-95"
+                                                    className="cursor-pointer hover:bg-primary/10 transition-colors p-2 text-sm active:scale-95 whitespace-normal text-left h-auto"
                                                     onClick={() => sendQuestion(language === 'vn' ? q.question_vi : q.question_en)}
                                                 >
                                                     {language === 'vn' ? q.question_vi : q.question_en}
@@ -171,7 +170,7 @@ Summary: ${currentModule.summary_vi}
 
                     {/* Tab: Code */}
                     <TabsContent value="code" className="flex-1 overflow-auto">
-                        <ScrollArea className="h-full pr-4">
+                        <ScrollArea className="h-full pr-2 md:pr-4">
                             <div className="max-w-4xl mx-auto space-y-6 pb-20">
                                 {/* Header */}
                                 <div className="mb-4">
@@ -189,12 +188,12 @@ Summary: ${currentModule.summary_vi}
                                         {/* Concept Overview Panel */}
                                         {(currentModule.code_blocks[0].concept_explanation_en || currentModule.code_blocks[0].concept_explanation_vi) && (
                                             <Card className="bg-gradient-to-r from-purple-50/50 to-indigo-50/50 dark:from-purple-900/10 dark:to-indigo-900/10 border-purple-200 dark:border-purple-900/50">
-                                                <CardHeader className="pb-2">
+                                                <CardHeader className="pb-2 px-4 md:px-6">
                                                     <CardTitle className="text-base flex items-center gap-2 text-purple-700 dark:text-purple-400">
                                                         📚 {language === 'vn' ? 'Tổng quan Khái niệm' : 'Concept Overview'}
                                                     </CardTitle>
                                                 </CardHeader>
-                                                <CardContent>
+                                                <CardContent className="px-4 md:px-6">
                                                     <div className="text-sm text-foreground/80 leading-relaxed whitespace-pre-line">
                                                         <FormattedText text={language === 'vn'
                                                             ? (currentModule.code_blocks[0].concept_explanation_vi || currentModule.code_blocks[0].concept_explanation_en || '')
@@ -208,14 +207,14 @@ Summary: ${currentModule.summary_vi}
                                         {/* Formula Breakdown */}
                                         {currentModule.code_blocks[0].formula_breakdown && (
                                             <Card className="bg-gradient-to-r from-amber-50/50 to-orange-50/50 dark:from-amber-900/10 dark:to-orange-900/10 border-amber-200 dark:border-amber-900/50">
-                                                <CardHeader className="pb-2">
+                                                <CardHeader className="pb-2 px-4 md:px-6">
                                                     <CardTitle className="text-base flex items-center gap-2 text-amber-700 dark:text-amber-400">
                                                         📐 {language === 'vn' ? 'Công thức' : 'Formula Breakdown'}
                                                     </CardTitle>
                                                 </CardHeader>
-                                                <CardContent className="space-y-3">
+                                                <CardContent className="space-y-3 px-4 md:px-6">
                                                     {/* Main Formula */}
-                                                    <div className="bg-white dark:bg-slate-900 rounded-lg p-3 border font-mono text-center text-lg">
+                                                    <div className="bg-white dark:bg-slate-900 rounded-lg p-3 border font-mono text-center text-lg overflow-x-auto">
                                                         {currentModule.code_blocks[0].formula_breakdown.formula}
                                                     </div>
                                                     {/* Variables Table */}
@@ -223,11 +222,11 @@ Summary: ${currentModule.summary_vi}
                                                         {currentModule.code_blocks[0].formula_breakdown.variables.map((v, i) => (
                                                             <div key={i} className="flex items-start gap-3 text-sm bg-white/50 dark:bg-slate-800/50 rounded p-2">
                                                                 <Badge variant="outline" className="font-mono shrink-0">{v.name}</Badge>
-                                                                <span className="flex-1 text-muted-foreground">
+                                                                <span className="flex-1 text-muted-foreground min-w-0 break-words">
                                                                     {language === 'vn' ? (v.description_vi || v.description_en) : v.description_en}
                                                                 </span>
                                                                 {v.example_value && (
-                                                                    <span className="text-xs bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-2 py-0.5 rounded">
+                                                                    <span className="text-xs bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-2 py-0.5 rounded shrink-0">
                                                                         {v.example_value}
                                                                     </span>
                                                                 )}
