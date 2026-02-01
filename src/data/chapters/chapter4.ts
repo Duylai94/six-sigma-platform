@@ -16,41 +16,165 @@ export const chapterAnalyzePatterns: Chapter = {
             id: "mod_analyze_multivari_01",
             order: 1,
             title_en: "Multi-Vari Analysis",
-            summary_vi: "Phân tích nguồn gốc biến động: Vị trí (Positional), Chu kỳ (Cyclical), Thời gian (Temporal).",
-            summary_en: "Source of Variation: Positional, Cyclical, and Temporal.",
-            key_metrics_en: ["Positional", "Cyclical", "Temporal", "Within-Piece", "Piece-to-Piece", "Time-to-Time"],
+            summary_vi: "Công cụ đồ họa giúp phân rã biến động tổng thể thành 3 nhóm: Vị trí, Chu kỳ, và Thời gian.",
+            summary_en: "A graphical tool used to decompose Total Variation into three specific families: Positional, Cyclical, and Temporal.",
+            key_metrics_en: ["Positional (Within-Piece)", "Cyclical (Piece-to-Piece)", "Temporal (Time-to-Time)"],
             key_points_en: [
-                "Positional (Within-Piece): Variation within a single unit (e.g., thickness on left vs right).",
-                "Cyclical (Piece-to-Piece): Variation between consecutive units.",
-                "Temporal (Time-to-Time): Variation over shifts, days, or weeks.",
-                "Multi-Vari Chart: Vertical lines represent range within a piece, connect means to see trends."
+                "Decomposes variation to find the 'Vital Few' families.",
+                "Positional: Variation location on a single unit (e.g., thickness).",
+                "Cyclical: Variation between consecutive units (e.g., batch-to-batch).",
+                "Temporal: Variation over longer periods (e.g., shift-to-shift).",
+                "Sampling: Requires a Nested Design (3 points x 3 parts x Time)."
             ],
             explanation_vi: `
-**Multi-Vari Analysis**
-Công cụ này như "Sherlock Holmes" của Six Sigma. Nó giúp khoanh vùng nghi phạm gây ra biến động.
-1. **Positional (Vị trí - Within Piece):** Lỗi nằm ở đâu trên sản phẩm? (Trái vs Phải, Trên vs Dưới).
-2. **Cyclical (Chu kỳ - Piece to Piece):** Sự khác biệt giữa các sản phẩm liên tiếp. (Sản phẩm 1 vs Sản phẩm 2).
-3. **Temporal (Thời gian - Time to Time):** Sự khác biệt theo giờ, theo ca, theo ngày.
-*Ví dụ:* Nếu biến động chủ yếu là 'Temporal' (Ca sáng tốt, Ca chiều xấu) -> Hãy kiểm tra tay nghề nhân viên hoặc nhiệt độ môi trường.
+**1. Mục Tiêu (The Goal)**
+Multi-Vari Analysis dùng đồ thị để "khoanh vùng" nguồn gốc gây ra biến động lớn nhất (Red X family). Nó không chỉ ra nguyên nhân gốc rễ chính xác, nhưng nó chỉ cho bạn biết **nơi cần tìm kiếm**.
+
+━━━━━━
+
+**2. Ba Nguồn Biến Động (3 Families of Variation)**
+Bạn cần thuộc lòng 3 nhóm này và các từ đồng nghĩa:
+
+- **1. Positional (Vị trí) / Within-Piece:**
+  - *Định nghĩa:* Biến động đo được tại các vị trí khác nhau trên **cùng một sản phẩm**.
+  - *Ví dụ:* Độ dày đĩa phanh (viền vs tâm), độ xốp của vật đúc (trên vs dưới).
+  - *Trên biểu đồ:* Thể hiện bằng độ dài của đường thẳng đứng nối các điểm đo trên 1 sản phẩm.
+  - *Nguyên nhân:* Thường do thiết kế sản phẩm hoặc đồ gá (fixture).
+
+- **2. Cyclical (Chu kỳ) / Piece-to-Piece:**
+  - *Định nghĩa:* Sự khác biệt giữa các sản phẩm được sản xuất **liên tiếp** trong thời gian ngắn.
+  - *Ví dụ:* Sản phẩm 1 vs Sản phẩm 2 vs Sản phẩm 3 cùng một lô.
+  - *Trên biểu đồ:* Thể hiện bằng sự dao động của các nhóm điểm (cluster of means).
+  - *Nguyên nhân:* Thường do máy móc không ổn định.
+
+- **3. Temporal (Thời gian) / Time-to-Time:**
+  - *Định nghĩa:* Biến động xảy ra trong khoảng thời gian **dài hơn**.
+  - *Ví dụ:* Ca A vs Ca B, Sáng vs Chiều, Mòn dao cắt theo tuần.
+  - *Trên biểu đồ:* Thể hiện bằng xu hướng (trend) hoặc sự dịch chuyển của trung bình nhóm theo thời gian.
+  - *Nguyên nhân:* Mòn dụng cụ, thay đổi ca, nhiệt độ môi trường.
+
+━━━━━━
+
+**3. Kế Hoạch Lấy Mẫu Lồng Nhau (Nested Sampling Plan)**
+Để vẽ biểu đồ Multi-Vari, bạn KHÔNG ĐƯỢC lấy mẫu ngẫu nhiên. Bạn phải dùng **Nested Design**:
+1. Đo 3 điểm trên 1 sản phẩm (Positional).
+2. Đo 3 sản phẩm liên tiếp (Cyclical).
+3. Lặp lại việc này mỗi giờ hoặc mỗi ca (Temporal).
+
+━━━━━━
+
+**4. Phân Tích (Analysis Logic)**
+- **Vạch đứng dài:** Biến động Vị trí (Positional) là chính -> Xem lại thiết kế/khuôn.
+- **Các cụm điểm nhảy múa:** Biến động Chu kỳ (Cyclical) là chính -> Xem lại tính ổn định của máy.
+- **Giá trị trung bình trôi đi:** Biến động Thời gian (Temporal) là chính -> Xem lại các yếu tố thay đổi theo thời gian (nhiệt độ, mòn dao).
+
+*Quy tắc:* Luôn xử lý nguồn biến động lớn nhất trước.
             `,
             explanation_en: `
-**Multi-Vari Analysis**
-A tool to visually pinpoint the source of variation. It reduces the number of possible inputs (x's) to a manageable few.
-1. **Positional (Within Piece):** Variation within a single unit (e.g., Top vs Bottom, Left vs Right).
-2. **Cyclical (Piece to Piece):** Variation between consecutive units. (e.g., Batch to Batch).
-3. **Temporal (Time to Time):** Variation over time (e.g., Shift A vs Shift B, Day vs Night).
+**1. The Goal: Reducing the "Vital Few"**
+Multi-Vari Analysis takes a long list of variables and uses a graphical chart to identify which **category** of variation is the biggest culprit. It tells you **where to look**.
+
+━━━━━━
+
+**2. The Three Families of Variation**
+Memorize these synonyms:
+
+- **1. Positional (Within-Piece / Intra-piece):**
+  - *Definition:* Variation measured at different locations on a **single unit**.
+  - *Examples:* Disk thickness (edge vs center), Furnace temp (front vs back).
+  - *Chart Visual:* Represented by the **length of the vertical line** for each unit. Long lines = High Positional Variation.
+
+- **2. Cyclical (Piece-to-Piece / Inter-piece):**
+  - *Definition:* Variation between **consecutive units** produced in a short timeframe.
+  - *Examples:* Part 1 vs Part 2 vs Part 3.
+  - *Chart Visual:* Represented by the **scatter/fluctuation of the means** (dots) of consecutive units.
+
+- **3. Temporal (Time-to-Time / Shift-to-Shift):**
+  - *Definition:* Variation occurring over **longer periods**.
+  - *Examples:* Shift A vs Shift B, Morning vs Afternoon, Tool wear.
+  - *Chart Visual:* Represented by **trends** or shifts connecting groups over time.
+
+━━━━━━
+
+**3. Sampling Plan (Nested Design)**
+You cannot sample randomly. You must use a **Nested Sampling Plan**:
+1. Measure 3 points on one part (Positional).
+2. Measure 3 consecutive parts (Cyclical).
+3. Repeat this every hour/shift (Temporal).
+
+━━━━━━
+
+**4. Key Takeaways**
+- **Vertical Lines:** Positional. (Check part geometry/fixture).
+- **Cluster of Means:** Cyclical. (Check machine stability).
+- **Group Trends:** Temporal. (Check tool wear, temp drift, shifts).
+*Rule:* Fix the largest source of variation first.
             `,
-            recommended_tools_en: ["Multi-Vari Chart"],
-            python_focus_en: ["Data Visualization"],
-            code_blocks: [],
+            recommended_tools_en: ["Multi-Vari Chart (Minitab)", "Seaborn (Python)"],
+            python_focus_en: ["Visualizing Nested Data"],
+            code_blocks: [
+                {
+                    id: "code_analyze_multivari",
+                    title_en: "Generating a Multi-Vari Chart",
+                    title_vi: "Tạo biểu đồ Multi-Vari",
+                    description_vi: "Đoạn code này mô phỏng dữ liệu Nested Design và vẽ biểu đồ Multi-Vari đơn giản dùng Seaborn để thấy rõ 3 nguồn biến động.",
+                    context_en: "Scenario: You suspect variation exists between shifts (Temporal) and within parts (Positional).",
+                    code_template: `import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Simulate Data (Nested Design)
+# Factors: Shift (Temporal), Part_ID (Cyclical within Shift), Location (Positional within Part)
+data = {
+    'Shift': ['Morning']*9 + ['Evening']*9,
+    'Part_ID': ['P1','P1','P1', 'P2','P2','P2', 'P3','P3','P3'] * 2,
+    'Location': ['Top', 'Mid', 'Bot'] * 6,
+    # Morning: Stable parts, consistent positions
+    # Evening: High positional variation (Top vs Bot)
+    'Measurement': [
+        10, 10, 10,  10, 10, 10,  10, 10, 10,  # Morning (Perfect)
+        12, 10, 8,   12, 10, 8,   12, 10, 8    # Evening (High Positional Var)
+    ]
+}
+
+df = pd.DataFrame(data)
+
+# Visualizing Multi-Vari
+# X-axis = Part (Cyclical), Y-axis = Measurement, Hue = Shift (Temporal)
+plt.figure(figsize=(10, 6))
+sns.lineplot(data=df, x='Part_ID', y='Measurement', hue='Shift', style='Shift', markers=True, err_style="bars", ci='sd')
+
+# Add individual points to show Positional variation
+sns.stripplot(data=df, x='Part_ID', y='Measurement', hue='Shift', dodge=False, jitter=False, color='black', alpha=0.5)
+
+plt.title("Multi-Vari Chart Approximation")
+plt.ylabel("Measurement Value")
+plt.xlabel("Consecutive Parts (Cyclical)")
+plt.show()
+
+print("Interpretation:")
+print("- Morning Shift: Flat line, tight points -> Low Variation.")
+print("- Evening Shift: Vertical spread (12 to 8) -> High POSITIONAL Variation.")`,
+                    expected_output_en: "Chart showing spread differences between shifts.",
+                    expected_output_vi: "Biểu đồ so sánh độ tản mạn giữa 2 ca.",
+                    datasets_used: [],
+                    learning_points_en: ["Nested Data Structure", "Interpreting Scales"],
+                    difficulty_en: "Intermediate",
+                    ai_tutor_prompts: ["How to spot Temporal variation?", "Why are the evening points spread out?"],
+                    challenges: []
+                }
+            ],
             ai_tutor_context: {
                 enabled: true,
-                system_prompt_en: "Explain the three families of variation in Multi-Vari.",
+                system_prompt_en: "You are a Multi-Vari Analysis expert. Help identify Positional, Cyclical, and Temporal variation families.",
                 suggested_questions: [
-                    { question_vi: "Biến động trong một sản phẩm (Within-piece) là gì?", question_en: "What is Within-piece variation?" },
-                    { question_vi: "Làm sao vẽ Multi-Vari Chart?", question_en: "How to draw a Multi-Vari Chart?" }
+                    { question_vi: "Biểu đồ Multi-Vari cho biết điều gì?", question_en: "What does a Multi-Vari chart tell you?" },
+                    { question_vi: "Làm sao phân biệt biến động Chu kỳ và Thời gian?", question_en: "How to distinguish Cyclical vs Temporal?" },
+                    { question_vi: "Ví dụ về biến động Vị trí?", question_en: "Give an example of Positional variation." },
+                    { question_vi: "3 nguồn biến động chính là gì?", question_en: "What are the 3 families of variation?" }
                 ],
-                hint_levels: ["Left vs Right side", "Consecutive pieces", "Shift to Shift"],
+                hint_levels: ["Focus on the 3 families", "Consecutive vs Long term", "Within a single unit"],
                 max_hints_per_question: 3
             },
             references_en: [
@@ -59,10 +183,34 @@ A tool to visually pinpoint the source of variation. It reduces the number of po
             flashcards: [
                 {
                     id: "fc_analyze_multi_01",
-                    question_en: "Variation observed between the morning shift and the night shift is an example of:",
-                    answer_vi: "Temporal Variation (Time-to-Time).",
+                    question_en: "Which variation family describes differences between Shift A and Shift B?",
+                    answer_vi: "Temporal (Time-to-Time).",
                     tags_en: ["Analyze", "Multi-Vari"],
+                    difficulty_en: "Easy",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_analyze_multi_02",
+                    question_en: "Variation measured at different locations on a single unit is called?",
+                    answer_vi: "Positional (Within-Piece).",
+                    tags_en: ["Analyze", "Multi-Vari"],
+                    difficulty_en: "Easy",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_analyze_multi_03",
+                    question_en: "What type of sampling plan is required for Multi-Vari Analysis?",
+                    answer_vi: "Nested Sampling Plan.",
+                    tags_en: ["Analyze", "Sampling"],
                     difficulty_en: "Medium",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_analyze_multi_04",
+                    question_en: "If the vertical lines on a Multi-Vari chart are very long, what is the dominant variation?",
+                    answer_vi: "Positional (Within-Piece).",
+                    tags_en: ["Analyze", "dCharts"],
+                    difficulty_en: "Hard",
                     ai_tutor_available: true
                 }
             ],
@@ -71,6 +219,7 @@ A tool to visually pinpoint the source of variation. It reduces the number of po
             estimated_time_minutes: 30,
             prerequisites_ids: ["mod_measure_capability_02"]
         },
+
         {
             id: "mod_analyze_inferential_01",
             order: 2,

@@ -11,7 +11,7 @@
     - `QuizRunner.tsx`: Assessment logic with hints/scoring (Self-contained results screen).
     - `AITutor.tsx`: Global floating chat widget. Uses `AITutorContext` for state persistence. *Supports language-aware responses via `page.tsx` suggestions.*
     - `FormattedText.tsx`: Lightweight Markdown parser with table support.
-    - `FlashcardTab.tsx` (Inline in page.tsx): Renders bilingual flashcards with "Explain Concept" AI link.
+    - `Flashcard.tsx` (Component): Reusable 3D flip card (Question Front / Answer Back) with "Explain Concept" AI integration.
     - `AnalyticsCard.tsx`: [NEW] Collapsible dashboard widget showing DMAIC Phase retention.
     - `ui/*`: Shadcn components (Button, Card, Badge, etc.).
 - **Global Context**:

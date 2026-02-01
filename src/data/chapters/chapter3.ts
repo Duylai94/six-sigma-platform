@@ -385,84 +385,205 @@ plt.show()`,
             id: "mod_measure_03",
             order: 3,
             title_en: "Measurement System Analysis (MSA)",
-            summary_vi: "Gage R&R: Đảm bảo dữ liệu đáng tin cậy. Các ngưỡng chấp nhận (<10%, >30%).",
-            summary_en: "Gage R&R: Ensuring data reliability. Acceptance criteria (<10%, >30%).",
-            key_metrics_en: ["Bias", "Linearity", "Stability", "Repeatability", "Reproducibility", "%GR&R"],
+            summary_vi: "Gage R&R: Đảm bảo dữ liệu đáng tin cậy. Phân tách biến thiên quy trình và biến thiên đo lường.",
+            summary_en: "Gage R&R: Ensuring data reliability. Separating Process Variation from Measurement System Variation.",
+            key_metrics_en: ["%Study Var (%GR&R)", "Repeatability (EV)", "Reproducibility (AV)", "ndc (>5)"],
             key_points_en: [
                 "Accuracy (Bias): Is the average correct? (Bullseye center).",
-                "Precision (Variation): Are the shots clustered together?",
-                "Repeatability: Same person, same part, same gage (Equipment variation).",
-                "Reproducibility: Different people, same part, same gage (Appraiser variation).",
-                "CRITICAL: %GR&R < 10% (Pass), 10-30% (Conditional), > 30% (Fail)."
+                "Precision (Variation): Are shots clustered? (Gage R&R).",
+                "Repeatability (EV): Same Part, Same Gage, Same Operator. -> Equipment Issue.",
+                "Reproducibility (AV): Same Part, Same Gage, Different Operator. -> Training Issue.",
+                "Rule: <10% (Green), 10-30% (Yellow), >30% (Red/Fail).",
+                "Resolution: ndc should be >= 5."
             ],
             explanation_vi: `
-    ** 1. Tại sao cần MSA ?**
-        Trước khi tin vào dữ liệu, phải tin vào thước đo.
+**1. Hai Trụ Cột của MSA (The Two Pillars)**
+- **Accuracy (Độ chính xác / Bias):** Sự khác biệt giữa giá trị đo trung bình và "True Value" (giá trị chuẩn).
+  - *Ví dụ:* Bắn trúng hồng tâm.
+  - *Bias:* Lỗi hệ thống (Luôn đo dư 1mm).
+  - *Linearity:* Chính xác trên toàn dải đo (Đo 10kg chuẩn, liệu 100kg có chuẩn?).
+  - *Stability:* Ổn định theo thời gian (Máy có trôi sau 4 giờ?).
+- **Precision (Độ chụm / Variation):** Độ biến thiên khi đo lặp lại cùng một vật.
+  - *Ví dụ:* Các phát bắn chụm vào một chỗ (dù lệch tâm).
+  - *Gage R&R:* Công cụ đo độ chụm.
 
-** 2. Các thành phần sai số **
-- ** Accuracy(Độ chính xác):** Bias, Linearity, Stability.
-- ** Precision(Độ chụm):** Repeatability + Reproducibility.
+━━━━━━
 
-** 3. Gage R & R Study(Tiêu chuẩn) **
-- ** Thiết kế chuẩn:** 10 mẫu x 3 người đo x 3 lần lặp = 90 dữ liệu.
-- ** Repeatability(Equipment):** Do thiết bị.Khắc phục: Sửa máy, kẹp chặt hơn.
-- ** Reproducibility(Appraiser):** Do con người.Khắc phục: Đào tạo(SOP), dùng dưỡng đo.
+**2. Thành Phần Gage R&R (Decision Criteria)**
+- **Repeatability (Equipment Variation - EV):**
+  - *Định nghĩa:* 1 Người, 1 Vật, 1 Thước đo, Lặp lại nhiều lần.
+  - *Nguyên nhân:* Thiết bị lỏng lẻo, kẹp không chặt, bảo dưỡng kém.
+- **Reproducibility (Appraiser Variation - AV):**
+  - *Định nghĩa:* Nhiều Người, 1 Vật, 1 Thước đo.
+  - *Nguyên nhân:* Người đo thao tác khác nhau. Cần training lại SOP.
 
-** 4. Acceptance Criteria(Tiêu chuẩn Chấp nhận) - Thuộc lòng! **
-- ** <10%:** Hệ thống tuyệt vời(Excellent). -> ** Dùng ngay.**
-- ** 10 % - 30 %:** Tạm chấp nhận(Marginal). -> ** Dùng có điều kiện ** (tùy vào chi phí sửa chữa).
-- **> 30 %:** Không chấp nhận(Unacceptable). -> ** DỪNG LẠI **.Phải sửa hệ thống đo trước khi làm tiếp.
+━━━━━━
+
+**3. Thiết Kế & Tiêu Chuẩn (Study Design & Rules)**
+- **Standard Setup:** 10 Mẫu × 3 Người đo × 3 Lần lặp = 90 dữ liệu.
+- **Acceptance Criteria (% Study Variation):** *HỌC THUỘC LÒNG!*
+  - **< 10%:** Xanh (Green). Hệ thống tốt. -> *Dùng ngay.*
+  - **10% - 30%:** Vàng (Yellow). Tạm chấp nhận. -> *Cân nhắc chi phí/rủi ro.*
+  - **> 30%:** Đỏ (Fail). Không chấp nhận. -> *DỪNG LẠI! Không được qua pha Analyze.*
+- **Resolution (Độ phân giải):**
+  - *Chỉ số:* **ndc** (Number of Distinct Categories).
+  - *Quy tắc:* **ndc ≥ 5** mới phân biệt được các nhóm dữ liệu.
             `,
             explanation_en: `
-    ** 1. Why MSA ?**
-        validate the measurement system before collecting project data.
+**1. The Two Pillars of MSA**
+- **Accuracy (Bias):** Difference between average measurement and "True Value".
+  - *Analogy:* Hitting the bullseye.
+  - *Types:* Bias (Offset), Linearity (Range consistency), Stability (Time consistency).
+- **Precision (Variation):** Variation when measuring the same part repeatedly.
+  - *Analogy:* Shots clustered tightly (Precision) vs Scattered (Imprecision).
+  - *Gage R&R measures Precision.*
 
-** 2. Precision Components **
-- ** Repeatability(EV):** Equipment Variation.Same operator, same part.
-- ** Reproducibility(AV):** Appraiser Variation.Different operators, same part.
+━━━━━━
 
-** 3. Standard Study Design **
-    - 10 Parts(representing process range)
-        - 3 Operators
-            - 3 Trials(Blind measurement)
-                - Total: 90 Data points.
+**2. Gage R&R Components**
+- **Repeatability (Equipment Variation - EV):**
+  - *Def:* Same Operator, Same Part, Repeated trials.
+  - *Cause:* Equipment maintenance, loose clamping, dirt.
+- **Reproducibility (Appraiser Variation - AV):**
+  - *Def:* Different Operators, Same Part.
+  - *Cause:* Human error, unclear SOP, lack of training.
 
-** 4. Acceptance Criteria(MEMORIZE THIS) **
-- **% GR & R < 10 %:** Excellent.System is capable.
-- **% GR & R 10 % - 30 %:** Marginal.Acceptable depending on application / cost.
-- **% GR & R > 30 %:** ** FAIL.** System needs improvement.Do NOT proceed to Analyze phase.
+━━━━━━
+
+**3. Study Design & Criteria**
+- **Standard:** 10 Parts × 3 Operators × 3 Trials = 90 points.
+- **Acceptance Criteria (% Study Var):** *MEMORIZE THIS*
+  - **< 10%:** Excellent. System is capable.
+  - **10% - 30%:** Marginal. Acceptable depending on cost.
+  - **> 30%:** **FAIL**. System unacceptable. Fix the gage before collecting data.
+- **Resolution Rule:**
+  - **ndc (Number of Distinct Categories) ≥ 5.**
+  - *The "10-Bucket Rule":* Gage should be 10x more precise than the tolerance.
             `,
             recommended_tools_en: ["Gage R&R Crossed", "Calibration"],
-            python_focus_en: ["ANOVA Logic"],
-            code_blocks: [],
+            python_focus_en: ["Variance Component Analysis"],
+            code_blocks: [
+                {
+                    id: "code_measure_grr",
+                    title_en: "Simple R&R Calculator",
+                    title_vi: "Máy tính Gage R&R Đơn giản",
+                    description_vi: "Tính %Gage R&R dựa trên phương sai của Thiết bị (EV) và Con người (AV).",
+                    concept_explanation_en: `Calculates total **Gage R&R** from its components:
+1. Equipment Variation (EV)
+2. Appraiser Variation (AV)
+3. Part-to-Part Variation (PV)
+
+Formula: $ TotalVariation = \\sqrt{GRR^2 + PV^2} $`,
+                    concept_explanation_vi: `Tính tổng **Gage R&R** từ các thành phần:
+1. Biến thiên Thiết bị (EV)
+2. Biến thiên Người đo (AV)
+3. Biến thiên Mẫu (PV)
+
+Công thức: $ TotalVariation = \\sqrt{GRR^2 + PV^2} $`,
+                    code_template: `import math
+
+def calculate_grr_percentage(sigma_ev, sigma_av, sigma_pv):
+    # 1. Total Gage R&R Variance (Repeatability + Reproducibility)
+    var_grr = sigma_ev**2 + sigma_av**2
+    sigma_grr = math.sqrt(var_grr)
+    
+    # 2. Total Study Variation (TV) = sqrt(GRR^2 + PV^2)
+    var_tv = var_grr + sigma_pv**2
+    sigma_tv = math.sqrt(var_tv)
+    
+    # 3. Calculate % Study Variation
+    percent_grr = (sigma_grr / sigma_tv) * 100
+    
+    # 4. Calculate ndc (Number of Distinct Categories)
+    ndc = 1.41 * (sigma_pv / sigma_grr)
+    
+    return percent_grr, ndc
+
+# Example Data (Standard Deviation components from ANOVA)
+s_ev = 0.5  # Repeatability
+s_av = 0.4  # Reproducibility
+s_pv = 5.0  # Part Variation (Actual Process)
+
+pct_rr, ndc_val = calculate_grr_percentage(s_ev, s_av, s_pv)
+
+print(f"% Gage R&R: {pct_rr:.2f}%")
+print(f"ndc:        {int(ndc_val)}")
+
+if pct_rr < 10:
+    print("-> System is EXCELLENT (Green)")
+elif pct_rr > 30:
+    print("-> System FAILED (Red) - Fix immediately!")
+else:
+    print("-> System is MARGINAL (Yellow)")`,
+                    expected_output_en: "%R&R and pass/fail verdict.",
+                    expected_output_vi: "Kết quả %R&R và kết luận Đạt/Hỏng.",
+                    datasets_used: [],
+                    learning_points_en: ["%Study Variation Formula", "ndc logic"],
+                    difficulty_en: "Intermediate",
+                    ai_tutor_prompts: ["What if sigma_av is 0?", "Why is ndc important?"],
+                    challenges: [
+                        {
+                            id: "ch_grr_01",
+                            prompt_en: "Increase Appraiser Variation (s_av) to 2.0 and check result.",
+                            hint_en: "Set s_av = 2.0",
+                            solution_code: "s_av = 2.0\npct_rr, ndc_val = calculate_grr_percentage(s_ev, s_av, s_pv)"
+                        }
+                    ]
+                }
+            ],
             ai_tutor_context: {
                 enabled: true,
-                system_prompt_en: "Explain Repeatability vs Reproducibility.",
+                system_prompt_en: "You are an MSA expert. Diagnose measurement issues.",
                 suggested_questions: [
-                    { question_vi: "Nếu Repeatability kém thì sửa cái gì?", question_en: "What to fix if Repeatability is poor?" },
-                    { question_vi: "Gage R&R > 30% có dùng được không?", question_en: "Can we use Gage R&R > 30%?" }
+                    { question_vi: "Repeatability khác Reproducibility chỗ nào?", question_en: "Difference between Repeatability and Reproducibility?" },
+                    { question_vi: "Nếu Gage R&R > 30% thì làm gì?", question_en: "What if Gage R&R > 30%?" },
+                    { question_vi: "Chỉ số ndc là gì?", question_en: "What is the ndc metric?" }
                 ],
-                hint_levels: ["Equipment issue", "Training issue", "Reject measuring system"],
+                hint_levels: ["Same operator vs Different operators", "Reject system", "Distinct Categories > 5"],
                 max_hints_per_question: 3
             },
             references_en: [
-                { source_type: "pdf", label_en: "Master Cheat Sheet - Section 4", location_hint_en: "MSA & Gage R&R" }
+                { source_type: "pdf", label_en: "Master Cheat Sheet - Section 8", location_hint_en: "MSA" }
             ],
             flashcards: [
                 {
                     id: "fc_measure_03_01",
-                    question_en: "Variation from different operators measuring the same part is called:",
-                    answer_vi: "Reproducibility (Khả năng tái lập).",
-                    tags_en: ["MSA"],
-                    difficulty_en: "Medium",
+                    question_en: "Variation observed when the SAME operator measures the same part repeatedly is:",
+                    answer_vi: "Repeatability (Equipment Variation).",
+                    tags_en: ["MSA", "Definitions"],
+                    difficulty_en: "Easy",
                     ai_tutor_available: true
                 },
                 {
                     id: "fc_measure_03_02",
-                    question_en: "What is the verdict if Gage R&R is 35%?",
-                    answer_vi: "Unacceptable. Must fix measurement system.",
-                    tags_en: ["MSA", "Criteria"],
+                    question_en: "What is the mandatory action if Gage R&R > 30%?",
+                    answer_vi: "Stop. The system is unacceptable. Fix it before measuring.",
+                    tags_en: ["MSA", "Rules"],
                     difficulty_en: "Hard",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_measure_03_03",
+                    question_en: "What is the minimum acceptable value for ndc (Number of Distinct Categories)?",
+                    answer_vi: "ndc >= 5.",
+                    tags_en: ["MSA", "Metrics"],
+                    difficulty_en: "Medium",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_measure_03_04",
+                    question_en: "Can a gage be Precise but not Accurate?",
+                    answer_vi: "Yes. (Consistently wrong). You need both.",
+                    tags_en: ["MSA", "Concepts"],
+                    difficulty_en: "Medium",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_measure_03_05",
+                    question_en: "Which variation is caused by 'Different People'?",
+                    answer_vi: "Reproducibility (Appraiser Variation).",
+                    tags_en: ["MSA", "Definitions"],
+                    difficulty_en: "Easy",
                     ai_tutor_available: true
                 }
             ],
@@ -475,110 +596,179 @@ plt.show()`,
             id: "mod_measure_04",
             order: 4,
             title_en: "Process Capability (Cp, Cpk) & Sigma Level",
-            summary_vi: "Đánh giá năng lực quy trình. Bảng quy đổi DPMO và các ngưỡng quan trọng.",
-            summary_en: "Assessing Process Capability. DPMO Conversion Table and critical thresholds.",
-            key_metrics_en: ["Cp", "Cpk", "Sigma Level", "DPMO", "Yield"],
+            summary_vi: "Đánh giá năng lực quy trình. So sánh Tiếng nói của Quy trình (Voice of Process) với Tiếng nói của Khách hàng (Voice of Customer).",
+            summary_en: "Assessing if the process can meet requirements. Comparing Voice of Process (Control Limits) to Voice of Customer (Spec Limits).",
+            key_metrics_en: ["Cp (Potential)", "Cpk (Actual)", "Sigma Level", "DPMO", "Yield"],
             key_points_en: [
-                "Cp: Potential capability (Process Width vs Spec Width).",
-                "Cpk: Actual capability (Accounts for Centering).",
-                "Cpk < 1.0: Not Capable.",
-                "Cpk 1.33: Minimum Standard.",
-                "Cpk 1.67: Six Sigma Level."
+                "Prerequisite 1: Stability (Process must be in control).",
+                "Prerequisite 2: Normality (P-value > 0.05).",
+                "Cp: Potential capability (Width). Formula: (USL-LSL)/6σ. 'Can we fit the car?'",
+                "Cpk: Actual capability (Centering). Formula: Min(Cpu, Cpl). 'Did we hit the wall?'",
+                "Standard: Cpk >= 1.33 (4 Sigma) is the minimum goal.",
+                "Relationship: Short-term Sigma Level ≈ 3 * Cpk."
             ],
             explanation_vi: `
-    ** 1. Cp vs Cpk **
-- ** Cp(Tiềm năng):** "Xe có lọt cửa không?"(Không quan tâm lệch tâm).\`Cp = (USL-LSL)/6σ\`
-- **Cpk (Thực tế):** "Xe có đang lọt cửa không?" (Phạt nếu lệch tâm). \`Cpk = Min(Cpu, Cpl)\`
+**1. Các Định Nghĩa Cốt Lõi (Definitions)**
+Trước khi tính toán, hãy hiểu rõ các biến số:
+- **USL (Upper Specification Limit):** Giới hạn trên của khách hàng. (VD: Đường kính tối đa 10.5mm).
+- **LSL (Lower Specification Limit):** Giới hạn dưới của khách hàng. (VD: Đường kính tối thiểu 9.5mm).
+- **Sigma ($\sigma$):** Độ lệch chuẩn (Standard Deviation) - Đo lường sự biến thiên của quy trình.
+- **$\mu$ (Mu):** Giá trị trung bình của quy trình.
 
-**2. Các ngưỡng đánh giá Cpk**
-- **Cpk < 1.0:** Kém. Quá trình tạo ra nhiều lỗi. (> 66,807 DPMO).
-- **1.0 <= Cpk < 1.33:** Tạm được (Marginal). Cần theo dõi sát.
-- **Cpk >= 1.33 (4 Sigma):** Tốt. Đạt chuẩn công nghiệp.
-- **Cpk >= 1.67 (5 Sigma):** Xuất sắc.
-- **Cpk >= 2.0 (6 Sigma):** Đẳng cấp thế giới. (3.4 DPMO).
+━━━━━━
 
-**3. Bảng quy đổi Sigma - DPMO (Cần nhớ)**
-| Cpk | Sigma Level | DPMO (Lỗi phần triệu) | Yield (Đạt) |
-|---|---|---|---|
-| 0.33 | 1.0 | 690,000 | 31% |
-| 0.67 | 2.0 | 308,537 | 69% |
-| 1.00 | 3.0 | 66,807 | 93.3% |
-| 1.33 | 4.0 | 6,210 | 99.38% |
-| 1.67 | 5.0 | 233 | 99.97% |
-| 2.00 | 6.0 | 3.4 | 99.99966% |
+**2. Công Thức Cp (Process Potential)**
+Cp đo lường "Tiềm năng" - liệu quy trình có *đủ hẹp* để lọt vào giới hạn của khách hàng không (bỏ qua việc có lệch tâm hay không).
+
+$$ Cp = \\frac{USL - LSL}{6\\sigma} $$
+
+*Giải thích công thức:*
+- **Tử số ($USL - LSL$):** Độ rộng cho phép của khách hàng (Voice of Customer).
+- **Mẫu số ($6\\sigma$):** Độ rộng thực tế của quy trình (Voice of Process).
+- *Quy tắc:* Nếu $Cp > 1$, quy trình "vừa vặn" (Capable).
+
+━━━━━━
+
+**3. Công Thức Cpk (Process Capability)**
+Cpk đo lường "Thực tế" - xem xét cả độ rộng và vị trí trung tâm.
+
+$$ Cpk = \\min(Cpk_{upper}, Cpk_{lower}) $$
+
+Trong đó:
+$$ Cpk_{upper} = \\frac{USL - \\mu}{3\\sigma} $$
+$$ Cpk_{lower} = \\frac{\\mu - LSL}{3\\sigma} $$
+
+*Tại sao dùng Min?*
+Chúng ta quan tâm đến phía "tệ nhất" (gần giới hạn nào nhất). Nếu xe đỗ sát tường bên phải, ta tính khoảng cách đến tường đó.
+
+━━━━━━
+
+**4. Bảng Quy Đổi Magic (Sigma Conversion)**
+| Cpk | Sigma Level | DPMO | Yield (%) | Đánh giá |
+|---|---|---|---|---|
+| < 1.0 | < 3 σ | > 66,807 | < 93.3% | **Kém (Not Capable)**. |
+| **1.33** | **4 σ** | **6,210** | **99.38%** | **Chuẩn công nghiệp**. |
+| **2.0** | **6 σ** | **3.4** | **99.9997%** | **Six Sigma**. |
             `,
             explanation_en: `
-**1. Cp vs Cpk Recap**
-- **Cp:** Can we do it? (Process Spread vs Spec Spread).
-- **Cpk:** Are we doing it? (Considers Shift).
+**1. Core Definitions**
+Before calculating, understand the variables:
+- **USL (Upper Specification Limit):** The maximum allowed by the customer (e.g., Max diameter 10.5mm).
+- **LSL (Lower Specification Limit):** The minimum allowed by the customer (e.g., Min diameter 9.5mm).
+- **Sigma ($\sigma$):** Standard Deviation - The measure of process variation.
+- **$\mu$ (Mu):** The process average (Mean).
 
-**2. Interpreting Cpk Scores**
-- **< 1.0:** NOT CAPABLE. High defect rate. Action Required.
-- **1.0 - 1.33:** Marginal. Risky.
-- **>= 1.33:** CAPABLE. The standard goal for most processes.
-- **>= 2.0:** SIX SIGMA.
+━━━━━━
 
-**3. The Magic Table (Cpk to DPMO)**
-| Cpk | Sigma | DPMO | Meaning |
+**2. Cp Formula (Process Potential)**
+Cp measures "Potential" - does the process variation fit within specificatoin limits? (Ignoring centering).
+
+$$ Cp = \\frac{USL - LSL}{6\\sigma} $$
+
+*Step-by-Step:*
+1. Calculate the spread allowed by customer: $USL - LSL$.
+2. Calculate the process spread: $6 \\times \\sigma$.
+3. Divide Customer Spread by Process Spread.
+*Interpretation:* If $Cp > 1.0$, the process width is good.
+
+━━━━━━
+
+**3. Cpk Formula (Process Capability)**
+Cpk measures "Reality" - checking both width and centering.
+
+$$ Cpk = \\min\\left(\\frac{USL - \\mu}{3\\sigma}, \\frac{\\mu - LSL}{3\\sigma}\\right) $$
+
+*Step-by-Step:*
+1. Calculate **Upper Capability**: Distance from Mean to USL defined in sigmas. ($Cpk_u$)
+2. Calculate **Lower Capability**: Distance from Mean to LSL defined in sigmas. ($Cpk_l$)
+3. Take the **Minimum** of the two.
+*Reason:* The "Min" identifies the closest wall you might hit.
+
+━━━━━━
+
+**4. The Magic Table**
+| Cpk | Sigma | DPMO | Interpretation |
 |---|---|---|---|
-| 0.33 | 1 | 690,000 | Disaster |
-| 1.00 | 3 | 66,807 | Average |
-| 1.33 | 4 | 6,210 | Industry Std |
-| 1.67 | 5 | 233 | World Class |
-| 2.00 | 6 | 3.4 | Six Sigma |
+| < 1.0 | < 3 σ | > 66,807 | **Bad**. High defects. |
+| **1.33** | **4 σ** | **6,210** | **Industry Standard**. |
+| **2.0** | **6 σ** | **3.4** | **Six Sigma**. |
             `,
-            recommended_tools_en: ["Capability Sixpack"],
-            python_focus_en: ["Calculation"],
+            recommended_tools_en: ["Capability Sixpack (Minitab)", "Python (Scipy)"],
+            python_focus_en: ["Process Capability Analysis"],
             code_blocks: [
                 {
                     id: "code_measure_cpk",
                     title_en: "Calculating Cp, Cpk & DPMO",
-                    context_en: `Situation: A customer requires a shaft diameter of 10.0 ± 0.5 mm. You collected 8 samples. Goal: Determine if the process is capable (Cpk >= 1.33).`,
-                    description_vi: "Hàm này tính toán năng lực quy trình:\n\n1. **Cp (Tiềm năng):** So sánh bề rộng của đường (USL-LSL) với bề rộng của xe (6 Sigma). Nếu Cp > 1, xe lọt đường.\n2. **Cpk (Thực tế):** Xem xét xe có đi lệch tâm không. Cpk luôn <= Cp.\n3. Ở ví dụ dưới, nếu Cpk < 1.33, quy trình cần cải tiến (hoặc canh giữa lại).",
+                    title_vi: "Tính toán Cp, Cpk & DPMO",
+                    description_vi: "Hàm này tính toán năng lực quy trình:\n\n1. **Cp (Tiềm năng):** So sánh bề rộng. Nếu Cp > 1, quy trình đủ khả năng.\n2. **Cpk (Thực tế):** Cpk luôn <= Cp. Nếu Cpk < 1.33, quy trình cần cải tiến.",
+                    context_en: `Situation: A customer requires a shaft diameter of 10.0 ± 0.5 mm. You collected 8 samples.
+Goal: Determine if the process is capable (Cpk >= 1.33).`,
                     code_template: `import numpy as np
 
 def calculate_capability(data, usl, lsl):
-    sigma = np.std(data, ddof=1)
+    # 1. Calculate Descriptive Stats
+    sigma = np.std(data, ddof=1) # Sample Std Dev
     mean = np.mean(data)
     
-    # Cp Calculation
+    # 2. Cp Calculation (Width)
+    # Formula: (USL - LSL) / 6*sigma
     cp = (usl - lsl) / (6 * sigma)
     
-    # Cpk Calculation
+    # 3. Cpk Calculation (Centering)
+    # Formula: Min( (USL-Mean)/3s, (Mean-LSL)/3s )
     cpu = (usl - mean) / (3 * sigma)
     cpl = (mean - lsl) / (3 * sigma)
     cpk = min(cpu, cpl)
     
-    return cp, cpk
+    return cp, cpk, mean, sigma
 
 # Example Data
 data = [9.8, 10.1, 9.9, 10.0, 10.2, 9.7, 10.1, 10.0]
 USL = 10.5
 LSL = 9.5
 
-cp, cpk = calculate_capability(data, USL, LSL)
+cp, cpk, mu, std = calculate_capability(data, USL, LSL)
 
+print(f"Mean: {mu:.3f}, StdDev: {std:.3f}")
 print(f"Cp (Potential): {cp:.2f}")
-print(f"Cpk (Actual): {cpk:.2f}")
+print(f"Cpk (Actual):   {cpk:.2f}")
 
-if cpk < 1.33:
-    print("Process is NOT capable.")
+# Verdict Logic
+if cpk < 1.0:
+    print("Verdict: NOT CAPABLE (Red). High defects.")
+elif cpk < 1.33:
+    print("Verdict: MARGINAL (Yellow). Improvements needed.")
 else:
-    print("Process is capable (>= 1.33).")`,
-                    expected_output_en: "Cp and Cpk values with conclusion.",
+    print("Verdict: CAPABLE (Green). Meets Industry Standard.")
+
+# Centering Check
+if cp > 1.33 and cpk < 1.0:
+    print("Insight: Process is Precise but OFF-CENTER. Adjust the Mean!")`,
+                    expected_output_en: "Cp/Cpk values and Capability Verdict.",
+                    expected_output_vi: "Giá trị Cp/Cpk và kết luận năng lực.",
                     datasets_used: [],
-                    learning_points_en: ["Capability formulas", "Interpretation"],
-                    difficulty_en: "Intermediate"
+                    learning_points_en: ["Cp vs Cpk logic", "Standard 1.33 threshold"],
+                    difficulty_en: "Intermediate",
+                    ai_tutor_prompts: ["Why is Cpk always <= Cp?", "What happens if we move the Mean closer to USL?"],
+                    challenges: [
+                        {
+                            id: "ch_cpk_01",
+                            prompt_en: "Change the data to be centered at 10.0 exactly and see Cpk.",
+                            hint_en: "Use data = [10.0, 10.0, ...]",
+                            solution_code: "data = [10.0]*8\ncp, cpk, m, s = calculate_capability(data, USL, LSL)"
+                        }
+                    ]
                 }
             ],
             ai_tutor_context: {
                 enabled: true,
-                system_prompt_en: "Contrast Cp and Cpk.",
+                system_prompt_en: "You are a Process Capability expert. Help interpret Cp/Cpk indices.",
                 suggested_questions: [
-                    { question_vi: "Nếu Cp = 2.0 mà Cpk = 0.5 thì vấn đề là gì?", question_en: "If Cp = 2.0 but Cpk = 0.5, what is the problem?" },
-                    { question_vi: "Cpk bao nhiêu thì đạt 6 Sigma?", question_en: "What Cpk value corresponds to 6 Sigma?" }
+                    { question_vi: "Nếu dữ liệu không ổn định (Unstable) thì dùng chỉ số nào?", question_en: "Which index to use if process is Unstable?" },
+                    { question_vi: "Cp = 2.0, Cpk = 1.0 nghĩa là gì?", question_en: "What does Cp=2.0, Cpk=1.0 mean?" },
+                    { question_vi: "Mục tiêu Cpk chuẩn là bao nhiêu?", question_en: "What is the standard target for Cpk?" }
                 ],
-                hint_levels: ["Off-center process", "Cpk = 2.0 corresponds to 6 Sigma", "DPMO = 3.4"],
+                hint_levels: ["Use Pp/Ppk", "Good potential but off-center", "Target Cpk >= 1.33"],
                 max_hints_per_question: 3
             },
             references_en: [
@@ -595,10 +785,34 @@ else:
                 },
                 {
                     id: "fc_measure_04_02",
-                    question_en: "If Cp is high (2.0) but Cpk is low (0.5), what should you do?",
-                    answer_vi: "Center the process (Adjust the mean).",
+                    question_en: "If Cp is high (2.0) but Cpk is low (0.5), what is the problem?",
+                    answer_vi: "The process is Off-Center. Adjust the Mean.",
                     tags_en: ["Capability", "Strategy"],
-                    difficulty_en: "Hard",
+                    difficulty_en: "Medium",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_measure_04_03",
+                    question_en: "Which index implies 'Potential Capability' (Ignoring Centering)?",
+                    answer_vi: "Cp.",
+                    tags_en: ["Capability", "Definitions"],
+                    difficulty_en: "Easy",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_measure_04_04",
+                    question_en: "Result: Can you calculate Cpk if the process is NOT stable?",
+                    answer_vi: "No. You must fix stability first (or use Ppk).",
+                    tags_en: ["Capability", "Rules"],
+                    difficulty_en: "Medium",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_measure_04_05",
+                    question_en: "What is the definition of Six Sigma in terms of Cpk?",
+                    answer_vi: "Cpk >= 2.0.",
+                    tags_en: ["Six Sigma", "Goals"],
+                    difficulty_en: "Easy",
                     ai_tutor_available: true
                 }
             ],

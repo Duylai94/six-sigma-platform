@@ -221,8 +221,45 @@ function TableParser({ block }: { block: string }) {
     );
 }
 
-// Simple Parser for **Bold** and *Italic*
+import katex from "katex";
+
+// Simple Parser for Math ($...$ or $$...$$) and **Bold**
 function InlineParser({ text }: { text: string }) {
+    // 1. Split by Block Math ($$...$$) and Inline Math ($...$)
+    const parts = text.split(/(\$\$[\s\S]+?\$\$|\$[^$]+?\$)/g);
+
+    return (
+        <>
+            {parts.map((part, i) => {
+                // Block Math
+                if (part.startsWith("$$") && part.endsWith("$$")) {
+                    const formula = part.slice(2, -2);
+                    try {
+                        const html = katex.renderToString(formula, { displayMode: true, throwOnError: false });
+                        return <div key={i} dangerouslySetInnerHTML={{ __html: html }} className="my-2 overflow-x-auto" />;
+                    } catch (e) {
+                        return <code key={i}>{part}</code>;
+                    }
+                }
+                // Inline Math
+                if (part.startsWith("$") && part.endsWith("$")) {
+                    const formula = part.slice(1, -1);
+                    try {
+                        const html = katex.renderToString(formula, { displayMode: false, throwOnError: false });
+                        return <span key={i} dangerouslySetInnerHTML={{ __html: html }} />;
+                    } catch (e) {
+                        return <code key={i}>{part}</code>;
+                    }
+                }
+
+                // 2. Fallback to Bold Parsing for text nodes
+                return <BoldParser key={i} text={part} />;
+            })}
+        </>
+    );
+}
+
+function BoldParser({ text }: { text: string }) {
     // Regex to match **bold**
     const parts = text.split(/(\*\*.*?\*\*)/g);
 
