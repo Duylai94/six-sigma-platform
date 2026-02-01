@@ -6,75 +6,104 @@ interface FormattedTextProps {
     className?: string;
 }
 
+// Import Mermaid dynamically or statically (client component)
+import { MermaidDiagram } from "./MermaidDiagram";
+import katex from "katex";
+
+type BlockType = 'text' | 'table' | 'mermaid';
+type ContentBlock = { type: BlockType; content: string };
+
 export function FormattedText({ text, className }: FormattedTextProps) {
     if (!text) return null;
 
-    // improved splitting: Detect tables and split them out
-    const blocks = extractTables(text);
+    // Use the robust state-machine parser
+    const blocks = parseMarkdown(text);
 
     return (
         <div className={cn("space-y-4 text-foreground/90 leading-relaxed", className)}>
             {blocks.map((block, index) => {
-                // If special marker for table
+                if (block.type === 'mermaid') {
+                    return <MermaidDiagram key={index} chart={block.content} />;
+                }
+
                 if (block.type === 'table') {
                     return <TableParser key={index} block={block.content} />;
                 }
 
-                // Normal Text processing
+                // Normal Text (Text Block)
+                // Parse for lists and paragraphs
                 const content = block.content;
 
-                // Check for List Items
-                if (content.trim().startsWith("- ")) {
-                    const items = content.split("\n").filter((line) => line.trim().startsWith("- "));
-                    return (
-                        <ul key={index} className="list-disc ml-6 space-y-1">
-                            {items.map((item, i) => (
-                                <li key={i} className="pl-1">
-                                    <InlineParser text={item.replace(/^- /, "")} />
-                                </li>
-                            ))}
-                        </ul>
-                    );
-                }
+                // Simple check for lists at the start of the block
+                // (Note: This is a simplification. Ideally, the parser should chunk lists too.
+                // But for now, we assume a text block might be a mix or a single paragraph).
+                // Let's split by double newline to handle paragraphs.
+                const paragraphs = content.split(/\n\s*\n/);
 
-                // Check for Numbered List
-                if (content.trim().match(/^(\d+\.|[1-5]️⃣)/)) {
-                    const lines = content.split("\n").filter((line) => line.trim().length > 0);
-                    return (
-                        <div key={index} className="space-y-2">
-                            {lines.map((line, i) => (
-                                <p key={i} className="whitespace-pre-line">
-                                    <InlineParser text={line} />
-                                </p>
-                            ))}
-                        </div>
-                    );
-                }
-
-                // Standard Paragraph
                 return (
-                    <p key={index} className="whitespace-pre-line">
-                        <InlineParser text={content} />
-                    </p>
+                    <div key={index} className="space-y-2">
+                        {paragraphs.map((p, i) => {
+                            if (!p.trim()) return null;
+
+                            // Check for List
+                            if (p.trim().startsWith("- ")) {
+                                const items = p.split("\n").filter((line) => line.trim().startsWith("- "));
+                                return (
+                                    <ul key={i} className="list-disc ml-6 space-y-1">
+                                        {items.map((item, j) => (
+                                            <li key={j} className="pl-1">
+                                                <InlineParser text={item.replace(/^\s*-\s/, "")} />
+                                            </li>
+                                        ))}
+                                    </ul>
+                                );
+                            }
+
+                            // Check for Numbered List
+                            if (p.trim().match(/^(\d+\.|[1-5]️⃣)/)) {
+                                const lines = p.split("\n").filter((line) => line.trim().length > 0);
+                                return (
+                                    <div key={i} className="space-y-2">
+                                        {lines.map((line, j) => (
+                                            <p key={j} className="whitespace-pre-line">
+                                                <InlineParser text={line} />
+                                            </p>
+                                        ))}
+                                    </div>
+                                );
+                            }
+
+                            // Standard Paragraph
+                            return (
+                                <p key={i} className="whitespace-pre-line">
+                                    <InlineParser text={p} />
+                                </p>
+                            );
+                        })}
+                    </div>
                 );
             })}
         </div>
     );
 }
 
-// Helper: Extract tables from text and return mixed array
-type TextBlock = { type: 'text' | 'table', content: string };
-
-function extractTables(text: string): TextBlock[] {
+// ---------------------------------------------------------------------------
+// PARSER ENGINE
+// ---------------------------------------------------------------------------
+function parseMarkdown(text: string): ContentBlock[] {
     const lines = text.split("\n");
-    const result: TextBlock[] = [];
-    let currentBuffer: string[] = [];
-    let isTableMode = false;
+    const blocks: ContentBlock[] = [];
 
-    // Helper to flush text buffer
-    const flushBuffer = (type: 'text' | 'table') => {
+    let currentBuffer: string[] = [];
+    let state: 'NORMAL' | 'TABLE' | 'CODE' = 'NORMAL';
+
+    const flush = (type: BlockType) => {
         if (currentBuffer.length > 0) {
-            result.push({ type, content: currentBuffer.join("\n") });
+            // Only push if content is not just empty lines
+            const content = currentBuffer.join("\n").trim();
+            if (content.length > 0 || type !== 'text') { // Always push non-text blocks even if content is empty (e.g., empty mermaid block)
+                blocks.push({ type, content: currentBuffer.join("\n") });
+            }
             currentBuffer = [];
         }
     };
@@ -82,134 +111,130 @@ function extractTables(text: string): TextBlock[] {
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
         const trimmed = line.trim();
-        // Detect table row: starts/ends with | AND contains |
-        // Relaxed check: Just needs containing pipes and looking tabular
-        const isTableRow = trimmed.includes("|") && (trimmed.startsWith("|") || trimmed.match(/^\s*\|/));
-        const isSeparator = trimmed.match(/^\|?[\s\-:|]+\|[\s\-:|]+\|?$/);
 
-        if (isTableMode) {
-            if (isTableRow || isSeparator) {
-                currentBuffer.push(line);
-            } else {
-                // End of table
-                flushBuffer('table');
-                isTableMode = false;
-                // Re-process this line as text
-                if (trimmed.length > 0) currentBuffer.push(line);
+        if (state === 'NORMAL') {
+            // Check for Code Block Start
+            if (trimmed.startsWith("```mermaid")) {
+                flush('text');
+                state = 'CODE';
+                // Do NOT include the fence line in the content for MermaidDiagram
+                // But we must handle indentation if it exists?
+                // Actually MermaidDiagram expects just the graph def.
+                // So skipping this line is correct.
             }
-        } else {
-            // Check if this line MIGHT be start of table
-            // Look ahead for separator
-            if (isTableRow) {
-                const nextLine = lines[i + 1]?.trim();
-                const nextIsSeparator = nextLine?.match(/^\|?[\s\-:|]+\|[\s\-:|]+\|?$/);
-
-                if (nextIsSeparator) {
-                    flushBuffer('text');
-                    isTableMode = true;
-                    currentBuffer.push(line);
-                } else {
-                    currentBuffer.push(line);
-                }
+            // Check for Table Start
+            else if (isTableStart(line, lines[i + 1])) {
+                flush('text');
+                state = 'TABLE';
+                currentBuffer.push(line);
+            }
+            else {
+                currentBuffer.push(line);
+            }
+        }
+        else if (state === 'CODE') {
+            // Check for Code Block End
+            if (trimmed.startsWith("```")) {
+                flush('mermaid');
+                state = 'NORMAL';
             } else {
-                // Normal text line
-                // Split by double newline for paragraphs if not in table
-                if (line.trim() === "") {
-                    flushBuffer('text'); // Empty line = split paragraph
-                } else {
-                    currentBuffer.push(line);
-                }
+                currentBuffer.push(line);
+            }
+        }
+        else if (state === 'TABLE') {
+            // Check for Table End (empty line or non-table row)
+            if (!isTableRow(line)) {
+                flush('table');
+                state = 'NORMAL';
+                // Reprocess this line as Normal
+                i--;
+            } else {
+                currentBuffer.push(line);
             }
         }
     }
-    flushBuffer(isTableMode ? 'table' : 'text');
 
-    return result;
+    // Final flush
+    if (state === 'CODE') flush('mermaid'); // Should not happen if closed properly, but safe
+    else if (state === 'TABLE') flush('table');
+    else flush('text');
+
+    return blocks;
 }
 
-// Check if a block is a markdown table
-function isTableBlock(block: string): boolean {
-    const lines = block.trim().split("\n");
-    if (lines.length < 2) return false;
-
-    // Check if lines start and contain pipe characters
-    const hasTableSyntax = lines.every(line =>
-        line.trim().includes("|") &&
-        !line.trim().startsWith("┌") && // Not ASCII art table
-        !line.trim().startsWith("├") &&
-        !line.trim().startsWith("└")
-    );
-
-    // Check for separator row (|---|---|)
-    const hasSeparator = lines.some(line =>
-        line.trim().match(/^\|?[\s\-:|]+\|[\s\-:|]+\|?$/)
-    );
-
-    return hasTableSyntax && hasSeparator;
+// Helper: Is this line a table row?
+function isTableRow(line: string): boolean {
+    const trimmed = line.trim();
+    // Must contain pipe and look like a table row
+    // Allow indentation
+    return trimmed.includes("|");
 }
 
-// Parse and render markdown table
+// Helper: Check if a table is starting
+function isTableStart(currentLine: string, nextLine?: string): boolean {
+    if (!isTableRow(currentLine)) return false;
+    if (!nextLine) return false;
+    // Check if next line is a separator |---|---|
+    return !!nextLine.trim().match(/^\|?[\s\-:|]+\|[\s\-:|]+\|?$/);
+}
+
+// ---------------------------------------------------------------------------
+// RENDERERS (TableParser, InlineParser, BoldParser)
+// ---------------------------------------------------------------------------
+
 function TableParser({ block }: { block: string }) {
     const lines = block.trim().split("\n").filter(line => line.trim().length > 0);
 
-    // Find separator line index
+    // Find separator line index to distinguish Header vs Body
     const separatorIndex = lines.findIndex(line =>
         line.trim().match(/^\|?[\s\-:|]+\|[\s\-:|]+\|?$/)
     );
 
-    if (separatorIndex === -1) return <p>{block}</p>;
+    if (separatorIndex === -1) return <p className="font-mono text-xs">{block}</p>;
 
-    // Parse header (lines before separator)
-    const headerLines = lines.slice(0, separatorIndex);
+    // lines[0...separatorIndex] = headers (should be just 1 line usually)
+    // lines[separatorIndex] = separator
+    // lines[separatorIndex+1...] = body
+
+    const headerLine = lines[0]; // Assume first line is header if separator exists
+    // (If separator is index 0, that's invalid, handled by findIndex returning -1 if not found matching structure?)
+    // Actually findIndex could be 0? No, separator implies a header above it usually. 
+    // If separator is at 0, no header? We'll assume structure Header \n Separator \n Body
+
     const bodyLines = lines.slice(separatorIndex + 1);
 
-    // Parse cells from a line
     const parseCells = (line: string): string[] => {
         return line
             .split("|")
             .map(cell => cell.trim())
             .filter((cell, index, arr) => {
-                // Remove empty first/last cells from | at start/end
+                // Remove empty first/last cells if they are result of leading/trailing pipes
                 if (index === 0 && cell === "") return false;
                 if (index === arr.length - 1 && cell === "") return false;
                 return true;
             });
     };
 
-    const headerCells = headerLines.length > 0 ? parseCells(headerLines[0]) : [];
+    const headerCells = parseCells(headerLine);
     const bodyRows = bodyLines.map(line => parseCells(line));
 
     return (
         <div className="overflow-x-auto my-4">
             <table className="min-w-full border-collapse border border-border rounded-lg overflow-hidden">
-                {headerCells.length > 0 && (
-                    <thead className="bg-muted/50">
-                        <tr>
-                            {headerCells.map((cell, i) => (
-                                <th
-                                    key={i}
-                                    className="px-4 py-3 text-left font-semibold border-b border-border text-sm"
-                                >
-                                    <InlineParser text={cell} />
-                                </th>
-                            ))}
-                        </tr>
-                    </thead>
-                )}
+                <thead className="bg-muted/50">
+                    <tr>
+                        {headerCells.map((cell, i) => (
+                            <th key={i} className="px-4 py-3 text-left font-semibold border-b border-border text-sm">
+                                <InlineParser text={cell} />
+                            </th>
+                        ))}
+                    </tr>
+                </thead>
                 <tbody>
                     {bodyRows.map((row, rowIndex) => (
-                        <tr
-                            key={rowIndex}
-                            className={cn(
-                                "transition-colors hover:bg-muted/30",
-                                rowIndex % 2 === 0 ? "bg-background" : "bg-muted/20"
-                            )}
-                        >
+                        <tr key={rowIndex} className={cn("transition-colors hover:bg-muted/30", rowIndex % 2 === 0 ? "bg-background" : "bg-muted/20")}>
                             {row.map((cell, cellIndex) => (
-                                <td
-                                    key={cellIndex}
-                                    className="px-4 py-3 border-b border-border text-sm"
-                                >
+                                <td key={cellIndex} className="px-4 py-3 border-b border-border text-sm">
                                     <InlineParser text={cell} />
                                 </td>
                             ))}
@@ -220,8 +245,6 @@ function TableParser({ block }: { block: string }) {
         </div>
     );
 }
-
-import katex from "katex";
 
 // Simple Parser for Math ($...$ or $$...$$) and **Bold**
 function InlineParser({ text }: { text: string }) {

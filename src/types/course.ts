@@ -45,7 +45,7 @@ export type AITutorContext = {
 };
 
 export type Reference = {
-  source_type: "cheatsheet" | "book" | "pdf" | "standard" | "article";
+  source_type: "cheatsheet" | "book" | "pdf" | "standard" | "article" | "template";
   label_en: string;           // e.g. "Advanced GB Cheat Sheet – MSA section"
   location_hint_en: string;   // e.g. "cheatsheet:measure_msa_01"
 };

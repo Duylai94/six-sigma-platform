@@ -224,112 +224,155 @@ print("- Evening Shift: Vertical spread (12 to 8) -> High POSITIONAL Variation."
             id: "mod_analyze_inferential_01",
             order: 2,
             title_en: "Hypothesis Testing & Inferential Stats",
-            summary_vi: "Kiểm định giả thuyết (P-value, Alpha, Power) và chọn kiểm định phù hợp.",
-            summary_en: "Hypothesis Testing (P-value, Alpha, Power) and Test Selection.",
+            summary_vi: "Sử dụng dữ liệu mẫu để đưa ra kết luận về tổng thể. Nguyên lý 'Tòa án' và Ma trận chọn kiểm định.",
+            summary_en: "Using sample data to infer conclusions about the population. The 'Courtroom' Analogy and Test Selection Matrix.",
             key_metrics_en: ["P-value", "Alpha (Risk)", "Power (1-Beta)", "H0 (Null)", "H1 (Alt)"],
             key_points_en: [
-                "H0 (Null Hypothesis): The boring assumption (No difference, Status Quo).",
-                "H1 (Alt Hypothesis): The exciting discovery (Significant difference exists).",
-                "P-value < 0.05: Reject H0 (Statistically Significant).",
-                "Power (1-β): Probability of finding a difference if it really exists.",
-                "Non-Parametric Tests: Use when data is NOT Normal (Mann-Whitney, Kruskal-Wallis)."
+                "H0 (Null Hypothesis): 'Status quo' or 'Innocent until proven guilty'.",
+                "H1 (Alt Hypothesis): What we are trying to prove (Difference exists).",
+                "P-value < 0.05: 'If P is low, the Null must go' (Statistically Significant).",
+                "Power (1-β): Probability of detecting a difference when one truly exists.",
+                "Assumption Checklist: Normality, Equal Variance, Independence."
             ],
             explanation_vi: `
-**1. The Logic of Hypothesis Testing**
-Chúng ta giống như quan tòa.
-- **H0 (Vô tội):** Mặc định không có gì xảy ra. (Mean A = Mean B).
-- **H1 (Có tội):** Có bằng chứng cho thấy sự khác biệt. (Mean A != Mean B).
-- **P-value (Bằng chứng):** Nếu P-value < 0.05 (Alpha), bằng chứng đủ mạnh để bác bỏ H0 -> Kết luận có sự khác biệt.
+**1. Nguyên Lý Tòa Án (The Courtroom Analogy)**
+Dữ liệu là bằng chứng, và chúng ta là quan tòa.
+- **Null Hypothesis (H0 - Giả thuyết không):** "Vô tội cho đến khi được chứng minh là có tội". Mặc định là **KHÔNG** có sự khác biệt. (VD: Quy trình Mới = Quy trình Cũ).
+- **Alternative Hypothesis (H1/Ha - Giả thuyết đối):** "Có tội". Đây là điều ta muốn chứng minh. (VD: Quy trình Mới > Quy trình Cũ).
 
-**2. P-value (The Most Misunderstood Concept)**
-- **Sai:** P-value là xác suất H0 đúng.
-- **Đúng:** P-value là xác suất **Dữ liệu này xuất hiện ngẫu nhiên** nếu H0 đúng.
-  - Ví dụ: P = 0.03. Nghĩa là chỉ có 3% khả năng sự việc này là ngẫu nhiên. -> Nó không ngẫu nhiên -> Nó là thật (Significant).
+**2. P-value & Quy Tắc Ra Quyết Định**
+P-value là thước đo "bằng chứng" chống lại H0.
+- **Định nghĩa:** Xác suất quan sát được dữ liệu này NẾU H0 đúng.
+- **Quy tắc Vàng (Alpha = 0.05):**
+  - **P-value < 0.05:** "If P is low, the Null must go!" -> **Bác bỏ H0**. (Kết quả có ý nghĩa thống kê - Significant).
+  - **P-value >= 0.05:** "If P is high, the Null must fly." -> **Chấp nhận H0**. (Không đủ bằng chứng để buộc tội).
 
-**3. Errors & Power**
-- **Type I Error (Alpha):** Kết luận sai là có tội. (False Positive). Alpha thường chọn là 0.05.
-- **Type II Error (Beta):** Bỏ sót tội phạm. (False Negative).
-- **Power (1 - Beta):** Khả năng lưới trời lồng lộng. Power càng cao (thường > 0.8), ta càng dễ phát hiện ra lỗi sai. Tăng cỡ mẫu (n) sẽ tăng Power.
+━━━━━━
 
-**4. Test Selection Guide (Tier 1)**
-- **Normal Data (Parametric):**
-  - 2 Groups: **t-test**.
-  - 3+ Groups: **ANOVA**. (Nếu P < 0.05, dùng **Tukey** để biết cụ thể nhóm nào khác biệt).
-- **Non-Normal Data (Non-Parametric):**
-  - 2 Groups: **Mann-Whitney**.
-  - 3+ Groups: **Kruskal-Wallis**.
+**3. Rủi Ro sai sót (Errors & Risks)**
+Chúng ta không bao giờ chắc chắn 100%, nên phải quản lý rủi ro:
+- **Type I Error (Alpha $\\alpha$):** Kết luận SAI là có tội (False Positive). (Thường chọn 5%).
+  - *Ví dụ:* Tuyên án tử hình người vô tội. (Rủi ro của Nhà sản xuất).
+- **Type II Error (Beta $\\beta$):** Bỏ lọt tội phạm (False Negative).
+  - *Ví dụ:* Thả tự do kẻ giết người. (Rủi ro của Khách hàng).
+- **Power (1 - $\\beta$):** Khả năng lưới trời lồng lộng. Muốn tăng Power (thường > 80%), bạn phải **tăng cỡ mẫu (n)** hoặc tăng độ lớn của sự khác biệt cần tìm (Effect Size).
+
+━━━━━━
+
+**4. Ma Trận Chọn Kiểm Định (Test Selection Matrix)**
+*Mẹo thi: Luôn kiểm tra tính chuẩn (Normality) và phương sai (Variance) trước.*
+
+| Scenario | Normal Data (Parametric) | Non-Normal (Non-Parametric) |
+|---|---|---|
+| **1 Group** vs Target | 1-Sample t-test | 1-Sample Wilcoxon |
+| **2 Groups** (Independent) | 2-Sample t-test | Mann-Whitney U |
+| **2 Groups** (Paired) | Paired t-test | Wilcoxon Signed Rank |
+| **3+ Groups** | **One-Way ANOVA** (+ Tukey) | Kruskal-Wallis |
+| **Compare Variances** | Bartlett's Test | Levene's Test |
+
+*Ghi chú:*
+- **ANOVA:** Chỉ cho biết "Có sự khác biệt". Dùng **Tukey Post-hoc** để biết cụ thể ai khác ai.
+- **Z-test:** Chỉ dùng khi n > 30 VÀ biết rõ độ lệch chuẩn tổng thể ($\sigma$). Nếu không, luôn dùng **t-test**.
             `,
             explanation_en: `
 **1. The Courtroom Analogy**
-- **H0 (Null):** Innocent until proven guilty. (Assumption: No difference).
-- **H1 (Alternative):** Guilty. (Claim: There is a difference).
-- **P-value:** The probability of innocent coincidence.
+Data is the evidence, and statistics is the judge.
+- **Null Hypothesis (H0):** "Innocent until proven guilty." Assumes NO difference or status quo. (e.g., $\\mu_1 = \\mu_2$).
+- **Alternative Hypothesis (H1/Ha):** "Guilty." The claim we want to prove. (e.g., $\\mu_1 \\neq \\mu_2$).
 
-**2. Interpreting P-value (< 0.05)**
-- **Definition:** Probability of observing the data IF H0 is true.
-- **Rule:** "If P is low, the Null must go." (Reject H0).
-- **Rule:** "If P is high, the Null must fly." (Fail to Reject H0).
+**2. P-value & The Decision Rule**
+P-value measures the strength of evidence against H0.
+- **Definition:** Probability of observing the data IF H0 were true.
+- **The Golden Rule ($\alpha = 0.05$):**
+  - **P-value < 0.05:** "If P is low, the Null must go!" -> **Reject H0**. (Statistically Significant).
+  - **P-value >= 0.05:** "If P is high, the Null must fly." -> **Fail to Reject H0**. (Not Significant).
 
-**3. Type I vs Type II Errors**
-- **Type I (Alpha):** Convicting an innocent person. (False Positive).
-- **Type II (Beta):** Letting a guilty person go free. (False Negative).
-- **Power (1 - Beta):** The ability to catch the guilty. Higher Sample Size (n) = Higher Power.
+━━━━━━
 
-**4. Test Selection (Memorize This)**
-- **Continuous Normal:**
-  - 2 Groups -> **t-test** (Paired if same samples, 2-Sample if restricted).
-  - 3+ Groups -> **ANOVA** (Use **Tukey Post-hoc** to find the specific winner).
-- **Continuous Non-Normal:**
-  - 2 Groups -> **Mann-Whitney U**.
-  - 3+ Groups -> **Kruskal-Wallis**.
+**3. Errors & Risks**
+We can never be 100% sure, so we manage risk:
+- **Type I Error (Alpha $\\alpha$):** False Positive. Rejecting H0 when it's actuall True.
+  - *Analogy:* Convicting an innocent person.
+- **Type II Error (Beta $\\beta$):** False Negative. Failing to reject H0 when it's False.
+  - *Analogy:* Letting a guilty person go free.
+- **Power (1 - $\\beta$):** The probability of correctly finding a difference. To increase Power, **increase Sample Size (n)**.
+
+━━━━━━
+
+**4. Test Selection Matrix (Memorize This!)**
+
+| Scenario | Normal Data (Parametric) | Non-Normal (Non-Parametric) |
+|---|---|---|
+| **1 Group** vs Target | 1-Sample t-test | 1-Sample Wilcoxon |
+| **2 Groups** (Independent) | 2-Sample t-test | Mann-Whitney U |
+| **2 Groups** (Paired) | Paired t-test | Wilcoxon Signed Rank |
+| **3+ Groups** | **One-Way ANOVA** (+ Tukey) | Kruskal-Wallis |
+| **Compare Variances** | Bartlett's Test | Levene's Test |
+
+*Key Takeaways:*
+- **Assumption Checklist:** Normality (Anderson-Darling), Equal Variance (Levene), Independence.
+- **Z-test vs t-test:** Only use Z-test if n > 30 AND Population Sigma ($\sigma$) is known. Otherwise, t-test.
             `,
-            recommended_tools_en: ["Confidence Interval Plot", "Hypothesis Test Map"],
-            python_focus_en: ["scipy.stats.ttest_ind"],
+            recommended_tools_en: ["Confidence Interval", "Hypothesis Test Map"],
+            python_focus_en: ["scipy.stats.ttest_ind", "scipy.stats.f_oneway"],
             code_blocks: [
                 {
                     id: "code_analyze_anova",
                     title_en: "ANOVA & Tukey Post-hoc",
-                    description_vi: "Đoạn code này thực hiện ANOVA một yếu tố (One-way ANOVA) để so sánh 3 nhóm. Nếu P-value < 0.05, ta dùng Tukey Test để tìm ra chính xác cặp nhóm nào khác biệt.",
+                    description_vi: "Đoạn code này thực hiện One-way ANOVA để so sánh 3 nhóm. Nếu P < 0.05, ta dùng Tukey Test để tìm cặp khác biệt.",
                     code_template: `import scipy.stats as stats
 from statsmodels.stats.multicomp import pairwise_tukeyhsd
+import numpy as np
 
-# Data: Scores of 3 Classes
+# Data: Scores of 3 Classes (3+ Groups)
 class_a = [82, 85, 88, 90, 86]
 class_b = [75, 78, 80, 79, 77]
 class_c = [95, 92, 96, 94, 98]
 
-# 1. ANOVA (Can we begin?)
+# 1. Check Normality (Shapiro-Wilk)
+# If P > 0.05, assume Normal.
+_, p_norm_a = stats.shapiro(class_a)
+_, p_norm_b = stats.shapiro(class_b)
+_, p_norm_c = stats.shapiro(class_c)
+
+print(f"Normality P-values: A={p_norm_a:.2f}, B={p_norm_b:.2f}, C={p_norm_c:.2f}")
+
+# 2. ANOVA (Can we begin?)
 f_stat, p_value = stats.f_oneway(class_a, class_b, class_c)
 print(f"ANOVA P-value: {p_value:.5f}")
 
 if p_value < 0.05:
-    print("Significant difference found! Running Tukey Post-hoc...")
-    # 2. Tukey Post-hoc (Who is different?)
+    print("-> Result: Significant difference found! (If P is low, Null must go)")
+    print("-> Next Step: Running Tukey Post-hoc to find the winner...")
+    
+    # 3. Tukey Post-hoc (Who is different?)
     all_data = class_a + class_b + class_c
     labels = ['A']*5 + ['B']*5 + ['C']*5
     
     tukey = pairwise_tukeyhsd(endog=all_data, groups=labels, alpha=0.05)
     print(tukey)
 else:
-    print("No difference between classes.")`,
-                    expected_output_en: "ANOVA Table and Pairwise comparisons.",
+    print("-> Result: No significant difference between classes.")`,
+                    expected_output_en: "ANOVA P-value < 0.05, followed by Tukey table showing A-B, A-C, B-C diffs.",
                     datasets_used: [],
-                    learning_points_en: ["ANOVA Logic", "Tukey Interpretation"],
-                    difficulty_en: "Advanced"
+                    learning_points_en: ["ANOVA = 'Is there a difference?'", "Tukey = 'Where is the difference?'", "Check Assumptions first"],
+                    difficulty_en: "Advanced",
+                    ai_tutor_prompts: ["Why did we run Tukey?", "What if P-value was 0.10?"]
                 }
             ],
             ai_tutor_context: {
                 enabled: true,
-                system_prompt_en: "Explain Central Limit Theorem using dice rolls.",
+                system_prompt_en: "Act as a Six Sigma Black Belt. Quiz the user on Hypothesis Testing selection.",
                 suggested_questions: [
-                    { question_vi: "Tại sao cần n >= 30?", question_en: "Why is n >= 30 required?" },
-                    { question_vi: "Khi nào dùng Mann-Whitney?", question_en: "When to use Mann-Whitney?" }
+                    { question_vi: "Khi nào dùng Paired t-test?", question_en: "When to use Paired t-test?" },
+                    { question_vi: "Giải thích Alpha và Beta?", question_en: "Explain Alpha and Beta errors?" },
+                    { question_vi: "Nếu dữ liệu không chuẩn thì dùng test gì?", question_en: "Test selection for Non-normal data?" }
                 ],
-                hint_levels: ["Average of averages", "Non-normal data", "Alternative to t-test"],
+                hint_levels: ["Check if groups are independent or dependent", "Alpha = False Positive", "Use Non-parametric tests"],
                 max_hints_per_question: 3
             },
             references_en: [
-                { source_type: "pdf", label_en: "Master Cheat Sheet - Section 11", location_hint_en: "Central Limit Theorem" }
+                { source_type: "pdf", label_en: "Master Cheat Sheet - Section 11", location_hint_en: "Hypothesis Testing Map" }
             ],
             flashcards: [
                 {
@@ -342,8 +385,24 @@ else:
                 },
                 {
                     id: "fc_analyze_stats_02",
-                    question_en: "If data is Non-Normal and you have 3 groups, which test do you use?",
+                    question_en: "Evaluate: P-value = 0.03 and Alpha = 0.05. What is the decision?",
+                    answer_vi: "Reject H0. The result is Statistically Significant.",
+                    tags_en: ["Analyze", "P-value"],
+                    difficulty_en: "Easy",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_analyze_stats_03",
+                    question_en: "If data is Non-Normal and you have 3 independent groups, which test do you use?",
                     answer_vi: "Kruskal-Wallis Test.",
+                    tags_en: ["Analyze", "Test Selection"],
+                    difficulty_en: "Hard",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_analyze_stats_04",
+                    question_en: "What is the only scenario where you use a Z-test instead of a t-test?",
+                    answer_vi: "When Sample Size > 30 AND Population Standard Deviation (Sigma) is KNOWN.",
                     tags_en: ["Analyze", "Test Selection"],
                     difficulty_en: "Hard",
                     ai_tutor_available: true
@@ -358,93 +417,144 @@ else:
             id: "mod_analyze_regression_01",
             order: 3,
             title_en: "Correlation & Simple Regression",
-            summary_vi: "Đánh giá mối quan hệ giữa biến X và biến Y và 5 giả định quan trọng.",
-            summary_en: "Relationship between X and Y, and the 5 Critical Assumptions.",
-            key_metrics_en: ["Pearson (r)", "R-squared", "Residuals", "VIF", "Homoscedasticity"],
+            summary_vi: "Định lượng mối quan hệ (r) và dự báo tương lai (Regression Analysis).",
+            summary_en: "Quantifying relationships (Pearson's r) and predicting future performance ($Y = f(X)$).",
+            key_metrics_en: ["Pearson's r", "R-squared", "Residuals", "VIF", "Homoscedasticity"],
             key_points_en: [
-                "r ranges from -1 to +1.",
-                "R-squared: % of variation in Y explained by X.",
-                "Assumption 1: Linearity (Straight line relationship).",
-                "Assumption 2: Normality of Residuals.",
-                "Assumption 3: Homoscedasticity (Constant Variance).",
-                "Assumption 4: Independence (No pattern over time).",
-                "Assumption 5: No Multicollinearity (VIF < 5)."
+                "Correlation (r): Measures strength & direction (-1 to +1).",
+                "Regression: The equation for prediction ($Y = \\beta_0 + \\beta_1X$).",
+                "R-squared: % of variation in Y explained by the model.",
+                "Residuals: Must be Random and Normal (No patterns).",
+                "Assumption Checklist: Linearity, Normality, Homoscedasticity, Independence, VIF."
             ],
             explanation_vi: `
-**1. Correlation & Regression Intro**
-- **Correlation (r):** Độ mạnh của mối quan hệ (-1 đến +1).
-- **Regression (Y = mx +c):** Phương trình dự báo.
+**1. Hệ Số Tương Quan (Pearson's r)**
+- **Định nghĩa:** Đo lường độ mạnh và chiều hướng của mối quan hệ tuyến tính giữa 2 biến.
+- **Phạm vi:** Từ -1 đến +1.
+  - \`r = -1\`: Tương quan âm tuyệt đối (X tăng, Y giảm).
+  - \`r = 0\`: Không có tương quan.
+  - \`r = +1\`: Tương quan dương tuyệt đối.
+  - *Quy tắc:* |r| > 0.8 là Mạnh; < 0.5 là Yếu.
+- **Cảnh báo:** "Correlation != Causation". (Ví dụ: Doanh số kem và Cá mập tấn công có tương quan cao, nhưng không gây ra nhau).
 
-**2. 5 Giả định của Hồi quy (Bắt buộc phải check)**
-Nếu vi phạm một trong 5 điều này, phương trình hồi quy là RÁC (Invalid).
-1. **Linearity (Tuyến tính):** X và Y phải có quan hệ đường thẳng. (Check: Residual Plot không được cong).
-2. **Normality of Residuals:** Phần dư (Error) phải phân phối chuẩn. (Check: Anderson-Darling on Residuals).
-3. **Homoscedasticity (Phương sai đồng nhất):** Độ tản mạn của Error phải giống nhau ở mọi điểm. (Check: Residual Plot không được có hình cái phễu).
-4. **Independence (Độc lập):** Dữ liệu không phụ thuộc lẫn nhau theo thời gian. (Check: Durbin-Watson ≈ 2; tốt nhất là từ 1.5 đến 2.5).
-5. **No Multicollinearity:** Các biến đầu vào (X1, X2...) không được tương quan với nhau. (Check: VIF < 5).
+━━━━━━
 
-**3. R-squared (R²)**
-- \`R² = 0.8\`: 80% biến động của Y là do X gây ra. Còn 20% là do các yếu tố khác.
+**2. Hồi Quy Tuyến Tính Đơn (Simple Linear Regression)**
+- **Mục tiêu:** Tạo ra phương trình toán học để DỰ BÁO Y dựa trên X.
+- **Phương trình:** $ Y = \\beta_0 + \\beta_1X + \\epsilon $ (hoặc $ Y = a + bX $)
+  - **Slope ($\\beta_1$):** Độ dốc. Y thay đổi bao nhiêu khi X tăng 1 đơn vị.
+  - **Intercept ($\\beta_0$):** Điểm cắt trục tung. Giá trị của Y khi X = 0.
+  - **Residual (e):** Sai số = Thực tế - Dự báo ($ Y_{actual} - Y_{predicted} $).
+
+━━━━━━
+
+**3. Hệ Số Xác Định (Coefficient of Determination - $R^2$)**
+- **Ý nghĩa:** Cho biết bao nhiêu % biến thiên của Y được giải thích bởi mô hình X.
+- **Ví dụ:** $ R^2 = 0.80 $. Nghĩa là mô hình giải thích được 80% sự thay đổi của Y. Còn 20% là do các yếu tố khác ("tiếng ồn").
+- **Adjusted $R^2$:** Dùng khi có nhiều biến đầu vào (Multiple Regression). Nó phạt việc thêm các biến rác.
+
+━━━━━━
+
+**4. 5 Giả Định Quan Trọng (Critical Assumptions)**
+Bạn **KHÔNG ĐƯỢC TIN** P-value nếu vi phạm các giả định này (Phân tích phần dư - Residual Analysis):
+1. **Linearity:** Quan hệ phải là đường thẳng. (Residuals không có hình chữ U).
+2. **Normality:** Phần dư phải phân phối chuẩn (Bell Curve). (Check: Anderson-Darling).
+3. **Homoscedasticity:** Phương sai đồng nhất. (Phần dư không được có hình cái phễu/loa phóng thanh).
+4. **Independence:** Không tự tương quan theo thời gian. (Check: Durbin-Watson $\\approx 2.0$).
+5. **No Multicollinearity:** Các biến đầu vào X không được tương quan với nhau. (Check: VIF < 5).
             `,
             explanation_en: `
-**1. Correlation & Regression Intro**
-- **Correlation (r):** Strength of relationship.
-- **Regression Equation:** Tool for prediction.
+**1. Correlation (Pearson's r)**
+- **Definition:** Measures strength and direction of the linear relationship.
+- **Range:** -1 to +1.
+  - \`r = -1\`: Perfect Negative.
+  - \`r = 0\`: No Linear Correlation.
+  - \`r = +1\`: Perfect Positive.
+  - *Rule of Thumb:* |r| > 0.8 is Strong.
+- **Warning:** Correlation $\\neq$ Causation.
 
-**2. The 5 Critical Assumptions**
-You CANNOT trust the P-value if these are violated:
-1. **Linearity:** The relationship is a straight line. (Fix: Log transform).
-2. **Normality of Residuals:** Errors are normally distributed (Bell Curve).
-3. **Homoscedasticity:** Constant Variance of errors. (Bad: Funnel shape in Residual Plot).
-4. **Independence:** No auto-correlation over time. (Test: Durbin-Watson Stat should be ~2.0; range 0-4 where values between ~1.5-2.5 are acceptable).
-5. **No Multicollinearity:** X variables are independent of each other. (Test: Variance Inflation Factor VIF < 5).
+━━━━━━
 
-**3. R-squared (R²)**
-- The % of variation in Y explained by the model.
-- High R² + High P-value = Warning (Potential Multicollinearity).
+**2. Simple Linear Regression**
+- **Goal:** Create a mathematical equation to predict Y.
+- **Equation:** $ Y = \\beta_0 + \\beta_1X + \\epsilon $
+  - **Slope ($b$ or $\\beta_1$):** The change in Y for every 1 unit increase in X.
+  - **Intercept ($a$ or $\\beta_0$):** The value of Y when X = 0.
+  - **Residual (e):** Distance between Actual data and the Predicted line.
+
+━━━━━━
+
+**3. Coefficient of Determination ($R^2$)**
+- **Definition:** The percentage of variation in Y explained by the variation in X.
+- **Interpretation:** If $R^2 = 0.80$, the model explains 80% of the variation. The remaining 20% is error/noise.
+
+━━━━━━
+
+**4. The 5 Critical Assumptions (Residual Analysis)**
+Always check the Residual Plots. If these are violated, the model is invalid:
+1. **Linearity:** Relationship is straight. (No U-shape residuals).
+2. **Normality:** Residuals follow a Bell Curve. (Anderson-Darling).
+3. **Homoscedasticity:** Constant Variance. (No Funnel/Megaphone shape).
+4. **Independence:** No time-based patterns. (Durbin-Watson Statistic $\\approx 2.0$).
+5. **No Multicollinearity:** Predictors (Xs) are independent. (VIF < 5).
             `,
-            recommended_tools_en: ["Residual Plots", "Durbin-Watson"],
-            python_focus_en: ["statsmodels.stats.stattools.durbin_watson"],
+            recommended_tools_en: ["Fitted Line Plot", "Residual Four-Pack"],
+            python_focus_en: ["statsmodels.api.OLS"],
             code_blocks: [
                 {
-                    id: "code_analyze_regression_assumptions",
-                    title_en: "Checking Regression Assumptions",
-                    context_en: `Situation: You built a model. Now you must validate it using Residual Analysis.`,
-                    description_vi: "Code kiểm tra 2 giả định quan trọng: Durbin-Watson (Độc lập) và vẽ biểu đồ Residual (Tuyến tính & Phương sai).",
+                    id: "code_analyze_regression",
+                    title_en: "Simple Linear Regression & Assumptions",
+                    description_vi: "Đoạn code này xây dựng mô hình hồi quy OLS và kiểm tra các giả định quan trọng (Durbin-Watson, Jarque-Bera).",
                     code_template: `import numpy as np
-import matplotlib.pyplot as plt
+import statsmodels.api as sm
 from statsmodels.stats.stattools import durbin_watson
 
-# Residuals = Actual - Predicted
-residuals = [0.5, -0.2, 0.1, -0.4, 0.0]
+# Data: Hours Studied (X) vs Exam Score (Y)
+X = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+Y = [50, 55, 60, 65, 70, 75, 80, 85, 90, 95]
 
-# 1. Check Independence (Durbin-Watson)
+# Add Intercept (Constant)
+X_const = sm.add_constant(X)
+
+# 1. Fit the Model (OLS - Ordinary Least Squares)
+model = sm.OLS(Y, X_const).fit()
+
+# 2. Print Summary (R-squared, P-values)
+print(f"R-squared: {model.rsquared:.4f}")
+print(f"P-value (Slope): {model.pvalues[1]:.4e}")
+
+# 3. Check Assumptions
+residuals = model.resid
+
+# Independence (Durbin-Watson): Ideal is 2.0
 dw = durbin_watson(residuals)
-print(f"Durbin-Watson Statistic: {dw:.2f}")
-if 1.5 < dw < 2.5:
-    print("-> Assumption Met: Independence.")
-else:
-    print("-> Warning: Auto-correlation detected.")
+print(f"Durbin-Watson: {dw:.2f} (Target: ~2.0)")
 
-# 2. Check Homoscedasticity (Visual)
-plt.scatter(range(len(residuals)), residuals)
-plt.axhline(0, color='red', linestyle='--')
-plt.title("Residual Plot (Look for random scatter)")
-plt.show()`,
-                    expected_output_en: "DW Stat approx 2.0 and Random Scatter plot.",
+if dw < 1.5 or dw > 2.5:
+    print("-> Warning: Possible Auto-correlation.")
+else:
+    print("-> Independence Assumption Met.")
+
+# Normality (Jarque-Bera)
+from statsmodels.stats.stattools import jarque_bera
+jb_score, jb_pvalue, _, _ = jarque_bera(residuals)
+print(f"Normality P-value: {jb_pvalue:.4f} (> 0.05 is Normal)")`,
+                    expected_output_en: "R-squared=1.0, DW=~2.0, Normality P > 0.05",
                     datasets_used: [],
-                    learning_points_en: ["Model Validation", "Residual Analysis"],
-                    difficulty_en: "Advanced"
+                    learning_points_en: ["Interpreting OLS Summary", "Validating Assumptions"],
+                    difficulty_en: "Advanced",
+                    ai_tutor_prompts: ["What does R-squared 0.8 mean?", "Why check Durbin-Watson?"]
                 }
             ],
             ai_tutor_context: {
                 enabled: true,
-                system_prompt_en: "Explain 'Correlation does not imply Causation'.",
+                system_prompt_en: "You are a Regression expert. Explain relationships and assumptions.",
                 suggested_questions: [
-                    { question_vi: "VIF là gì?", question_en: "What is VIF?" },
-                    { question_vi: "Tại sao Residual phải ngẫu nhiên?", question_en: "Why must Residuals be random?" }
+                    { question_vi: "Cổn là gì (Residual)?", question_en: "What is a Residual?" },
+                    { question_vi: "Mối quan hệ giữa R-squared và r?", question_en: "Relationship between R-squared and r?" },
+                    { question_vi: "Hiện tượng Đa cộng tuyến là gì?", question_en: "What is Multicollinearity?" }
                 ],
-                hint_levels: ["VIF measures Multicollinearity", "Patterns indicate missing variables", "Randomness = Good Model"],
+                hint_levels: ["Observed minus Predicted", "Square of correlation coefficient", "VIF > 5"],
                 max_hints_per_question: 3
             },
             references_en: [
@@ -453,10 +563,26 @@ plt.show()`,
             flashcards: [
                 {
                     id: "fc_analyze_reg_01",
-                    question_en: "What is the acceptable range for the Durbin-Watson statistic?",
-                    answer_vi: "Approximately 1.5 to 2.5 (Ideal is 2.0).",
-                    tags_en: ["Analyze", "Regression"],
+                    question_en: "If the Residual Plot shows a 'Megaphone' or 'Funnel' shape, which assumption is violated?",
+                    answer_vi: "Homoscedasticity (Constant Variance). This is called Heteroscedasticity.",
+                    tags_en: ["Analyze", "Regression", "Assumptions"],
                     difficulty_en: "Hard",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_analyze_reg_02",
+                    question_en: "What is the rule of thumb for VIF (Variance Inflation Factor)?",
+                    answer_vi: "VIF should be < 5. If VIF > 5, Multicollinearity exists (Redundant X variables).",
+                    tags_en: ["Analyze", "Regression"],
+                    difficulty_en: "Medium",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_analyze_reg_03",
+                    question_en: "Does Correlation imply Causation?",
+                    answer_vi: "NO. Correlation only measures strength of linear relationship.",
+                    tags_en: ["Analyze", "Correlation"],
+                    difficulty_en: "Easy",
                     ai_tutor_available: true
                 }
             ],
