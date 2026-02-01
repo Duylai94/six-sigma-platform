@@ -61,7 +61,7 @@ Summary: ${currentModule.summary_vi}
 
 
     return (
-        <div className="min-h-screen bg-background flex flex-col">
+        <div className="min-h-screen bg-background flex flex-col overflow-x-hidden">
             {/* Top Bar */}
             <header className="border-b px-6 py-4 flex items-center gap-4 bg-muted/20">
                 <Button variant="ghost" size="icon" onClick={() => router.push("/dashboard")}>
@@ -82,7 +82,7 @@ Summary: ${currentModule.summary_vi}
             </header>
 
             {/* Main Content */}
-            <main className="flex-1 w-full max-w-6xl mx-auto p-2 md:p-6 h-[calc(100vh-80px)]">
+            <main className="flex-1 w-full max-w-6xl mx-auto p-2 md:p-6 h-[calc(100vh-80px)] overflow-x-hidden">
                 <Tabs defaultValue="learn" className="h-full flex flex-col">
                     <TabsList className="inline-flex w-full md:w-auto h-auto p-1 mb-6 gap-2 bg-muted/50 overflow-x-auto flex-nowrap">
                         <TabsTrigger value="learn" className="flex-1 md:flex-none px-2 md:px-4 text-xs md:text-sm"><BookOpen className="h-4 w-4 mr-2" /> {ui.module.detailed_explanation[language]}</TabsTrigger>
@@ -114,7 +114,7 @@ Summary: ${currentModule.summary_vi}
                                 </Card>
 
                                 {/* Explanation */}
-                                <div className="prose dark:prose-invert max-w-none px-1">
+                                <div className="prose dark:prose-invert max-w-none px-1 overflow-x-hidden [&_*]:max-w-full [&_*]:break-words">
                                     <h3>{ui.module.detailed_explanation[language]}</h3>
                                     <FormattedText text={language === 'vn' ? currentModule.explanation_vi : (currentModule.explanation_en || currentModule.explanation_vi)} />
                                 </div>
@@ -151,7 +151,7 @@ Summary: ${currentModule.summary_vi}
                                         <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
                                             🤖 {language === 'vn' ? 'Hỏi AI Tutor về bài này' : 'Ask AI Tutor about this lesson'}
                                         </h3>
-                                        <div className="flex flex-wrap gap-2">
+                                        <div className="flex flex-wrap gap-2 max-w-full">
                                             {currentModule.ai_tutor_context.suggested_questions.map((q, i) => (
                                                 <Badge
                                                     key={i}
