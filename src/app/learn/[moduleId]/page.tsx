@@ -42,12 +42,18 @@ export default function ModulePage() {
         return { currentModule: null, currentChapter: null };
     }, [moduleId]);
 
-    // Update AI Tutor context when module changes (MUST be before early returns)
+    // Update AI Tutor context when module changes or language changes
     useEffect(() => {
         if (currentModule && currentChapter) {
-            setModuleContext(`Chapter: ${currentChapter.title_en}\nModule: ${currentModule.title_en}\nSummary: ${currentModule.summary_vi}`);
+            const contextString = `
+User Language Preference: ${language === 'vn' ? 'Vietnamese (Tiếng Việt)' : 'English'}
+Chapter: ${currentChapter.title_en}
+Module: ${currentModule.title_en}
+Summary: ${currentModule.summary_vi}
+            `.trim();
+            setModuleContext(contextString);
         }
-    }, [currentModule, currentChapter, setModuleContext]);
+    }, [currentModule, currentChapter, language, setModuleContext]);
 
     if (!moduleId) return <div className="p-10 text-center">Loading module...</div>;
     if (!currentModule) return <div className="p-10 text-center text-red-500">Module not found!</div>;
@@ -85,7 +91,8 @@ export default function ModulePage() {
                             <TabsTrigger value="quiz" className="flex-1 md:flex-none px-4"><Trophy className="h-4 w-4 mr-2" /> Quiz</TabsTrigger>
                         )}
                         {/* Optional Mini Project */}
-                        <TabsTrigger value="project" disabled={!currentModule.mini_project} className="flex-1 md:flex-none px-4"><Activity className="h-4 w-4 mr-2" /> Project</TabsTrigger>
+                        {/* Optional Mini Project REPLACED by Flashcards */}
+                        <TabsTrigger value="flashcards" className="flex-1 md:flex-none px-4"><Activity className="h-4 w-4 mr-2" /> Flashcards</TabsTrigger>
                     </TabsList>
 
                     {/* Tab: Theory */}
@@ -137,6 +144,27 @@ export default function ModulePage() {
                                     moduleId={currentModule.id}
                                     nextModuleId={getNextModuleId(currentModule.id)}
                                 />
+
+                                {/* AI Tutor Prompts (Contextual) */}
+                                {currentModule.ai_tutor_context && currentModule.ai_tutor_context.suggested_questions && (
+                                    <div className="mt-8 pt-6 border-t">
+                                        <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
+                                            🤖 {language === 'vn' ? 'Hỏi AI Tutor về bài này' : 'Ask AI Tutor about this lesson'}
+                                        </h3>
+                                        <div className="flex flex-wrap gap-2">
+                                            {currentModule.ai_tutor_context.suggested_questions.map((q, i) => (
+                                                <Badge
+                                                    key={i}
+                                                    variant="outline"
+                                                    className="cursor-pointer hover:bg-primary/10 transition-colors p-2 text-sm active:scale-95"
+                                                    onClick={() => sendQuestion(language === 'vn' ? q.question_vi : q.question_en)}
+                                                >
+                                                    {language === 'vn' ? q.question_vi : q.question_en}
+                                                </Badge>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </ScrollArea>
                     </TabsContent>
@@ -343,29 +371,65 @@ export default function ModulePage() {
                         </TabsContent>
                     )}
 
-                    {/* Tab: Project */}
-                    <TabsContent value="project" className="flex-1 overflow-auto">
-                        {currentModule.mini_project && (
-                            <div className="max-w-3xl mx-auto space-y-6">
-                                <Card>
-                                    <CardHeader>
-                                        <CardTitle>{currentModule.mini_project.title_en}</CardTitle>
-                                        <CardDescription>{language === 'vn' ? currentModule.mini_project.scenario_vi : (currentModule.mini_project.scenario_en || currentModule.mini_project.scenario_vi)}</CardDescription>
-                                    </CardHeader>
-                                    <CardContent className="space-y-4">
-                                        <div>
-                                            <h3 className="font-semibold mb-2">Tasks:</h3>
-                                            <ul className="list-decimal ml-5 space-y-1">
-                                                {currentModule.mini_project.tasks_en.map((t, i) => <li key={i}>{t}</li>)}
-                                            </ul>
-                                        </div>
-                                        <div className="bg-muted p-4 rounded-md font-mono text-sm overflow-x-auto">
-                                            {currentModule.mini_project.code_skeleton}
-                                        </div>
-                                    </CardContent>
-                                </Card>
+                    {/* Tab: Flashcards */}
+                    <TabsContent value="flashcards" className="flex-1 overflow-auto">
+                        <ScrollArea className="h-full">
+                            <div className="max-w-3xl mx-auto py-8 px-4">
+                                <h2 className="text-2xl font-bold mb-6 text-center">
+                                    {language === 'vn' ? 'Ôn tập thẻ nhớ' : 'Flashcard Review'}
+                                </h2>
+
+                                {currentModule.flashcards && currentModule.flashcards.length > 0 ? (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        {currentModule.flashcards.map((card, i) => (
+                                            <Card key={i} className="group hover:shadow-lg transition-all duration-300 border-primary/20">
+                                                <CardHeader className="pb-2">
+                                                    <div className="flex justify-between items-start">
+                                                        <Badge variant="outline" className="mb-2">Card #{i + 1}</Badge>
+                                                        {card.difficulty_en && (
+                                                            <Badge variant={card.difficulty_en === 'Easy' ? 'secondary' : card.difficulty_en === 'Hard' ? 'destructive' : 'default'} className="text-xs">
+                                                                {card.difficulty_en}
+                                                            </Badge>
+                                                        )}
+                                                    </div>
+                                                    <CardTitle className="text-lg font-medium leading-normal">
+                                                        {card.question_en}
+                                                    </CardTitle>
+                                                </CardHeader>
+                                                <CardContent>
+                                                    <div className="pt-4 border-t mt-4">
+                                                        <p className="font-semibold text-primary mb-1">
+                                                            {language === 'vn' ? 'Đáp án:' : 'Answer:'}
+                                                        </p>
+                                                        <p className="text-muted-foreground group-hover:text-foreground transition-colors">
+                                                            {language === 'vn' ? card.answer_vi : (card.answer_en || card.answer_vi)}
+                                                        </p>
+                                                    </div>
+                                                    {card.ai_tutor_available && (
+                                                        <Button
+                                                            variant="ghost"
+                                                            size="sm"
+                                                            className="w-full mt-4 text-xs text-muted-foreground hover:text-primary gap-1"
+                                                            onClick={() => sendQuestion(`Explain this flashcard concept: ${card.question_en}`)}
+                                                        >
+                                                            <Activity className="h-3 w-3" />
+                                                            {language === 'vn' ? 'Giải thích thêm' : 'Explain Concept'}
+                                                        </Button>
+                                                    )}
+                                                </CardContent>
+                                            </Card>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div className="text-center py-12 bg-muted/30 rounded-lg border-2 border-dashed">
+                                        <FileText className="h-12 w-12 mx-auto text-muted-foreground mb-3 opacity-50" />
+                                        <p className="text-muted-foreground">
+                                            {language === 'vn' ? 'Chưa có thẻ nhớ cho bài này.' : 'No flashcards available for this module yet.'}
+                                        </p>
+                                    </div>
+                                )}
                             </div>
-                        )}
+                        </ScrollArea>
                     </TabsContent>
                 </Tabs>
             </main>

@@ -4,12 +4,14 @@
 - **App/Pages**:
     - `/dashboard`: Lists all 10 chapters. Tracks progress (conceptual).
     - `/learn/[moduleId]`: DYNAMIC Player.
-        - **Tabs**: Theory (Content), Code (Pyodide), Quiz (Assessment), Project (Mini-Brief).
+        - **Tabs**: Theory (Content), Code (Pyodide), Flashcards (Review), Quiz (Assessment).
+        - **Details Tab**: Now includes contextual "Ask AI Tutor" prompt badges at the bottom.
 - **Core Components**:
     - `PythonEditor.tsx`: Monaco Editor + `src/lib/pyodide.ts` hook.
     - `QuizRunner.tsx`: Assessment logic with hints/scoring (Self-contained results screen).
     - `AITutor.tsx`: Global floating chat widget. Uses `AITutorContext` for state persistence.
-    - `FormattedText.tsx`: Lightweight Markdown parser for rich content display.
+    - `FormattedText.tsx`: Lightweight Markdown parser with table support.
+    - `FlashcardTab.tsx` (Inline in page.tsx): Renders bilingual flashcards with "Explain Concept" AI link.
     - `AnalyticsCard.tsx`: [NEW] Collapsible dashboard widget showing DMAIC Phase retention.
     - `ui/*`: Shadcn components (Button, Card, Badge, etc.).
 - **Global Context**:

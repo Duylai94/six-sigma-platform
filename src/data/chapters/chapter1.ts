@@ -112,7 +112,13 @@ This is the "DNA" of Six Sigma.
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Explain the history of Six Sigma and definitions.",
-                suggested_questions: ["Ai là cha đẻ của Six Sigma?", "Sự khác biệt giữa Y và x?"],
+                suggested_questions: [
+                    { question_vi: "Ai là cha đẻ của Six Sigma?", question_en: "Who is the father of Six Sigma?" },
+                    { question_vi: "Sự khác biệt giữa Y và x?", question_en: "What is the difference between Y and x?" },
+                    { question_vi: "Quy tắc 3.4 DPMO là gì?", question_en: "What is the 3.4 DPMO rule?" },
+                    { question_vi: "Tại sao độ chính xác 99% lại không đủ tốt?", question_en: "Why is 99% accuracy not good enough?" },
+                    { question_vi: "Khác biệt cốt lõi giữa Lean và Six Sigma?", question_en: "What is the core difference between Lean and Six Sigma?" }
+                ],
                 hint_levels: ["Basic definitions", "Motorola vs GE", "Causality"],
                 max_hints_per_question: 3
             },
@@ -135,9 +141,16 @@ This is the "DNA" of Six Sigma.
                     tags_en: ["History"],
                     difficulty_en: "Medium",
                     ai_tutor_available: true
+                },
+                {
+                    id: "fc_foundations_03",
+                    question_en: "Which part of Y=f(x) represents the lagging indicator?",
+                    answer_vi: "Y (The Output/Effect). Bạn chỉ có thể đo nó sau khi sự việc đã xảy ra.",
+                    tags_en: ["Basics", "Y=f(x)"],
+                    difficulty_en: "Medium",
+                    ai_tutor_available: true
                 }
             ],
-
             faq: [],
             mastery_threshold: 80,
             estimated_time_minutes: 40,
@@ -228,15 +241,46 @@ A company is losing $1M/year due to incorrect customer invoices.
             code_blocks: [],
             ai_tutor_context: {
                 enabled: true,
-                system_prompt_en: "Explain the difference between a Green Belt and a Black Belt.",
-                suggested_questions: ["Process Owner khác gì với Project Sponsor?", "Green Belt có phải làm full-time không?"],
+                system_prompt_en: "Explain the difference between a Green Belt and a Black Belt and other roles.",
+                suggested_questions: [
+                    { question_vi: "Process Owner khác gì với Project Sponsor?", question_en: "How is a Process Owner different from a Project Sponsor?" },
+                    { question_vi: "Green Belt có phải làm full-time không?", question_en: "Does a Green Belt work full-time?" },
+                    { question_vi: "Ai là người ký séc cho dự án?", question_en: "Who signs the check for the project?" },
+                    { question_vi: "Vai trò của Master Black Belt là gì?", question_en: "What is the role of a Master Black Belt?" },
+                    { question_vi: "Tại sao gọi Process Owner là 'Chủ nhà'?", question_en: "Why is the Process Owner called the 'Landlord'?" }
+                ],
                 hint_levels: ["Authority vs Responsibility", "Time allocation", "Skill depth"],
                 max_hints_per_question: 3
             },
             references_en: [
                 { source_type: "pdf", label_en: "IASSC BOK - 1.1.6 Roles", location_hint_en: "Roles & Responsibilities" }
             ],
-            flashcards: [],
+            flashcards: [
+                {
+                    id: "fc_roles_01",
+                    question_en: "What is the primary role of a Champion/Sponsor?",
+                    answer_vi: "Remove roadblocks and approve funding (Xóa bỏ rào cản và duyệt ngân sách).",
+                    tags_en: ["Roles", "Leadership"],
+                    difficulty_en: "Easy",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_roles_02",
+                    question_en: "Which Belt level works full-time on Six Sigma projects?",
+                    answer_vi: "Black Belt.",
+                    tags_en: ["Roles"],
+                    difficulty_en: "Easy",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_roles_03",
+                    question_en: "Who is responsible for the process AFTER the Six Sigma project is closed?",
+                    answer_vi: "Process Owner.",
+                    tags_en: ["Roles", "Sustainability"],
+                    difficulty_en: "Medium",
+                    ai_tutor_available: true
+                }
+            ],
 
             faq: [],
             mastery_threshold: 80,
@@ -381,9 +425,11 @@ A tool to classify stakeholders to determine communication strategy:
                 enabled: true,
                 system_prompt_en: "Explain Quality Gurus (Shewhart, Deming, Juran), Tuckman's Team Stages, and Change Management concepts for Six Sigma.",
                 suggested_questions: [
-                    "Quy tắc 94/6 của Deming có nghĩa gì?",
-                    "Sự khác biệt giữa Storming và Norming là gì?",
-                    "Power/Interest Matrix hoạt động như thế nào?"
+                    { question_vi: "Quy tắc 94/6 của Deming nghĩa là gì?", question_en: "What does Deming's 94/6 rule mean?" },
+                    { question_vi: "Sự khác biệt giữa Storming và Norming?", question_en: "What is the difference between Storming and Norming?" },
+                    { question_vi: "Khi nào cần 'Quản lý chặt chẽ' một Stakeholder?", question_en: "When should you 'Manage Closely' a Stakeholder?" },
+                    { question_vi: "Juran Trilogy bao gồm những gì?", question_en: "What does the Juran Trilogy include?" },
+                    { question_vi: "14 Points for Management là của ai?", question_en: "Who created the 14 Points for Management?" }
                 ],
                 hint_levels: ["Guru contributions", "Team conflict resolution", "Stakeholder classification"],
                 max_hints_per_question: 3
@@ -593,9 +639,11 @@ plt.show()`,
                 enabled: true,
                 system_prompt_en: "Explain the DMAIC methodology phases, their goals, key tools, and deliverables. Also explain Tollgate Reviews.",
                 suggested_questions: [
-                    "Tollgate Review là gì và có 3 quyết định nào?",
-                    "Output chính của Measure phase là gì?",
-                    "Nếu vấn đề quay lại sau 3 tháng, phase nào đã thất bại?"
+                    { question_vi: "Tollgate Review là gì và có 3 quyết định nào?", question_en: "What is a Tollgate Review and what are the 3 decisions?" },
+                    { question_vi: "Output chính của Measure phase là gì?", question_en: "What is the main output of the Measure phase?" },
+                    { question_vi: "Nếu vấn đề quay lại sau 3 tháng, phase nào đã thất bại?", question_en: "If the problem returns after 3 months, which phase failed?" },
+                    { question_vi: "Tại sao không nên đoán mò nguyên nhân trong Define?", question_en: "Why shouldn't we guess the root cause in Define?" },
+                    { question_vi: "Sự khác biệt giữa Measure và Control?", question_en: "What is the difference between Measure and Control?" }
                 ],
                 hint_levels: ["Phase goals", "Key deliverables", "Tollgate decisions"],
                 max_hints_per_question: 3
@@ -806,9 +854,9 @@ A foundational tool for Lean. **Must know English AND Japanese terms:**
                 enabled: true,
                 system_prompt_en: "Explain Lean concepts including Value Analysis (VA/NVA/BVA), the 8 Wastes (DOWNTIME), and 5S methodology with Japanese terms.",
                 suggested_questions: [
-                    "Tại sao Overproduction là lãng phí tệ nhất?",
-                    "Sự khác biệt giữa Motion và Transportation là gì?",
-                    "Inspection có phải là Value Added không?"
+                    { question_vi: "Tại sao Overproduction là lãng phí tệ nhất?", question_en: "Why is Overproduction the worst waste?" },
+                    { question_vi: "Sự khác biệt giữa Motion và Transportation là gì?", question_en: "What is the difference between Motion and Transportation?" },
+                    { question_vi: "Inspection có phải là Value Added không?", question_en: "Is Inspection Value Added?" }
                 ],
                 hint_levels: ["Waste classification", "Moving people vs things", "5S Japanese terms"],
                 max_hints_per_question: 3

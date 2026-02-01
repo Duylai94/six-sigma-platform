@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.7.5] - 2026-01-31
+### 🧠 Lesson Review & Contextual AI
+- **Details Tab**: Added "Ask AI Tutor" section.
+    - Badges (e.g., "Explain Cost Avoidance") trigger the global AI Tutor with specific context.
+- **Flashcards Tab**: Replaced "Project" tab with a fully interactive Flashcards system.
+    - **Bilingual**: Primary in Vietnamese, question in English.
+    - **AI Link**: "Explain Concept" button triggers AI for deep dives.
+- **Content Updates**:
+    - **Chapter 1 & 2**: Populated all 7 modules with Flashcards and AI Prompts.
+    - **Enhancements**: Added critical content for Financial Metrics (ROI, NPV) and Kano Model nuances.
+- **Technical**:
+    - **Build**: Successfully built with updated `Flashcard` type definitions.
+    - **Types**: Added optional `answer_en` to support future bilingual requirements.
+
 ## [0.7.1] - 2026-01-31
 ### 🐛 Stability & AI Tutor Fixes
 - **Global AI Tutor**: Moved `AITutor` to `layout.tsx` (available on all pages).

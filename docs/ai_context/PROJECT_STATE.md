@@ -1,18 +1,23 @@
 # PROJECT STATE
 ### [Current Goal]
-**GOAL**: [COMPLETE] Version 0.7.0: Lesson Details & AI-Enhanced Python Sandbox.
-**STATUS**: ✅ All v0.7.0 features implemented and verified.
+**GOAL**: [COMPLETE] Version 0.7.5: Enhanced Module UI & Contextual AI.
+**STATUS**: ✅ Flashcards and AI Prompts integrated. Documentation phase active.
 
 ### [Last Success]
 **DATE**: 2026-01-31
-**VERSION**: v0.7.1
+**VERSION**: v0.7.5
 **SUCCESS**:
-- **AI Tutor Fixed**: Converted to global context (`AITutorContext`), moved to `layout.tsx`, added persistent chat & clickable badges.
-- **Hook Stability**: Resolved React lifecycle violation in `ModulePage` by optimizing `useMemo`/`useEffect` order.
-- **Documentation**: Updated `LOGIC_MAP` and cleaned up outdated context files.
-- **Build**: ✓ Verified successful.
+- **UI Enhancements**:
+    - **"Details" Tab**: Added "Ask AI Tutor" section with clickable prompt badges.
+    - **"Flashcards" Tab**: Replaced unused "Project" tab with fully functional Flashcards review.
+    - **Interactive Cards**: Added "Explain Concept" button linking directly to AI Tutor.
+- **Content Updates**:
+    - **Chapter 1 & 2**: Fully updated Modules 1.1-1.5 and 2.1-2.2 with bilingual Flashcards and AI Context.
+- **Technical**:
+    - **Types**: Updated `Flashcard` type in `course.ts` to support optional `answer_en`.
+    - **Build**: ✓ Verified successful.
 
-## Completed Tasks (v0.7.0)
+## Completed Tasks (v0.7.5)
 - [x] Backup `Backups/Version 0.7.0/` created
 - [x] Chapter 1 formatting standardized (1.1-1.5)
 - [x] Chapter 2 Module 2.1 content enriched

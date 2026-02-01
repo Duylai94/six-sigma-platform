@@ -27,6 +27,7 @@ export async function POST(req: Request) {
                     content: `
 [CONTEXT]
 ${context || "No specific context provided."}
+(IMPORTANT: Please reply in the language specified in the context above, or default to the language of the user's question.)
 [/CONTEXT]
 
 User Question: ${message}

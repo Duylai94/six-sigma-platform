@@ -234,9 +234,15 @@ if payback < 1:
             ],
             ai_tutor_context: {
                 enabled: true,
-                system_prompt_en: "Explain COPQ categories with examples.",
-                suggested_questions: ["Chi phí bảo hành là loại COPQ nào?", "Tại sao nên tập trung vào Prevention Cost?"],
-                hint_levels: ["Internal vs External", "Cost of finding vs preventing", "1-10-100 Rule"],
+                system_prompt_en: "Explain COPQ categories with examples. Explain Financial Metrics (ROI, NPV, Payback).",
+                suggested_questions: [
+                    { question_vi: "Chi phí bảo hành là loại COPQ nào?", question_en: "Warranty cost is which type of COPQ?" },
+                    { question_vi: "Tại sao nên tập trung vào Prevention Cost?", question_en: "Why focus on Prevention Cost?" },
+                    { question_vi: "Sự khác biệt giữa Hard Savings và Soft Savings?", question_en: "What is the difference between Hard Savings and Soft Savings?" },
+                    { question_vi: "Làm sao tính ROI cho dự án?", question_en: "How to calculate ROI for a project?" },
+                    { question_vi: "Tại sao Internal Failure ít tốn kém hơn External Failure?", question_en: "Why is Internal Failure less expensive than External Failure?" }
+                ],
+                hint_levels: ["Internal vs External", "1-10-100 Rule", "Budget impact"],
                 max_hints_per_question: 3
             },
             references_en: [
@@ -254,8 +260,32 @@ if payback < 1:
                 {
                     id: "fc_define_02",
                     question_en: "Which represents 'Hard Savings'?",
-                    answer_vi: "Reduction in scrap/waste (Giảm phế liệu).",
+                    answer_vi: "Reduction in scrap/waste (Giảm phế liệu) - reduces actual budget.",
                     tags_en: ["Financial"],
+                    difficulty_en: "Easy",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_define_03",
+                    question_en: "According to the 1-10-100 Rule, which is the most expensive cost?",
+                    answer_vi: "Failure (External) - $100. (Lỗi phát hiện bởi khách hàng).",
+                    tags_en: ["COPQ", "1-10-100 Rule"],
+                    difficulty_en: "Easy",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_define_04",
+                    question_en: "What is the formula for ROI?",
+                    answer_vi: "(Net Benefits / Project Cost) x 100%.",
+                    tags_en: ["Financial", "Metrics"],
+                    difficulty_en: "Medium",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_define_05",
+                    question_en: "What does COPQ stand for?",
+                    answer_vi: "Cost of Poor Quality (Chi phí chất lượng kém).",
+                    tags_en: ["COPQ", "Definitions"],
                     difficulty_en: "Easy",
                     ai_tutor_available: true
                 }
@@ -270,66 +300,218 @@ if payback < 1:
             id: "mod_define_02",
             order: 2,
             title_en: "Voice of Customer (VOC) & Kano Model",
-            summary_vi: "Thu thập ý kiến khách hàng và phân loại nhu cầu bằng mô hình Kano.",
-            summary_en: "Capturing customer needs (VOC) and classifying them using the Kano Model.",
-            key_metrics_en: ["VOC", "CTQ (Critical to Quality)", "Kano Categories"],
+            summary_vi: "Thu thập nhu cầu khách hàng qua VOC, chuyển dịch thành các chỉ số CTQ đo lường được, và ưu tiên chúng bằng Mô hình Kano.",
+            summary_en: "Capturing customer needs through VOC, translating them into measurable CTQs, and prioritizing them using the Kano Model.",
+            key_metrics_en: ["VOC", "CTQ", "KPOV", "Likert Scale"],
             key_points_en: [
-                "VOC: The 'Raw' voice (Subjective, vague).",
-                "CTQ Tree: Drill down VOC -> Drivers -> Measurable Metrics.",
-                "Kano Model - Must-be: Dissatisfied if missing, neutral if present.",
-                "Kano Model - Performance: More is better (Linear satisfaction).",
-                "Kano Model - Delighters: Unexpected features that wow customers."
+                "Translation: VOC is subjective (User language); CTQ is objective (Engineering language).",
+                "Structure: Need -> Driver -> Requirement (CTQ).",
+                "Kano Logic: Fulfill Must-Be first, compete on Performance, win loyalty with Delighters.",
+                "Data Types: Reactive (Complaints) vs. Proactive (Surveys)."
             ],
             explanation_vi: `
 **1. Voice of Customer (VOC)**
-VOC là điểm khởi đầu. Khách hàng thường nói những điều mơ hồ như "Tôi muốn dịch vụ nhanh hơn".
-- Nhiệm vụ của bạn: Dùng **CTQ Tree** để dịch nó thành con số.
-- Vd: "Dịch vụ nhanh" (VOC) -> "Thời gian giao hàng" (Driver) -> "< 30 phút" (CTQ).
+VOC là "tiếng nói thô" từ khách hàng. Nó mô tả khách hàng MUỐN gì, chứ không phải làm thế nào để đạt được.
+- **Định nghĩa:** Nhu cầu và mong đợi của khách hàng, bao gồm cả những điều nói ra (Explicit) và không nói ra (Implicit).
+- **Loại dữ liệu (Data Types):**
+  - **Reactive Data (Phản ứng):** Khiếu nại, Yêu cầu bảo hành, Trả hàng. *Cho biết bạn đã làm sai ở đâu.*
+  - **Proactive Data (Chủ động):** Khảo sát, Phỏng vấn, Focus Groups, Thử nghiệm Beta. *Tìm hiểu khách hàng muốn gì trong tương lai.*
 
-**2. Kano Model (Mô hình Kano)**
-Giáo sư Noriaki Kano chia nhu cầu khách hàng thành 3 loại:
-1. **Must-be (Cơ bản):** Phải có. Thiếu là bị chửi ngay. Có thì bình thường (VD: Xe hơi phải có phanh).
-2. **Performance (Hiệu suất):** Càng nhiều càng tốt. (VD: Xe càng tiết kiệm xăng càng tốt).
-3. **Delighters (Gây thích thú):** Khách không ngờ tới. Thiếu không sao, nhưng có thì cực thích (VD: Xe tự lái).
-*Lưu ý:* Delighters hôm nay sẽ trở thành Must-be ngày mai!
+━━━━━━
+
+**2. CTQ Tree (Cây chất lượng quan trọng)**
+VOC thường mơ hồ. Bạn phải dịch nó thành Yêu cầu kỹ thuật (Requirement).
+- **Cấu trúc:** Customer Need -> Drivers -> Requirements (CTQs).
+- **Ví dụ:**
+  - **Need (Nhu cầu):** "Tôi muốn dịch vụ tuyệt vời" *(Mơ hồ)*.
+  - **Driver (Yếu tố dẫn dắt):** "Sự phản hồi nhanh".
+  - **Requirement (CTQ):** "Điện thoại phải được trả lời trong vòng 3 tiếng chuông" *(Cụ thể, Đo lường được)*.
+- *Lưu ý:* Một CTQ hợp lệ phải có Giới hạn/Mục tiêu (Limit/Target).
+
+━━━━━━
+
+**3. Kano Model (Mô hình Kano)**
+Phân loại yêu cầu khách hàng thành 3 nhóm để xác định tác động đến sự hài lòng:
+
+🟢 **Must-Be / Basic Quality (Phải có):**
+- **Thiếu:** Khách hàng KHÔNG hài lòng (Dissatisfied).
+- **Có:** Khách hàng thấy bình thường (Neutral) - Họ coi đó là điều hiển nhiên.
+- *Ví dụ:* Khăn trải giường sạch ở khách sạn, phanh xe hơi.
+
+🔵 **Performance / Expected Quality (Hiệu suất):**
+- **Đặc điểm:** Tuyến tính (Linear). Có càng nhiều càng tốt.
+- *Ví dụ:* Thời lượng pin, tốc độ internet, tiết kiệm xăng.
+
+🔥 **Delighters / Exciting Quality (Gây thích thú):**
+- **Thiếu:** Khách hàng thấy bình thường (Họ không mong đợi nó).
+- **Có:** Khách hàng cực kỳ vui sướng (Delighted).
+- *Ví dụ:* Bánh quy nóng miễn phí khi check-in.
+
+*The Kano Shift:* Theo thời gian, Delighters sẽ trở thành Performance, và cuối cùng trở thành Must-Be (VD: Wifi ở khách sạn).
             `,
             explanation_en: `
 **1. Voice of Customer (VOC)**
-VOC is the "raw" feedback from the customer. It is often vague.
-- Use a **CTQ Tree** (Critical to Quality) to translate vague VOC into measurable metrics.
-- Example: "Fast" (VOC) -> "Delivery Time" (Driver) -> "< 30 mins" (CTQ).
+VOC is the "raw" feedback from the customer. It describes WHAT the customer wants, not HOW to achieve it.
+- **Definition:** Customer's explicit (stated) and implicit (unspoken) needs and expectations.
+- **Data Types:**
+  - **Reactive Data:** Complaints, Warranty Claims, Returns. *Tells you where you failed.*
+  - **Proactive Data:** Surveys, Focus Groups, Interviews, Beta Testing. *Finds out what customers want in the future.*
 
-**2. Kano Model**
-Dr. Noriaki Kano classified customer requirements into three categories:
-1. **Must-be (Basic):** If missing -> Dissatisfied. If present -> Neutral. (e.g., Hotel cleanliness).
-2. **Performance (Linear):** More is better. (e.g., Battery life).
-3. **Delighters (Exciters):** Unexpected features. If missing -> Neutral. If present -> Delighted. (e.g., Free upgrade).
-*Note:* Delighters eventually become Must-haves over time.
+━━━━━━
+
+**2. CTQ Tree (Critical to Quality)**
+VOC is vague. You must translate it into a Requirement.
+- **Structure:** Customer Need -> Drivers -> Requirements (CTQs).
+- **Example:**
+  - **Need:** "I want excellent service" *(Vague/Hard to measure)*.
+  - **Driver:** "Responsiveness" *(The area we focus on)*.
+  - **Requirement (CTQ):** "Phone must be answered within 3 rings" *(Specific, Measurable)*.
+- *Note:* A valid CTQ must have a Limit (Limit/Target).
+
+━━━━━━
+
+**3. Kano Model**
+Classifies customer requirements into three categories to determine satisfaction impact:
+
+🟢 **Must-Be / Basic Quality (Dissatisfiers):**
+- **If missing:** Customer is Dissatisfied.
+- **If present:** Customer is Neutral (They take it for granted).
+- *Example:* Clean sheets in a hotel; brakes on a car.
+
+🔵 **Performance / Expected Quality (Linear):**
+- **Characteristics:** More is Better. Satisfaction rises linearly with performance.
+- *Example:* Battery life, internet speed, gas mileage.
+
+🔥 **Delighters / Exciting Quality (Exciters):**
+- **If missing:** Customer is Neutral (They didn't expect it).
+- **If present:** Customer is Delighted.
+- *Example:* Free warm cookies at check-in.
+
+*The Kano Shift:* Over time, Delighters become Performance features, and eventually become Must-Be features (e.g., Wi-Fi in hotels).
             `,
-            recommended_tools_en: ["CTQ Drill Down", "Kano Survey"],
-            python_focus_en: [],
-            code_blocks: [],
+            recommended_tools_en: ["CTQ Tree", "Kano Survey", "Likert Scale"],
+            python_focus_en: ["Data Visualization"],
+            code_blocks: [
+                {
+                    id: "code_define_kano",
+                    title_en: "Visualizing the Kano Model",
+                    title_vi: "Trực quan hóa Mô hình Kano",
+                    description_vi: "Mô phỏng và vẽ biểu đồ 3 loại yêu cầu trong Mô hình Kano bằng Python.",
+                    concept_explanation_en: `This code simulates and plots the **Kano Model** curves.
+- **Must-Be**: Satisfaction drops rapidly if performance is low, but flattens out (maxes at Neutral) even with high performance.
+- **Performance**: Linear relationship. Better performance = Higher satisfaction.
+- **Delighters**: Satisfaction creates a "Wow" factor exponentially as performance increases.`,
+                    concept_explanation_vi: `Mã này mô phỏng và vẽ các đường cong **Mô hình Kano**.
+- **Must-Be**: Sự hài lòng giảm nhanh nếu hiệu suất thấp, nhưng chỉ đạt mức Trung lập (Neutral) ngay cả khi hiệu suất cao.
+- **Performance**: Quan hệ tuyến tính. Hiệu suất tốt hơn = Hài lòng cao hơn.
+- **Delighters**: Sự hài lòng tăng theo cấp số nhân (Wow factor) khi hiệu suất tăng.`,
+                    code_template: `import matplotlib.pyplot as plt
+import numpy as np
+
+# Create data range (Performance: Low to High)
+x = np.linspace(0.1, 10, 100)
+
+# 1. Must-Be (Phải có): Logarithmic curve aiming for Neutral (0)
+# If x is low, y is very negative. If x is high, y approaches 0.
+y_must_be = -10 / x 
+
+# 2. Performance (Hiệu suất): Linear
+y_performance = x - 5  # Centered
+
+# 3. Delighter (Thích thú): Exponential
+y_delighter = np.exp(x/3) - 1
+
+# Plot
+plt.figure(figsize=(10, 6))
+plt.plot(x, y_must_be, 'r-', linewidth=2, label='Must-Be (Basic)')
+plt.plot(x, y_performance, 'b-', linewidth=2, label='Performance (Linear)')
+plt.plot(x, y_delighter, 'g-', linewidth=2, label='Delighter (Exciter)')
+
+# Add Neutral Line
+plt.axhline(0, color='gray', linestyle='--')
+plt.text(0.5, 0.5, 'Neutral Satisfaction', color='gray')
+
+plt.title('Kano Model Visualization')
+plt.xlabel('Degree of Implementation (Performance)')
+plt.ylabel('Customer Satisfaction')
+plt.ylim(-10, 10)
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.show()`,
+                    expected_output_en: "A plot showing the three distinct Kano curves.",
+                    expected_output_vi: "Biểu đồ hiển thị 3 đường cong Kano riêng biệt.",
+                    datasets_used: [],
+                    learning_points_en: ["Data Visualization", "Kano Logic"],
+                    difficulty_en: "Beginner",
+                    ai_tutor_prompts: ["How would you plot 'Reverse Quality'?", "Why does the Red line never go above 0?"],
+                    challenges: [
+                        {
+                            id: "ch_kano_01",
+                            prompt_en: "Challenge: Add the 'Indifferent' Line. Create a 4th category called 'Indifferent' where Satisfaction does not change regardless of Performance (y = 0). Plot it in Yellow.",
+                            hint_en: "Use plt.axhline or create a y_indifferent array of zeros.",
+                            solution_code: "y_indifferent = np.zeros_like(x)\nplt.plot(x, y_indifferent, 'y-', label='Indifferent')"
+                        }
+                    ]
+                }
+            ],
             ai_tutor_context: {
                 enabled: true,
-                system_prompt_en: "Classify features using the Kano model.",
-                suggested_questions: ["Wifi miễn phí ở khách sạn là loại nhu cầu nào?", "Tại sao Delighter lại thành Must-be?"],
-                hint_levels: ["Basic expectation", "More is better", "Unexpected wow factor"],
+                system_prompt_en: "You are a Product Manager expert in VOC and Kano Model.",
+                suggested_questions: [
+                    { question_vi: "Wifi miễn phí là Must-be hay Delighter?", question_en: "Is free Wifi a Must-be or Delighter?" },
+                    { question_vi: "Ví dụ về Proactive Data?", question_en: "Example of Proactive Data?" },
+                    { question_vi: "CTQ Tree khác gì với VOC?", question_en: "How is CTQ Tree different from VOC?" },
+                    { question_vi: "Khi nào Delighter trở thành Must-Be?", question_en: "When does a Delighter become a Must-Be?" },
+                    { question_vi: "Làm sao để đo lường VOC?", question_en: "How to measure VOC?" }
+                ],
+                hint_levels: ["Context dependent", "Future needs vs Past complaints", "Measurable vs Vague"],
                 max_hints_per_question: 3
             },
             references_en: [
-                { source_type: "pdf", label_en: "Master Cheat Sheet - Section 2", location_hint_en: "VOC & CTQ" }
+                { source_type: "pdf", label_en: "Master Cheat Sheet - Section 2", location_hint_en: "VOC & Kano" }
             ],
             flashcards: [
                 {
                     id: "fc_define_02_01",
-                    question_en: "In the Kano Model, which needs cause dissatisfaction if missing but no satisfaction if present?",
-                    answer_vi: "Must-be (Basic) Needs.",
+                    question_en: "What connects a vaguely defined Customer Need to a specific Requirement?",
+                    answer_vi: "Drivers (Yếu tố dẫn dắt) in the CTQ Tree.",
+                    tags_en: ["CTQ", "VOC"],
+                    difficulty_en: "Medium",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_define_02_02",
+                    question_en: "Complaints and Warranty Claims are what type of data?",
+                    answer_vi: "Reactive Data (Dữ liệu phản ứng).",
+                    tags_en: ["VOC", "Data Types"],
+                    difficulty_en: "Easy",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_define_02_03",
+                    question_en: "In the Kano Model, which feature leads to dissatisfaction if missing but is just neutral if present?",
+                    answer_vi: "Must-Be (Basic Quality).",
                     tags_en: ["Kano", "VOC"],
                     difficulty_en: "Medium",
                     ai_tutor_available: true
+                },
+                {
+                    id: "fc_define_02_04",
+                    question_en: "What defines a 'Proactive' VOC collection method?",
+                    answer_vi: "Seeking input BEFORE a problem occurs (e.g., Surveys, Focus Groups).",
+                    tags_en: ["VOC", "Data Types"],
+                    difficulty_en: "Medium",
+                    ai_tutor_available: true
+                },
+                {
+                    id: "fc_define_02_05",
+                    question_en: "Does VOC tell you HOW to fix the problem?",
+                    answer_vi: "No. VOC tells you WHAT the customer wants. You need to Translate it to CTQs.",
+                    tags_en: ["VOC", "Definitions"],
+                    difficulty_en: "Easy",
+                    ai_tutor_available: true
                 }
             ],
-
             faq: [],
             mastery_threshold: 80,
             estimated_time_minutes: 30,
@@ -408,7 +590,10 @@ print(df)`,
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Critique a Problem Statement.",
-                suggested_questions: ["Scope Creep là gì?", "SIPOC giúp gì cho Scope?"],
+                suggested_questions: [
+                    { question_vi: "Scope Creep là gì?", question_en: "What is Scope Creep?" },
+                    { question_vi: "SIPOC giúp gì cho Scope?", question_en: "How does SIPOC help with Scope?" }
+                ],
                 hint_levels: ["Moving goalposts", "Defining boundaries", "Inputs/Outputs validation"],
                 max_hints_per_question: 3
             },
@@ -479,7 +664,10 @@ To improve a process, you must see it.
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Explain standard flowchart symbols.",
-                suggested_questions: ["Hình thoi dùng để làm gì?", "Level 3 khác gì Level 1?"],
+                suggested_questions: [
+                    { question_vi: "Hình thoi dùng để làm gì?", question_en: "What is the diamond shape used for?" },
+                    { question_vi: "Level 3 khác gì Level 1?", question_en: "How is Level 3 different from Level 1?" }
+                ],
                 hint_levels: ["Visual shape meaning", "Granularity of detail", "Decision paths"],
                 max_hints_per_question: 3
             },
@@ -574,7 +762,10 @@ print(f"Status: {action}")`,
             ai_tutor_context: {
                 enabled: true,
                 system_prompt_en: "Quiz me on FMEA ratings.",
-                suggested_questions: ["Điểm Detection = 10 nghĩa là gì?", "Nếu RPN = 120 thì làm gì?"],
+                suggested_questions: [
+                    { question_vi: "Điểm Detection = 10 nghĩa là gì?", question_en: "What does Detection score = 10 mean?" },
+                    { question_vi: "Nếu RPN = 120 thì làm gì?", question_en: "What to do if RPN = 120?" }
+                ],
                 hint_levels: ["Can you see the defect?", "Mandatory action threshold"],
                 max_hints_per_question: 3
             },

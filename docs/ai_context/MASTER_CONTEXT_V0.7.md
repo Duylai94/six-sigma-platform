@@ -33,18 +33,14 @@ It uniquely combines **Theory** (CSSC/IASSC Aligned), **Practice** (Python Codin
 - **AI Upgrade**: Migrated Tutor from Gemini Flash to **Perplexity (Sonar-Pro)** via OpenRouter.
 - **Dashboard Analytics**: Added `AnalyticsCard` to visualize mastery by DMAIC phase.
 
-### **v0.7: Lesson Details & AI-Enhanced Python Sandbox (Current Era)**
+### **v0.7: Lesson Details & AI-Enhanced Python Sandbox**
 - **Goal**: Transform learning modules into comprehensive, interactive, exam-ready study materials with AI assistance.
 - **Key Deliverables**:
-    - **AI-Enhanced Python Sandbox**: Redesigned Python Focus tab with 6 interactive sections:
-        - 📚 Concept Overview (bilingual explanations)
-        - 📐 Formula Breakdown (visual formula with variables)
-        - 📋 Step-by-Step Walkthrough (code explanation)
-        - 🤖 AI Tutor Prompts (suggested questions)
-        - 🎯 Interactive Challenges (exercises with hints)
+    - **AI-Enhanced Python Sandbox**: 6-section interactive tab (Concept, Formula, Steps, AI Prompts, Challenges, Editor).
+    - **Contextual AI Tutor**: [NEW] Clickable badges in "Details" tab triggering relevant AI explanations.
+    - **Flashcards Tab**: [NEW] Integrated bilingual flashcard review replacing the old "Project" tab.
     - **Schema Enhancement**: Extended `PythonCodeBlock` type with new fields for rich learning content.
-    - **Chapter 1 Formatting**: Standardized formatting across all Foundation modules (1.1 - 1.5).
-    - **Chapter 2 Content**: Updated Module 2.1 with COQ vs COPQ, financial metrics, and rich Python examples.
+    - **Content Formatting**: Standardized Ch 1 & 2 with rich examples and emojis.
     - **Table Support**: Enhanced `FormattedText` to render markdown tables.
     - **NotebookLM Integration**: AI-assisted content validation against authoritative sources.
 

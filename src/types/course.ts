@@ -1,10 +1,12 @@
 export type PythonCodeBlock = {
   id: string;
   title_en: string;
+  title_vi?: string;
   context_en?: string;             // The situation/math context in English
   description_vi: string;
   code_template: string;          // Pre-filled code for user to run
   expected_output_en: string;     // What they should see conceptually
+  expected_output_vi?: string;
   datasets_used: string[];        // CSV filenames to load
   learning_points_en: string[];   // What this code teaches
   difficulty_en: "Beginner" | "Intermediate" | "Advanced";
@@ -37,7 +39,7 @@ export type PythonCodeBlock = {
 export type AITutorContext = {
   enabled: boolean;
   system_prompt_en: string;
-  suggested_questions: string[];  // "Ask me about...", "Need a hint?", etc.
+  suggested_questions: { question_en: string; question_vi: string }[];  // Bilingual suggestions
   hint_levels: string[];          // e.g. ["basic", "intermediate", "expert"]
   max_hints_per_question: number;
 };
@@ -52,6 +54,7 @@ export type Flashcard = {
   id: string;
   question_en: string;
   answer_vi: string;
+  answer_en?: string;
   tags_en: string[];
   difficulty_en: "Easy" | "Medium" | "Hard";
   ai_tutor_available: boolean;

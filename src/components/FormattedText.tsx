@@ -9,20 +9,23 @@ interface FormattedTextProps {
 export function FormattedText({ text, className }: FormattedTextProps) {
     if (!text) return null;
 
-    // Split by double newlines to form paragraphs/blocks
-    const blocks = text.split("\n\n");
+    // improved splitting: Detect tables and split them out
+    const blocks = extractTables(text);
 
     return (
         <div className={cn("space-y-4 text-foreground/90 leading-relaxed", className)}>
             {blocks.map((block, index) => {
-                // Check for Table (lines starting with |)
-                if (isTableBlock(block)) {
-                    return <TableParser key={index} block={block} />;
+                // If special marker for table
+                if (block.type === 'table') {
+                    return <TableParser key={index} block={block.content} />;
                 }
 
+                // Normal Text processing
+                const content = block.content;
+
                 // Check for List Items
-                if (block.trim().startsWith("- ")) {
-                    const items = block.split("\n").filter((line) => line.trim().startsWith("- "));
+                if (content.trim().startsWith("- ")) {
+                    const items = content.split("\n").filter((line) => line.trim().startsWith("- "));
                     return (
                         <ul key={index} className="list-disc ml-6 space-y-1">
                             {items.map((item, i) => (
@@ -34,9 +37,9 @@ export function FormattedText({ text, className }: FormattedTextProps) {
                     );
                 }
 
-                // Check for Numbered List (1. 2. 3. or 1️⃣ 2️⃣ etc)
-                if (block.trim().match(/^(\d+\.|[1-5]️⃣)/)) {
-                    const lines = block.split("\n").filter((line) => line.trim().length > 0);
+                // Check for Numbered List
+                if (content.trim().match(/^(\d+\.|[1-5]️⃣)/)) {
+                    const lines = content.split("\n").filter((line) => line.trim().length > 0);
                     return (
                         <div key={index} className="space-y-2">
                             {lines.map((line, i) => (
@@ -51,12 +54,77 @@ export function FormattedText({ text, className }: FormattedTextProps) {
                 // Standard Paragraph
                 return (
                     <p key={index} className="whitespace-pre-line">
-                        <InlineParser text={block} />
+                        <InlineParser text={content} />
                     </p>
                 );
             })}
         </div>
     );
+}
+
+// Helper: Extract tables from text and return mixed array
+type TextBlock = { type: 'text' | 'table', content: string };
+
+function extractTables(text: string): TextBlock[] {
+    const lines = text.split("\n");
+    const result: TextBlock[] = [];
+    let currentBuffer: string[] = [];
+    let isTableMode = false;
+
+    // Helper to flush text buffer
+    const flushBuffer = (type: 'text' | 'table') => {
+        if (currentBuffer.length > 0) {
+            result.push({ type, content: currentBuffer.join("\n") });
+            currentBuffer = [];
+        }
+    };
+
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        const trimmed = line.trim();
+        // Detect table row: starts/ends with | AND contains |
+        // Relaxed check: Just needs containing pipes and looking tabular
+        const isTableRow = trimmed.includes("|") && (trimmed.startsWith("|") || trimmed.match(/^\s*\|/));
+        const isSeparator = trimmed.match(/^\|?[\s\-:|]+\|[\s\-:|]+\|?$/);
+
+        if (isTableMode) {
+            if (isTableRow || isSeparator) {
+                currentBuffer.push(line);
+            } else {
+                // End of table
+                flushBuffer('table');
+                isTableMode = false;
+                // Re-process this line as text
+                if (trimmed.length > 0) currentBuffer.push(line);
+            }
+        } else {
+            // Check if this line MIGHT be start of table
+            // Look ahead for separator
+            if (isTableRow) {
+                const nextLine = lines[i + 1]?.trim();
+                const nextIsSeparator = nextLine?.match(/^\|?[\s\-:|]+\|[\s\-:|]+\|?$/);
+
+                if (nextIsSeparator) {
+                    flushBuffer('text');
+                    isTableMode = true;
+                    currentBuffer.push(line);
+                } else {
+                    currentBuffer.push(line);
+                }
+            } else {
+                // Normal text line
+                // Split by double newline for paragraphs if not in table
+                if (line.trim() === "") {
+                    flushBuffer('text'); // Empty line = split paragraph
+                } else {
+                    currentBuffer.push(line);
+                }
+            }
+        }
+    }
+    flushBuffer(isTableMode ? 'table' : 'text');
+
+    return result;
 }
 
 // Check if a block is a markdown table

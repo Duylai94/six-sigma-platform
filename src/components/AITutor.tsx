@@ -8,6 +8,8 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Bot, Send, X, MessageSquare, Loader2, Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAITutor } from "@/contexts/AITutorContext";
+import { FormattedText } from "@/components/FormattedText";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function AITutor() {
     const {
@@ -20,6 +22,8 @@ export function AITutor() {
         clearPendingQuestion,
         moduleContext
     } = useAITutor();
+
+    const { language } = useLanguage();
 
     const [input, setInput] = useState("");
     const [isLoading, setIsLoading] = useState(false);
@@ -61,7 +65,11 @@ export function AITutor() {
             const res = await fetch("/api/ai/chat", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: userMsg, context: moduleContext })
+                body: JSON.stringify({
+                    message: userMsg,
+                    context: moduleContext,
+                    language: language
+                })
             });
 
             const data = await res.json();
@@ -72,7 +80,12 @@ export function AITutor() {
                 addMessage({ role: "assistant", content: data.reply });
             }
         } catch (e) {
-            addMessage({ role: "assistant", content: "Xin lỗi, đã xảy ra lỗi kết nối. / Sorry, a connection error occurred." });
+            addMessage({
+                role: "assistant",
+                content: language === 'vn'
+                    ? "Xin lỗi, đã xảy ra lỗi kết nối. Vui lòng thử lại."
+                    : "Sorry, a connection error occurred. Please try again."
+            });
         } finally {
             setIsLoading(false);
         }
@@ -83,11 +96,13 @@ export function AITutor() {
         handleSendMessage(input);
     };
 
+    const placeholderText = language === 'vn' ? "Hỏi về Six Sigma..." : "Ask about Six Sigma...";
+
     return (
-        <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end">
+        <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end pointer-events-none">
             {isOpen && (
-                <Card className="w-[380px] h-[520px] mb-4 shadow-xl flex flex-col transition-all duration-300 animate-in slide-in-from-bottom-10 fade-in">
-                    <CardHeader className="py-3 px-4 bg-primary text-primary-foreground rounded-t-lg flex flex-row justify-between items-center">
+                <Card className="w-[380px] h-[520px] max-h-[80vh] mb-4 shadow-xl flex flex-col transition-all duration-300 animate-in slide-in-from-bottom-10 fade-in pointer-events-auto flex-shrink-0">
+                    <CardHeader className="py-3 px-4 bg-primary text-primary-foreground rounded-t-lg flex flex-row justify-between items-center flex-shrink-0">
                         <div className="flex items-center gap-2">
                             <Bot className="h-5 w-5" />
                             <CardTitle className="text-base">AI Tutor</CardTitle>
@@ -113,15 +128,19 @@ export function AITutor() {
                         </div>
                     </CardHeader>
                     <CardContent className="flex-1 p-0 overflow-hidden relative bg-muted/5">
-                        <ScrollArea className="h-full p-4" ref={scrollRef}>
+                        <ScrollArea className="h-full p-4" viewportClassName="overscroll-contain" ref={scrollRef}>
                             <div className="space-y-4">
                                 {messages.map((m, i) => (
                                     <div key={i} className={cn("flex w-full", m.role === "user" ? "justify-end" : "justify-start")}>
                                         <div className={cn(
-                                            "max-w-[85%] rounded-lg px-3 py-2 text-sm whitespace-pre-wrap",
-                                            m.role === "user" ? "bg-primary text-primary-foreground" : "bg-white border shadow-sm text-foreground"
+                                            "max-w-[85%] rounded-lg px-3 py-2 text-sm shadow-sm",
+                                            m.role === "user" ? "bg-primary text-primary-foreground" : "bg-white border text-foreground"
                                         )}>
-                                            {m.content}
+                                            {m.role === "user" ? (
+                                                <p className="whitespace-pre-wrap">{m.content}</p>
+                                            ) : (
+                                                <FormattedText text={m.content} className="text-sm space-y-2 [&_p]:leading-normal" />
+                                            )}
                                         </div>
                                     </div>
                                 ))}
@@ -139,7 +158,7 @@ export function AITutor() {
                         <form className="flex w-full gap-2" onSubmit={handleSubmit}>
                             <Input
                                 ref={inputRef}
-                                placeholder="Hỏi về Six Sigma... / Ask about Six Sigma..."
+                                placeholder={placeholderText}
                                 value={input}
                                 onChange={e => setInput(e.target.value)}
                                 className="flex-1"
@@ -156,7 +175,7 @@ export function AITutor() {
             {!isOpen && (
                 <Button
                     onClick={() => setIsOpen(true)}
-                    className="rounded-full h-14 w-14 shadow-lg bg-primary hover:bg-primary/90 transition-all hover:scale-110"
+                    className="rounded-full h-14 w-14 shadow-lg bg-primary hover:bg-primary/90 transition-all hover:scale-110 pointer-events-auto"
                 >
                     <MessageSquare className="h-7 w-7" />
                 </Button>
