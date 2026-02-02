@@ -71,7 +71,7 @@ Dự án phải tác động đến "Bottom Line" (Lợi nhuận ròng).
 ━━━━━━
 
 **4. Lean & 5S (Review)**
-[[ref:mod_foundations_05]]
+[[ref:mod_foundations_04]]
 
 ━━━━━━
 
@@ -123,7 +123,7 @@ Projects must impact the "Bottom Line."
 ━━━━━━
 
 **4. Lean & 5S (Review)**
-[[ref:mod_foundations_05]]
+[[ref:mod_foundations_04]]
 
 ━━━━━━
 
@@ -611,13 +611,13 @@ Cái nhìn tổng quan (30,000-foot view) để xác minh phạm vi.
 ━━━━━━
 
 **3. Quản Lý Bên Liên Quan (Stakeholder Management)**
-[[ref:mod_foundations_03]]
+[[ref:mod_foundations_gurus]]
 • **Kế hoạch Truyền thông:** Phải xác định Ai cần thông tin gì, khi nào, và qua kênh nào.
 
 ━━━━━━
 
 **4. Tollgate Review (Cửa Kiểm Soát)**
-[[ref:mod_foundations_03]]
+[[ref:mod_foundations_gurus]]
 • **Tollgate Checklist:** Ở giai đoạn này, bạn CẦN đáp ứng:
   1. Charter đã được ký?
   2. VOC đã chuyển thành CTQ?
@@ -654,13 +654,13 @@ A high-level view (30,000-foot view) of the process used to verify scope.
 ━━━━━━
 
 **3. Stakeholder Management**
-[[ref:mod_foundations_03]]
+[[ref:mod_foundations_gurus]]
 • **Communication Plan:** Define Who needs What info, When, and How.
 
 ━━━━━━
 
 **4. Tollgate Review**
-[[ref:mod_foundations_03]]
+[[ref:mod_foundations_gurus]]
 • **Define Tollgate Checklist:** Before moving to Measure, ensure:
   1. Is the Charter signed?
   2. Are VOCs translated to CTQs?
