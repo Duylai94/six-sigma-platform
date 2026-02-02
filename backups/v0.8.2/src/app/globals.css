@@ -1,0 +1,218 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-cta: var(--cta);
+  --color-cta-foreground: var(--cta-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Charts - Keeping existing for now, can update if needed */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Sidebar Specifics */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.625rem;
+  /* 10px */
+
+  /* UI/UX Pro Max: Data-Dense Dashboard (Teal/Orange) */
+  /* MASTER.md Reference: Primary #0D9488, Secondary #14B8A6, CTA #F97316 */
+
+  /* Light Mode */
+  --background: oklch(0.98 0.01 180);
+  /* #F0FDFA (Teal-50 ish) */
+  --foreground: oklch(0.20 0.04 180);
+  /* #134E4A (Teal-900) */
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.20 0.04 180);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.20 0.04 180);
+
+  /* Primary: Teal-600 #0D9488 */
+  --primary: oklch(0.51 0.13 180);
+  --primary-foreground: oklch(0.98 0 0);
+
+  /* Secondary: Teal-500 #14B8A6 */
+  --secondary: oklch(0.65 0.16 180);
+  --secondary-foreground: oklch(0.98 0 0);
+
+  /* CTA: Orange-500 #F97316 */
+  --cta: oklch(0.65 0.20 35);
+  --cta-foreground: oklch(1 0 0);
+
+  --muted: oklch(0.96 0.01 180);
+  --muted-foreground: oklch(0.40 0.06 180);
+  /* Slate-600 ish tint */
+
+  --accent: oklch(0.93 0.03 180);
+  --accent-foreground: oklch(0.20 0.06 180);
+
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.98 0 0);
+
+  --border: oklch(0.85 0.03 180);
+  /* Teal-200 ish */
+  --input: oklch(0.85 0.03 180);
+  --ring: oklch(0.51 0.13 180);
+  /* Match Primary */
+
+  /* Charts */
+  --chart-1: oklch(0.51 0.13 180);
+  /* Teal */
+  --chart-2: oklch(0.65 0.20 35);
+  /* Orange */
+  --chart-3: oklch(0.45 0.20 280);
+  /* Purple */
+  --chart-4: oklch(0.60 0.15 140);
+  /* Green */
+  --chart-5: oklch(0.70 0.10 50);
+  /* Gold */
+
+  /* Sidebar */
+  --sidebar: oklch(0.98 0.01 180);
+  --sidebar-foreground: oklch(0.20 0.04 180);
+  --sidebar-primary: oklch(0.51 0.13 180);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.93 0.03 180);
+  --sidebar-accent-foreground: oklch(0.20 0.06 180);
+  --sidebar-border: oklch(0.85 0.03 180);
+  --sidebar-ring: oklch(0.51 0.13 180);
+}
+
+.dark {
+  /* Dark Mode - Deep Teal/Slate Base */
+  --background: oklch(0.12 0.03 180);
+  /* Very Dark Teal */
+  --foreground: oklch(0.95 0.01 180);
+
+  --card: oklch(0.15 0.03 180);
+  --card-foreground: oklch(0.95 0.01 180);
+
+  --popover: oklch(0.15 0.03 180);
+  --popover-foreground: oklch(0.95 0.01 180);
+
+  /* Primary: Teal-500 for better contrast in dark */
+  --primary: oklch(0.65 0.16 180);
+  --primary-foreground: oklch(0.12 0.03 180);
+
+  /* Secondary: Teal-400 */
+  --secondary: oklch(0.70 0.14 180);
+  --secondary-foreground: oklch(0.12 0.03 180);
+
+  /* CTA: Orange-400 */
+  --cta: oklch(0.70 0.18 35);
+  --cta-foreground: oklch(0.12 0 0);
+
+  --muted: oklch(0.20 0.03 180);
+  --muted-foreground: oklch(0.65 0.04 180);
+
+  --accent: oklch(0.20 0.03 180);
+  --accent-foreground: oklch(0.95 0.01 180);
+
+  --destructive: oklch(0.40 0.20 25);
+  --destructive-foreground: oklch(0.95 0 0);
+
+  --border: oklch(0.25 0.03 180);
+  --input: oklch(0.25 0.03 180);
+  --ring: oklch(0.65 0.16 180);
+
+  /* Charts */
+  --chart-1: oklch(0.65 0.16 180);
+  /* Teal-500 */
+  --chart-2: oklch(0.70 0.18 35);
+  /* Orange-400 */
+  --chart-3: oklch(0.60 0.18 280);
+  /* Purple-400 */
+  --chart-4: oklch(0.70 0.12 140);
+  /* Green-400 */
+  --chart-5: oklch(0.80 0.08 50);
+  /* Gold-400 */
+
+  /* Sidebar */
+  --sidebar: oklch(0.12 0.03 180);
+  --sidebar-foreground: oklch(0.95 0.01 180);
+  --sidebar-primary: oklch(0.65 0.16 180);
+  --sidebar-primary-foreground: oklch(0.12 0.03 180);
+  --sidebar-accent: oklch(0.20 0.03 180);
+  --sidebar-accent-foreground: oklch(0.95 0.01 180);
+  --sidebar-border: oklch(0.25 0.03 180);
+  --sidebar-ring: oklch(0.65 0.16 180);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    overflow-x: hidden;
+  }
+
+  html {
+    overflow-x: hidden;
+  }
+}
+
+/* Custom Utilities for Pro Max Glassmorphism & Shadows */
+@layer utilities {
+  .glass-card {
+    @apply bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-lg;
+  }
+
+  .glass-panel {
+    @apply bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm;
+  }
+
+  /* Mobile text wrapping utility */
+  .overflow-wrap-anywhere {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+}

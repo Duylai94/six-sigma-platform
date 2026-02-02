@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
-import { QuizQuestion, Answer } from '@/types/quiz.types';
+import { RenderedQuestion, OptionID } from '@/types/quiz.types';
 
 export interface QuizState {
-    answers: Record<string, Answer>; // map questionId -> Answer (A, B, C, D)
+    answers: Record<string, OptionID>; // map questionId -> Answer (A, B, C, D)
     currentQuestionIndex: number;
     flagged: string[]; // List of flagged question IDs
     isComplete: boolean;
@@ -11,7 +11,7 @@ export interface QuizState {
 
 const STORAGE_KEY_PREFIX = 'six_sigma_quiz_';
 
-export const useQuizState = (quizId: string, questions: QuizQuestion[]) => {
+export const useQuizState = (quizId: string, questions: RenderedQuestion[]) => {
     const [state, setState] = useState<QuizState>({
         answers: {},
         currentQuestionIndex: 0,
@@ -38,7 +38,7 @@ export const useQuizState = (quizId: string, questions: QuizQuestion[]) => {
         localStorage.setItem(`${STORAGE_KEY_PREFIX}${quizId}`, JSON.stringify(state));
     }, [quizId, state]);
 
-    const selectAnswer = useCallback((questionId: string, answer: Answer) => {
+    const selectAnswer = useCallback((questionId: string, answer: OptionID) => {
         if (state.isComplete) return; // Prevent changing after completion
 
         setState(prev => ({

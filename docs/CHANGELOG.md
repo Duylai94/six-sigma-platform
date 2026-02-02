@@ -1,5 +1,32 @@
 # Changelog
 
+## [0.8.2] - 2026-02-01
+### 📚 Content Integration: Reverse Engineering Quizzes (Chapter 1)
+- **Feature**: Mapped all 100 general knowledge quiz questions to specific chapter modules.
+- **Content Gap Closure**:
+    - **Module 1.1**: Added DPMO formula and Motorola history/ROI stats.
+    - **Module 1.2**: Added IASSC vs ASQ distinction, belt velocity (projects/year), and excluded "Compliance Officer" role.
+    - **Module 1.3**: Added "Vital Few" (Juran), Fishbone history (Ishikawa 1945), and Mikel Harry's role.
+    - **Module 1.4**: Added DMADV comparison table.
+    - **Module 1.5**: Added Lean philosophy, SMED, and Poka-Yoke.
+- **Refactor**: Granularized quiz mapping in `quiz-mapping.ts` to support per-module targeted quizzing.
+- **Backup**: Created `backups/v0.8.2/` snapshot.
+
+## [0.8.1] - 2026-02-01
+### 📱 Mobile Layout & AI Tutor Enhancements
+- **Mobile Layout Fixes**:
+    - Fixed text wrapping in `FormattedText.tsx` with `break-words`, `overflow-wrap-anywhere`.
+    - Added global `overflow-x: hidden` to `html` and `body` in `globals.css`.
+    - Added `viewport` meta tag in `layout.tsx` with `userScalable: false`.
+    - Fixed header truncation and mobile padding in `[moduleId]/page.tsx`.
+- **AI Tutor Language Toggle**:
+    - Added 🌐 EN/VN toggle button in AI Tutor header.
+    - API now enforces response language via explicit system prompt instruction.
+- **AI Tutor Chat Wrapping**:
+    - Fixed message bubble overflow with `overflow-hidden`, `break-words`, `max-w-full`.
+    - Fixed TableParser for mobile with smaller padding (`px-2 py-1.5`) and text wrapping.
+- **Backup**: Created `backups/v0.8.1/` snapshot.
+
 ## [0.8.0] - 2026-02-01
 ### 🎨 UI/UX Pro Max Complete
 - **Dashboard Cards**: Aligned "Start Learning" buttons using CSS Grid `auto-rows-fr` + `CardFooter`.

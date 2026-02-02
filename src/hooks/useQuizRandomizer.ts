@@ -1,6 +1,8 @@
 import { useState, useCallback } from 'react';
-import { QuizQuestion } from '@/types/quiz.types';
+import { QuizQuestion, RenderedQuestion } from '@/types/quiz.types';
 import { allQuizzes } from '@/data/quizzes';
+import { renderQuestions } from '@/lib/quizUtils';
+import { QUIZ_MAPPING } from '@/data/quiz-mapping';
 
 // Fisher-Yates Shuffle
 const shuffleArray = <T>(array: T[]): T[] => {
@@ -12,10 +14,8 @@ const shuffleArray = <T>(array: T[]): T[] => {
     return shuffled;
 };
 
-import { QUIZ_MAPPING } from '@/data/quiz-mapping';
-
 export const useQuizRandomizer = () => {
-    const [questions, setQuestions] = useState<QuizQuestion[]>([]);
+    const [questions, setQuestions] = useState<RenderedQuestion[]>([]);
 
     const generateModuleQuiz = useCallback((moduleName: string, count: number = 5, phaseFallback: string = '', moduleId: string = '') => {
         let pool: QuizQuestion[] = [];
@@ -101,16 +101,22 @@ export const useQuizRandomizer = () => {
 
         const shuffled = shuffleArray(pool);
         const selected = shuffled.slice(0, count);
-        setQuestions(selected);
-        return selected;
+
+        // Render questions (shuffle options, assign A/B/C/D)
+        const rendered = renderQuestions(selected);
+        setQuestions(rendered);
+        return rendered;
     }, []);
 
     const generatePhaseQuiz = useCallback((phase: string, count: number = 10) => {
         const pool = allQuizzes.filter(q => q.phase === phase);
         const shuffled = shuffleArray(pool);
         const selected = shuffled.slice(0, count);
-        setQuestions(selected);
-        return selected;
+
+        // Render questions (shuffle options, assign A/B/C/D)
+        const rendered = renderQuestions(selected);
+        setQuestions(rendered);
+        return rendered;
     }, []);
 
     return {

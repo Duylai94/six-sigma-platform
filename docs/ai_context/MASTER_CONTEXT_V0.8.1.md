@@ -1,6 +1,6 @@
-# MASTER CONTEXT: Six Sigma Learning Platform (v0.8.0)
+# MASTER CONTEXT: Six Sigma Learning Platform (v0.8.1)
 **Last Updated**: 2026-02-01
-**Version**: 0.8.0 (UI/UX Pro Max Complete)
+**Version**: 0.8.1 (Mobile Layout & AI Tutor Enhancements)
 
 ## 1. Project Overview
 A professional, bilingual (English/Vietnamese) learning platform for Six Sigma Green Belt certification.
@@ -16,19 +16,32 @@ It uniquely combines **Theory** (CSSC/IASSC Aligned), **Practice** (Python Codin
 
 ## 2. Version History & Evolution
 
-### **v0.7.7: UI/UX Pro Max Audit (Current)**
-- **Design System**: Teal (#0D9488) / Orange (#F97316) palette + Fira fonts.
-- **Mobile Fixes**: TabsList scrollable, content padding increased to `px-4`.
-- **Card Fixes**: `p-0 overflow-hidden` on AITutor, PythonEditor, Flashcard.
-- **Agent Skills**: Added `ui-ux-pro-max` skill for design pattern audits.
+### **v0.8.1: Mobile Layout & AI Tutor Enhancements (Current)**
+- **Mobile Layout Fixes**: 
+  - Fixed text wrapping in `FormattedText.tsx` with `break-words`, `overflow-wrap-anywhere`.
+  - Added global `overflow-x: hidden` to `html` and `body` in `globals.css`.
+  - Added `viewport` meta tag in `layout.tsx` with `userScalable: false`.
+  - Fixed header truncation and mobile padding in `[moduleId]/page.tsx`.
+- **AI Tutor Language Toggle**:
+  - Added 🌐 EN/VN toggle button in AI Tutor header.
+  - API now enforces response language via explicit system prompt instruction.
+- **AI Tutor Chat Wrapping**:
+  - Fixed message bubble overflow with `overflow-hidden`, `break-words`, `max-w-full`.
+  - Fixed TableParser for mobile with smaller padding and text wrapping.
 
-### **v0.8: The Capstone Project**
+### **v0.8.0: The Capstone Project**
 - **Titan Casting Case Study**: A full end-to-end DMAIC project simulation.
 - **Phase 1 (Define)**: Baseline Calculation (2.5 Sigma), Project Charter, Financial Impact ($2.7M loss).
 - **Phase 2 (Measure)**: Data Health Check (Normality Test).
 - **Phase 3 (Analyze)**: Root Cause Analysis (Correlation, Hypothesis Testing) identifying **Melt Temperature** as the "Smoking Gun".
 - **Phase 4 (Improve)**: Regression Optimization (Target 750°C).
 - **Phase 5 (Control)**: Xbar-R Control Charts and Reaction Plans to sustain gains (4.5 Sigma).
+
+### **v0.7.7: UI/UX Pro Max Audit**
+- **Design System**: Teal (#0D9488) / Orange (#F97316) palette + Fira fonts.
+- **Mobile Fixes**: TabsList scrollable, content padding increased to `px-4`.
+- **Card Fixes**: `p-0 overflow-hidden` on AITutor, PythonEditor, Flashcard.
+- **Agent Skills**: Added `ui-ux-pro-max` skill for design pattern audits.
 
 ### **v0.7: Lesson Details & AI-Enhanced Python Sandbox**
 - **AI-Enhanced Python Sandbox**: 6-section interactive tab.
@@ -43,7 +56,7 @@ It uniquely combines **Theory** (CSSC/IASSC Aligned), **Practice** (Python Codin
 - **Framework**: Next.js 15 (App Router).
 - **Styling**: Tailwind CSS v4 + Shadcn/UI.
 - **Design System**: Pro Max palette (Teal/Orange), Fira Sans/Code fonts.
-- **Components**: `FormattedText` (Markdown Tables), `PythonEditor` (Pyodide), `AITutor` (DeepSeek/Gemini).
+- **Components**: `FormattedText` (Markdown Tables), `PythonEditor` (Pyodide), `AITutor` (Perplexity).
 
 ### Data Architecture
 - **Content**: Static TypeScript files (`src/data/chapters/*.ts`) for speed and versioning.
@@ -52,7 +65,7 @@ It uniquely combines **Theory** (CSSC/IASSC Aligned), **Practice** (Python Codin
 
 ### AI & Backend
 - **API**: `/api/ai/chat` (Next.js Route Handler).
-- **Model**: Perplexity Sonar-Pro (via OpenRouter) / Gemini Flash.
+- **Model**: Perplexity Sonar-Pro (via OpenRouter).
 - **Database**: Supabase (PostgreSQL) + Row Level Security (RLS).
 
 ---
@@ -61,10 +74,11 @@ It uniquely combines **Theory** (CSSC/IASSC Aligned), **Practice** (Python Codin
 
 | Component | Purpose | v0.8.1 Updates |
 |-----------|---------|----------------|
-| `AITutor.tsx` | Global floating chat | `p-0 overflow-hidden`, `w-[90vw]` mobile |
-| `PythonEditor.tsx` | Monaco + Pyodide | `p-0` Card fix |
-| `Flashcard.tsx` | 3D flip cards | `p-0 overflow-hidden` both faces |
-| `[moduleId]/page.tsx` | Module player | `overflow-x-auto` tabs, `px-4` padding |
+| `AITutor.tsx` | Global floating chat | 🌐 EN/VN toggle, `overflow-hidden` bubbles, chat text wrapping |
+| `FormattedText.tsx` | Markdown parser | `break-words`, `overflow-wrap-anywhere`, mobile-friendly tables |
+| `[moduleId]/page.tsx` | Module player | Header truncation, viewport meta, mobile padding |
+| `globals.css` | Global styles | `overflow-x: hidden` on html/body, `.overflow-wrap-anywhere` utility |
+| `layout.tsx` | Root layout | Viewport meta with `userScalable: false` |
 
 ---
 
@@ -90,8 +104,6 @@ It uniquely combines **Theory** (CSSC/IASSC Aligned), **Practice** (Python Codin
 | Skill | Path | Purpose |
 |-------|------|---------|
 | `ui-ux-pro-max` | `.agent/skills/ui-ux-pro-max/` | Design audits, UX guidelines, component patterns |
-| `react-best-practices` | `.agent/skills/react-best-practices/` | React performance rules |
-| `tailwind-patterns` | `.agent/skills/tailwind-patterns/` | Tailwind CSS patterns |
 
 ---
 
@@ -101,3 +113,13 @@ It uniquely combines **Theory** (CSSC/IASSC Aligned), **Practice** (Python Codin
 - `docs/ai_context/`: Living documentation for Agentic workflows.
 - `.agent/skills/`: Agent skill modules with CSV databases.
 - `backups/`: Version snapshots (excludes node_modules, .next, .git).
+
+---
+
+## 8. Backup History
+
+| Version | Date | Size | Notes |
+|---------|------|------|-------|
+| v0.8.1 | 2026-02-01 | ~10GB | Mobile layout fixes, AI language toggle |
+| v0.8.0 | 2026-02-01 | ~10GB | Capstone Project complete |
+| v0.7.7 | 2026-01-31 | ~10GB | UI/UX Pro Max audit |

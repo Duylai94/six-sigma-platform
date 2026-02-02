@@ -5,15 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { CheckCircle2, XCircle, ChevronDown, ChevronRight, Flag } from "lucide-react";
+import { RenderedQuestion, OptionID } from "@/types/quiz.types";
 
-interface QuizQuestion {
-    id: string;
-    question: string;
-    options: Record<string, string>;
-    correctAnswer: string;
-    explanation: string;
-    phase?: string;
-}
 
 interface QuizState {
     answers: Record<string, string>; // questionId -> selectedOptionKey
@@ -23,8 +16,8 @@ interface QuizState {
 }
 
 interface QuizReviewProps {
-    questions: QuizQuestion[];
-    userAnswers: Record<string, string>;
+    questions: RenderedQuestion[];
+    userAnswers: Record<string, OptionID>;
     score: number;
     flaggedQuestions?: string[];
 }
@@ -103,7 +96,7 @@ export function QuizReview({ questions, userAnswers, score, flaggedQuestions = [
 
                                     {!isCorrect && (
                                         <p className="text-xs text-red-600 mt-1 font-medium">
-                                            Your Answer: {q.options[userAnswer]}
+                                            Your Answer: {userAnswer && q.options[userAnswer as OptionID]}
                                         </p>
                                     )}
                                 </div>

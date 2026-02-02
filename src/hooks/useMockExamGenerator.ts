@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
-import { QuizQuestion, MockExamConfig } from '@/types/quiz.types';
+import { QuizQuestion, RenderedQuestion, MockExamConfig } from '@/types/quiz.types';
 import { allQuizzes } from '@/data/quizzes';
+import { renderQuestions } from '@/lib/quizUtils';
 
 // Standard IASSC Green Belt Distribution (100 Questions total)
 const DEFAULT_DISTRIBUTION: MockExamConfig = {
@@ -22,7 +23,7 @@ const shuffleArray = <T>(array: T[]): T[] => {
 };
 
 export const useMockExamGenerator = () => {
-    const [examQuestions, setExamQuestions] = useState<QuizQuestion[]>([]);
+    const [examQuestions, setExamQuestions] = useState<RenderedQuestion[]>([]);
     const [isGenerating, setIsGenerating] = useState(false);
 
     const generateExam = useCallback((config: MockExamConfig = DEFAULT_DISTRIBUTION) => {
@@ -45,7 +46,7 @@ export const useMockExamGenerator = () => {
         const selectedGeneral = shuffleArray(generalPool).slice(0, config.generalCount);
 
         // 3. Combine
-        const allSelected = [
+        const allSelected: QuizQuestion[] = [
             ...selectedDefine,
             ...selectedMeasure,
             ...selectedAnalyze,
@@ -55,7 +56,10 @@ export const useMockExamGenerator = () => {
         ];
 
         // 4. Shuffle Final Set (so questions are mixed, not sequential by phase)
-        const finalExam = shuffleArray(allSelected);
+        const shuffledQuestions = shuffleArray(allSelected);
+
+        // 5. Render questions (shuffle options, assign A/B/C/D)
+        const finalExam = renderQuestions(shuffledQuestions);
 
         setExamQuestions(finalExam);
         setIsGenerating(false);

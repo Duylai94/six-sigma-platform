@@ -31,7 +31,9 @@ export const chapterFoundations: Chapter = {
             explanation_vi: `
 **1. Meanings of Six Sigma (Ý nghĩa của Six Sigma)**
 Six Sigma thường bị hiểu nhầm là "chỉ là thống kê". Thực tế, nó là ba thứ cùng lúc:
-1. **Metric (Thước đo):** Mục tiêu thống kê là **3.4 DPMO** (Lỗi trên một triệu cơ hội), tương đương tỷ lệ sạch lỗi **99.99966%**.
+1. **Metric (Thước đo):** Mục tiêu thống kê là **3.4 DPMO** (Lỗi trên một triệu cơ hội).
+   - Công thức: **(Tổng số lỗi / Tổng cơ hội) × 1,000,000**.
+   - Tương đương tỷ lệ sạch lỗi **99.99966%**.
 2. **Methodology (Phương pháp luận):** Lộ trình giải quyết vấn đề có cấu trúc gọi là **DMAIC** (Xác định, Đo lường, Phân tích, Cải tiến, Kiểm soát).
 3. **Philosophy (Triết lý):** Tập trung vào việc **giảm biến động** (reducing variation). Khách hàng không cảm nhận "trung bình"; họ cảm nhận sự biến động. Một quy trình ổn định, dự đoán được là chìa khóa của chất lượng.
 
@@ -43,7 +45,9 @@ Nếu chúng ta chấp nhận độ chính xác 99% (khoảng 3.8 Sigma) thay v�
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 **2. History (Lịch sử & Bối cảnh)**
-- **Motorola (1986):** Bill Smith phát triển Six Sigma để giải quyết các vấn đề bảo hành và lỗi do quy trình sản xuất. Trọng tâm ban đầu là *Cải tiến Chất lượng*.
+- **Motorola (1986):** Bill Smith phát triển Six Sigma. CEO **Bob Galvin** đã thúc đẩy nó trên toàn công ty.
+  - **Kết quả:** Tiết kiệm **$2.2 tỷ USD** trong 4 năm đầu và $16 tỷ USD trong 15 năm.
+  - Trọng tâm ban đầu là *Cải tiến Chất lượng*.
 - **General Electric (1995):** Jack Welch phổ biến nó bằng cách gắn liền với *Kết quả Tài chính* và thăng tiến lãnh đạo. Ông chứng minh Six Sigma tiết kiệm hàng tỷ USD, đưa nó từ nhà máy lên phòng họp hội đồng quản trị.
 - **Lean vs Six Sigma:**
   - **Lean:** Tập trung vào loại bỏ *Lãng phí (Muda)* và cải thiện *Tốc độ/Dòng chảy*.
@@ -70,7 +74,9 @@ Hãy tưởng tượng một tiệm pizza. Nhân viên dùng cốc để đong p
             explanation_en: `
 **1. Meanings of Six Sigma**
 Six Sigma is often misunderstood as just "statistics." It is actually three things simultaneously:
-1. **Metric:** It represents a statistical target of **3.4 DPMO** (Defects Per Million Opportunities), which translates to a **99.99966%** defect-free yield.
+1. **Metric:** It represents a statistical target of **3.4 DPMO** (Defects Per Million Opportunities).
+   - Formula: **(Total Defects / Total Opportunities) × 1,000,000**.
+   - Translates to a **99.99966%** defect-free yield.
 2. **Methodology:** It provides a structured roadmap called **DMAIC** (Define, Measure, Analyze, Improve, Control) to solve problems.
 3. **Philosophy:** It focuses on **reducing variation**. The core belief is that customers do not feel "averages"; they feel the variation in the process. A stable, predictable process is the key to quality.
 
@@ -82,7 +88,9 @@ If we accept a 99% accuracy rate (roughly 3.8 Sigma) instead of Six Sigma (99.99
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 **2. History & Context**
-- **Motorola (1986):** Bill Smith developed Six Sigma to solve warranty claims and defect issues. The focus was purely on *Quality Improvement*.
+- **Motorola (1986):** Bill Smith developed Six Sigma. CEO **Bob Galvin** championed the initiative company-wide.
+  - **Result:** Saved **$2.2 Billion** in the first 4 years and $16 Billion over 15 years.
+  - The focus was purely on *Quality Improvement*.
 - **General Electric (1995):** Jack Welch popularized it by tying it to *Financial Results* and leadership promotion. He proved that Six Sigma saves billions of dollars, moving it from the factory floor to the boardroom.
 - **Lean vs. Six Sigma:**
   - **Lean** focuses on removing *Waste (Muda)* and improving *Speed/Flow*.
@@ -188,6 +196,15 @@ Six Sigma phân cấp kỹ năng tương tự như một công trường xây d�
 4. **Master Black Belt (Giáo sư):**
    - Người dạy các Black/Green Belt. Định hướng chiến lược cho công ty.
 
+**Các Tổ Chức Chứng Nhận (Certification Bodies)**
+- **ASQ (American Society for Quality - 1946):** Tổ chức lâu đời nhất, tập trung rộng hơn vào Quản lý Chất lượng.
+- **IASSC (2008):** Tập trung chuyên sâu vào Lean Six Sigma. Chứng nhận Yellow, Green, BlackBelt (Không chứng nhận Project).
+
+**Chi tiết về Thời gian & Tốc độ (Velocity):**
+- **Green Belt:** Dành 30-40% thời gian. Hoàn thành **2-3 dự án/năm**.
+- **Black Belt:** 100% thời gian. Hoàn thành **6-8 dự án/năm**.
+- ⚠️ **Lưu ý:** "Compliance Officer" (Cán bộ tuân thủ) **KHÔNG** phải là một vai trò trong Six Sigma.
+
 **Lãnh đạo (Authority vs Responsibility)**
 - **Champion/Sponsor (Chủ đầu tư/Ngân hàng):**
    - Người "ký séc". Giám đốc tài chính (CFO) hoặc Giám đốc nhà máy.
@@ -219,6 +236,15 @@ Six Sigma hierarchy is similar to a specialized construction team:
    - Mentors Green Belts.
 4. **Master Black Belt (The Professor):**
    - Trains the Engineers and Architects. Sets the strategic roadmap.
+
+**Certification Bodies**
+- **ASQ (American Society for Quality - 1946):** Oldest body, broader focus on Quality Management.
+- **IASSC (2008):** Focused specifically on Lean Six Sigma. Certifies Belts (does not certify projects).
+
+**Time & Velocity Details:**
+- **Green Belt:** Dedicates 30-40% of time. Completes **2-3 projects/year**.
+- **Black Belt:** 100% full-time. Completes **6-8 projects/year**.
+- ⚠️ **Note:** "Compliance Officer" is **NOT** a Six Sigma role.
 
 **Leadership Roles (Authority vs Responsibility)**
 - **Champion/Sponsor (The Banker/Owner):**
@@ -316,6 +342,13 @@ A company is losing $1M/year due to incorrect customer invoices.
   - **Nguyên nhân ngẫu nhiên (Chance/Common Cause):** Biến động tự nhiên của hệ thống.
 - Phát triển ban đầu **Vòng tròn PDCA (Plan-Do-Check-Act)** như một phương pháp khoa học để học hỏi.
 
+**Kaoru Ishikawa (Father of Japanese Quality)**
+- Phát minh biểu đồ **Fishbone (Xương cá)** năm **1945**.
+- Tiên phong mô hình **Quality Circles (Nhóm chất lượng)** năm 1960 tại NTT.
+
+**Mikel Harry**
+- Kiến trúc sư chính của Six Sigma tại Motorola. Đồng sáng tạo **MAIC** (sau này là DMAIC).
+
 **W. Edwards Deming (The System Thinker)**
 - Phổ biến PDCA (sau này gọi là **PDSA - Study** thay vì Check).
 - **Quy tắc 94/6:** Ông dạy rằng **94% vấn đề là do Hệ thống** (trách nhiệm của Ban quản lý) và chỉ **6% là do Nguyên nhân đặc biệt** (trách nhiệm của công nhân).
@@ -328,7 +361,7 @@ A company is losing $1M/year due to incorrect customer invoices.
   1. **Hoạch định (Planning/Design):** Thiết kế quy trình đáp ứng nhu cầu khách hàng.
   2. **Kiểm soát (Control/Monitoring):** Giám sát quy trình để duy trì hiệu suất.
   3. **Cải tiến (Improvement/Breakthrough):** Đạt mức hiệu suất cao hơn.
-- Áp dụng **Nguyên tắc Pareto (80/20)** vào quản lý chất lượng: 80% vấn đề đến từ 20% nguyên nhân.
+- Áp dụng **Nguyên tắc Pareto (80/20)** vào quản lý chất lượng: Ông gọi là **"The Vital Few" (Số ít quan trọng)** và **"The Trivial Many" (Số nhiều không quan trọng)**.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -372,6 +405,13 @@ Công cụ phân loại các bên liên quan để xác định chiến lược 
   - **Chance Cause (Common):** Natural variation inherent in the system.
 - Originally developed the **PDCA cycle (Plan-Do-Check-Act)** as a scientific method for learning.
 
+**Kaoru Ishikawa (Father of Japanese Quality)**
+- Invented the **Fishbone Diagram** in **1945**.
+- Pioneered **Quality Circles** in 1960 at NTT.
+
+**Mikel Harry**
+- Principal architect of Six Sigma at Motorola. Co-created **MAIC** (which evolved into DMAIC).
+
 **W. Edwards Deming (The System Thinker)**
 - Popularized PDCA (later **PDSA** - replacing "Check" with "Study").
 - **The 94/6 Rule:** He taught that **94% of problems are due to the System** (Management's responsibility) and only **6% are due to Special Causes** (Worker's responsibility).
@@ -384,7 +424,7 @@ Công cụ phân loại các bên liên quan để xác định chiến lược 
   1. **Planning (Design):** Designing processes to meet customer needs.
   2. **Control (Monitoring):** Monitoring processes to maintain performance.
   3. **Improvement (Breakthrough):** Achieving higher levels of performance.
-- Applied the **Pareto Principle (80/20)** to quality management: 80% of effects come from 20% of causes.
+- Applied the **Pareto Principle (80/20)** to quality management: He coined the terms **"The Vital Few"** and **"The Trivial Many"**.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -512,6 +552,13 @@ DMAIC là một **vòng lặp khép kín dựa trên dữ liệu**, không phả
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+**DMAIC vs DMADV (DFSS)**
+| Phương pháp | Khi nào dùng? | Mục tiêu |
+|-------------|---------------|----------|
+| **DMAIC** | Quy trình **đang tồn tại** nhưng bị lỗi/kém hiệu quả. | Sửa chữa (Fix). |
+| **DMADV** | Quy trình **chưa tồn tại** hoặc cần thiết kế lại từ đầu. | Thiết kế mới (Design). |
+- **DMADV:** Define - Measure - Analyze - Design - Verify.
+
 **1. DEFINE (Xác Định) - "Vấn đề là gì?"**
 - **Mục tiêu:** Xác định vấn đề, phạm vi, và yêu cầu của khách hàng.
 - **Câu hỏi chính:** Khách hàng cần gì (VOC)? Dự án có hợp lý về tài chính không (Business Case)?
@@ -564,6 +611,13 @@ Tollgate Review xảy ra **giữa các giai đoạn**:
 DMAIC is a **data-driven closed-loop cycle**, not a linear straight line. Each phase ends with a **Tollgate Review** where the Sponsor approves progression.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+**DMAIC vs DMADV (DFSS)**
+| Methodology | When to use? | Goal |
+|-------------|--------------|------|
+| **DMAIC** | Process **exists** but is broken/inefficient. | Fix it. |
+| **DMADV** | Process **does not exist** or needs total redesign. | Design it. |
+- **DMADV:** Define - Measure - Analyze - Design - Verify.
 
 **1. DEFINE - "What is the problem?"**
 - **Goal:** Define the problem, the scope, and customer requirements.
@@ -729,7 +783,12 @@ plt.show()`,
             ],
             explanation_vi: `
 **Lean là gì?**
-Lean tập trung vào **tốc độ (Velocity)** và **loại bỏ lãng phí (Muda)**. Mục tiêu cuối cùng là giảm **Cycle Time** bằng cách loại bỏ các bước không tạo giá trị.
+Lean tập trung vào **tốc độ (Velocity)** và **loại bỏ lãng phí (Muda)**.
+- **Mục tiêu:** Giảm **Cycle Time** bằng cách loại bỏ các bước không tạo giá trị (NVA).
+- **Triết lý:**
+  - **Respect for People:** Trao quyền cho nhân viên, vì họ hiểu quy trình nhất.
+  - **Data-Driven:** Dùng dữ kiện, không dùng giả định.
+  - **Process Thinking:** Hiểu mối liên hệ đầu vào/đầu ra.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -782,6 +841,10 @@ Công cụ nền tảng của Lean. **Phải nhớ cả thuật ngữ tiếng An
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+**Công cụ Lean Nâng cao**
+- **SMED (Single Minute Exchange of Dies):** Giảm thời gian chuyển đổi (setup) xuống dưới 10 phút. (Cải thiện Flow/Velocity).
+- **Poka-Yoke (Mistake Proofing):** Chống sai lỗi. Thiết kế để lỗi không thể xảy ra (VD: Phích cắm 3 chấu chỉ cắm được 1 chiều).
+
 **Key Concepts (Khái Niệm Chính)**
 - **Just-In-Time (JIT):** Sản xuất đúng sản phẩm, đúng thời điểm, đúng số lượng.
 - **Muda:** Thuật ngữ tiếng Nhật cho Lãng phí.
@@ -789,7 +852,12 @@ Công cụ nền tảng của Lean. **Phải nhớ cả thuật ngữ tiếng An
             `,
             explanation_en: `
 **What is Lean?**
-Lean focuses on **speed (Velocity)** and the **elimination of waste (Muda)**. The ultimate goal is to reduce **Cycle Time** by removing Non-Value-Added steps.
+Lean focuses on **speed (Velocity)** and the **elimination of waste (Muda)**.
+- **Goal:** Reduce **Cycle Time** by removing Non-Value-Added steps.
+- **Philosophy:**
+  - **Respect for People:** Empower employees, as they know the process best.
+  - **Data-Driven:** Use facts, not assumptions.
+  - **Process Thinking:** Understand input/output relationships.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -842,7 +910,11 @@ A foundational tool for Lean. **Must know English AND Japanese terms:**
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-**Key Concepts**
+845: **Advanced Lean Tools**
+846: - **SMED (Single Minute Exchange of Dies):** Reduce setup/changeover time to under 10 minutes. (Improves Flow).
+847: - **Poka-Yoke (Mistake Proofing):** Design processes so errors are impossible (e.g., A 3-prong plug only fits one way).
+848: 
+849: **Key Concepts**
 - **Just-In-Time (JIT):** Producing the right part, at the right time, in the right amount.
 - **Muda:** Japanese term for Waste.
 - **Gemba:** "The real place" (where work actually happens).

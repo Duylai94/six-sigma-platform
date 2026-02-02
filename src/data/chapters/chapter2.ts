@@ -67,6 +67,17 @@ Dự án phải tác động đến "Bottom Line" (Lợi nhuận ròng).
 • **Net Present Value (NPV):** Giá trị của dòng tiền tương lai theo đồng tiền hôm nay (tính đến lạm phát/lãi suất).
 
 💡 **Quy tắc 1-10-100:** Phòng ngừa tốn $1, Sửa lỗi nội bộ tốn $10, Lỗi bên ngoài tốn $100.
+
+━━━━━━
+
+**4. Lean & 5S (Review)**
+• **8 Wastes (DOWNTIME) & 5S:** Những khái niệm này (đã học kỹ ở **Chương 1, Module 1.5**) là nền tảng để phát hiện lãng phí ngay trong giai đoạn Define. Hãy ôn lại nếu bạn quên DOWNTIME là gì!
+
+━━━━━━
+
+**5. Các Vai Trò Dự Án (Review)**
+• **Dự án Six Sigma** đòi hỏi sự phối hợp chặt chẽ giữa các vai trò (Sponsor, MBB, BB, GB, Process Owner).
+• Xem lại chi tiết trách nhiệm từng vai trò tại **Chương 1, Module 1.2**.
             `,
             explanation_en: `
 **1. Business Case & Project Selection**
@@ -109,6 +120,17 @@ Projects must impact the "Bottom Line."
 • **Net Present Value (NPV):** The value of future cash flows in today's dollars (accounting for inflation/interest).
 
 💡 **1-10-100 Rule:** Prevention costs $1, Correction (Internal) costs $10, Failure (External) costs $100.
+
+━━━━━━
+
+**4. Lean & 5S (Review)**
+• **8 Wastes & 5S:** These concepts (covered in depth in **Chapter 1, Module 1.5**) are essential for identifying waste during the Define phase. Review them if you don't recall DOWNTIME!
+
+━━━━━━
+
+**5. Project Roles (Review)**
+• Successful projects require clear roles (Sponsor, Process Owner, Belts).
+• Refer to **Chapter 1, Module 1.2** for the full detailed breakdown of responsibilities.
             `,
             recommended_tools_en: ["Project Selection Matrix", "Pareto Chart"],
             python_focus_en: ["Calculation"] as string[],
@@ -349,6 +371,17 @@ Không phải tính năng nào cũng tạo ra sự hài lòng giống nhau.
 - Khách hàng không ngờ tới.
 - Thiếu cũng không sao, nhưng có thì **Wow!**.
 - *VD:* Quà tặng bất ngờ, Gói nâng cấp miễn phí.
+
+━━━━━━
+
+**4. Công Cụ VOC Bổ Sung (Kiến thức thi)**
+• **Affinity Diagram (Biểu đồ tương đồng):** Dùng để nhóm hàng trăm ý tưởng VOC rời rạc thành các chủ đề chung (KJ Method).
+• **Operational Definitions (Định nghĩa vận hành):** Đảm bảo mọi người đo lường giống nhau. "Trễ" là gì? >5 phút hay >1 giây? Phải rõ ràng.
+• **Critical to X (CTX):**
+  - **CTQ (Quality):** Chất lượng sản phẩm.
+  - **CTC (Cost):** Ngân sách/Giá thành.
+  - **CTS (Safety):** An toàn.
+  - **CTD (Delivery):** Giao hàng đúng hạn.
             `,
             explanation_en: `
 **1. Voice of Customer (VOC)**
@@ -392,6 +425,17 @@ Not all features create satisfaction equally.
 - If missing: Customer is **Neutral** (didn't expect it).
 - If present: Customer is **Delighted**.
 - *Ex:* Free upgrade, Unexpected gift.
+
+━━━━━━
+
+**4. Additional VOC Tools (Exam Concepts)**
+• **Affinity Diagram:** Used to group hundreds of scattered VOC ideas into common themes (KJ Method).
+• **Operational Definitions:** Ensuring everyone measures the same way. What is "Late"? >5 mins or >1 sec? Must be precise.
+• **Critical to X (CTX):**
+  - **CTQ (Quality):** Product characteristics.
+  - **CTC (Cost):** Budget/Price.
+  - **CTS (Safety):** Safety risks.
+  - **CTD (Delivery):** On-time delivery.
             `,
             recommended_tools_en: ["CTQ Tree", "Kano Survey", "Likert Scale"],
             python_focus_en: ["Data Visualization"],
@@ -565,6 +609,22 @@ Cái nhìn tổng quan (30,000-foot view) để xác minh phạm vi.
 - **C**ustomers: Ai nhận đầu ra? (Nội bộ hoặc Bên ngoài).
 
 💡 *Mẹo:* SIPOC thường được điền ngược: **P → O → C → I → S** để đảm bảo quy trình thực sự phục vụ khách hàng.
+
+━━━━━━
+
+**3. Quản Lý Bên Liên Quan (Stakeholder Management)**
+• **Stakeholder Analysis & Power/Interest Grid:** Xem lại **Chương 1, Module 1.3** để biết cách lập bản đồ các bên liên quan.
+• **Kế hoạch Truyền thông:** Phải xác định Ai cần thông tin gì, khi nào, và qua kênh nào.
+
+━━━━━━
+
+**4. Tollgate Review (Cửa Kiểm Soát)**
+• **Mô hình Tuckman (Forming - Storming...):** Chi tiết tại **Chương 1, Module 1.3**.
+• **Tollgate Checklist:** Ở giai đoạn này, bạn CẦN đáp ứng:
+  1. Charter đã được ký?
+  2. VOC đã chuyển thành CTQ?
+  3. SIPOC đã hoàn tất?
+  4. Sponsor đã phê duyệt "Go"?
             `,
             explanation_en: `
 **1. Project Charter Elements**
@@ -592,6 +652,22 @@ A high-level view (30,000-foot view) of the process used to verify scope.
 - **C**ustomers: Who receives the outputs?
 
 💡 *Note:* SIPOC is often filled out in reverse: **P → O → C → I → S** to ensure the process serves the customer.
+
+━━━━━━
+
+**3. Stakeholder Management**
+• **Stakeholder Analysis & Power/Interest Grid:** Refer to **Chapter 1, Module 1.3** for the matrix and strategy.
+• **Communication Plan:** Define Who needs What info, When, and How.
+
+━━━━━━
+
+**4. Tollgate Review**
+• **Tuckman's Team Stages:** Detailed in **Chapter 1, Module 1.3**.
+• **Define Tollgate Checklist:** Before moving to Measure, ensure:
+  1. Is the Charter signed?
+  2. Are VOCs translated to CTQs?
+  3. Is the SIPOC complete?
+  4. Did the Sponsor vote "Go"?
             `,
             recommended_tools_en: ["SIPOC Diagram", "SMART Checklist", "Project Charter Template"],
             python_focus_en: ["Visualization"],
@@ -759,6 +835,13 @@ Bạn phải thuộc lòng các ký hiệu ANSI này cho kỳ thi:
 - **Takt Time:** Nhịp đập của khách hàng.
   - *Công thức:* Takt = Thời gian sản xuất khả dụng / Nhu cầu khách hàng.
   - *Quy tắc:* Nếu **Cycle Time > Takt Time** → Bạn không kịp giao hàng (Bottle-neck).
+
+━━━━━━
+
+**5. Công Cụ Mapping Nâng Cao (Kiến thức thi)**
+• **Spaghetti Diagram:** Vẽ lại chuyển động vật lý thực tế của người/vật. Mục tiêu là phát hiện lãng phí Di chuyển (Transportation/Motion).
+• **Value Stream Map (VSM):** Khác với Process Map thường ở chỗ nó có luồng thông tin (Information Flow) và trục thời gian (Timeline).
+• **Gemba Walk:** "Đi đến tận nơi". Không ngồi văn phòng đoán mò, mà phải xuống xưởng quan sát quy trình thật.
             `,
             explanation_en: `
 **1. Standard Process Map Symbols**
@@ -793,6 +876,13 @@ Memorize these ANSI symbols:
 - **Takt Time:** The "heartbeat" of customer demand.
   - *Formula:* Takt = Available Production Time / Customer Demand.
   - *Rule:* If **Cycle Time > Takt Time**, you cannot meet demand (Need more resources/efficiency).
+
+━━━━━━
+
+**5. Advanced Mapping Tools (Exam Concepts)**
+• **Spaghetti Diagram:** Traces actual physical movement. Visualizes Transportation/Motion waste.
+• **Value Stream Map (VSM):** Differs from Process Map by including Information Flow and a Timeline.
+• **Gemba Walk:** "Go to the real place." Observing the actual process where work is done, not assuming from a desk.
             `,
             recommended_tools_en: ["Swimlane Diagram", "Value Stream Map", "Stopwatch"],
             python_focus_en: ["Metric Calculation"],
@@ -973,6 +1063,12 @@ Bạn phải nhớ ý nghĩa của điểm 1 và 10:
   1. Giảm **Occurrence** (Tốt nhất): Ngăn chặn nguyên nhân (Poka-yoke).
   2. Tăng **Detection** (Khá): Thêm kiểm tra/cảm biến.
   3. Giảm **Severity** (Khó nhất): Phải đổi thiết kế sản phẩm.
+
+━━━━━━
+
+**4. Kết Nối Giai Đoạn Control (Control Phase Connection)**
+• **Mistake Proofing (Poka-yoke):** Giải pháp tối thượng để giảm Occurrence về 1. (VD: Phích cắm 3 chấu không thể cắm ngược).
+• **Control Plans:** Kết quả của FMEA sẽ được nhập vào Control Plan trong pha Control để theo dõi dài hạn.
             `,
             explanation_en: `
 **1. Definitions & Types**
@@ -1009,6 +1105,12 @@ Memorize the extremes:
   1. **Reduce Occurrence** (Best): Prevent the cause (Poka-yoke).
   2. **Improve Detection**: Add sensors/inspection.
   3. **Reduce Severity** (Hardest): Change the physical design.
+
+━━━━━━
+
+**4. Control Phase Connection**
+• **Mistake Proofing (Poka-yoke):** The ultimate solution to reduce Occurrence to 1. (Ex: A 3-pin plug cannot be inserted backwards).
+• **Control Plans:** FMEA outputs are fed into the Control Plan in the Control phase for long-term monitoring.
             `,
             recommended_tools_en: ["FMEA Template", "Risk Assessment Matrix"],
             python_focus_en: ["Risk Analysis"],
