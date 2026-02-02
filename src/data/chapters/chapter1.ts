@@ -910,11 +910,11 @@ A foundational tool for Lean. **Must know English AND Japanese terms:**
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-845: **Advanced Lean Tools**
-846: - **SMED (Single Minute Exchange of Dies):** Reduce setup/changeover time to under 10 minutes. (Improves Flow).
-847: - **Poka-Yoke (Mistake Proofing):** Design processes so errors are impossible (e.g., A 3-prong plug only fits one way).
-848: 
-849: **Key Concepts**
+**Advanced Lean Tools**
+- **SMED (Single Minute Exchange of Dies):** Reduce setup/changeover time to under 10 minutes. (Improves Flow).
+- **Poka-Yoke (Mistake Proofing):** Design processes so errors are impossible (e.g., A 3-prong plug only fits one way).
+
+**Key Concepts**
 - **Just-In-Time (JIT):** Producing the right part, at the right time, in the right amount.
 - **Muda:** Japanese term for Waste.
 - **Gemba:** "The real place" (where work actually happens).
