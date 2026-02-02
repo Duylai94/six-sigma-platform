@@ -8,9 +8,10 @@ interface FormattedTextProps {
 
 // Import Mermaid dynamically or statically (client component)
 import { MermaidDiagram } from "./MermaidDiagram";
+import { LessonReference } from "./LessonReference";
 import katex from "katex";
 
-type BlockType = 'text' | 'table' | 'mermaid';
+type BlockType = 'text' | 'table' | 'mermaid' | 'lesson_ref';
 type ContentBlock = { type: BlockType; content: string };
 
 export function FormattedText({ text, className }: FormattedTextProps) {
@@ -24,6 +25,10 @@ export function FormattedText({ text, className }: FormattedTextProps) {
             {blocks.map((block, index) => {
                 if (block.type === 'mermaid') {
                     return <MermaidDiagram key={index} chart={block.content} />;
+                }
+
+                if (block.type === 'lesson_ref') {
+                    return <LessonReference key={index} id={block.content} />;
                 }
 
                 if (block.type === 'table') {
@@ -117,10 +122,13 @@ function parseMarkdown(text: string): ContentBlock[] {
             if (trimmed.startsWith("```mermaid")) {
                 flush('text');
                 state = 'CODE';
-                // Do NOT include the fence line in the content for MermaidDiagram
-                // But we must handle indentation if it exists?
-                // Actually MermaidDiagram expects just the graph def.
-                // So skipping this line is correct.
+            }
+            // Check for Lesson Reference [[ref:id]]
+            else if (trimmed.match(/^\[\[ref:[a-zA-Z0-9_]+\]\]$/)) {
+                flush('text');
+                const refId = trimmed.replace(/^\[\[ref:/, '').replace(/\]\]$/, '');
+                // Push directly as a block
+                blocks.push({ type: 'lesson_ref', content: refId });
             }
             // Check for Table Start
             else if (isTableStart(line, lines[i + 1])) {

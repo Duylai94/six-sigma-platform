@@ -71,13 +71,12 @@ Dự án phải tác động đến "Bottom Line" (Lợi nhuận ròng).
 ━━━━━━
 
 **4. Lean & 5S (Review)**
-• **8 Wastes (DOWNTIME) & 5S:** Những khái niệm này (đã học kỹ ở **Chương 1, Module 1.5**) là nền tảng để phát hiện lãng phí ngay trong giai đoạn Define. Hãy ôn lại nếu bạn quên DOWNTIME là gì!
+[[ref:mod_foundations_05]]
 
 ━━━━━━
 
 **5. Các Vai Trò Dự Án (Review)**
-• **Dự án Six Sigma** đòi hỏi sự phối hợp chặt chẽ giữa các vai trò (Sponsor, MBB, BB, GB, Process Owner).
-• Xem lại chi tiết trách nhiệm từng vai trò tại **Chương 1, Module 1.2**.
+[[ref:mod_foundations_02]]
             `,
             explanation_en: `
 **1. Business Case & Project Selection**
@@ -124,13 +123,12 @@ Projects must impact the "Bottom Line."
 ━━━━━━
 
 **4. Lean & 5S (Review)**
-• **8 Wastes & 5S:** These concepts (covered in depth in **Chapter 1, Module 1.5**) are essential for identifying waste during the Define phase. Review them if you don't recall DOWNTIME!
+[[ref:mod_foundations_05]]
 
 ━━━━━━
 
 **5. Project Roles (Review)**
-• Successful projects require clear roles (Sponsor, Process Owner, Belts).
-• Refer to **Chapter 1, Module 1.2** for the full detailed breakdown of responsibilities.
+[[ref:mod_foundations_02]]
             `,
             recommended_tools_en: ["Project Selection Matrix", "Pareto Chart"],
             python_focus_en: ["Calculation"] as string[],
@@ -613,13 +611,13 @@ Cái nhìn tổng quan (30,000-foot view) để xác minh phạm vi.
 ━━━━━━
 
 **3. Quản Lý Bên Liên Quan (Stakeholder Management)**
-• **Stakeholder Analysis & Power/Interest Grid:** Xem lại **Chương 1, Module 1.3** để biết cách lập bản đồ các bên liên quan.
+[[ref:mod_foundations_03]]
 • **Kế hoạch Truyền thông:** Phải xác định Ai cần thông tin gì, khi nào, và qua kênh nào.
 
 ━━━━━━
 
 **4. Tollgate Review (Cửa Kiểm Soát)**
-• **Mô hình Tuckman (Forming - Storming...):** Chi tiết tại **Chương 1, Module 1.3**.
+[[ref:mod_foundations_03]]
 • **Tollgate Checklist:** Ở giai đoạn này, bạn CẦN đáp ứng:
   1. Charter đã được ký?
   2. VOC đã chuyển thành CTQ?
@@ -656,13 +654,13 @@ A high-level view (30,000-foot view) of the process used to verify scope.
 ━━━━━━
 
 **3. Stakeholder Management**
-• **Stakeholder Analysis & Power/Interest Grid:** Refer to **Chapter 1, Module 1.3** for the matrix and strategy.
+[[ref:mod_foundations_03]]
 • **Communication Plan:** Define Who needs What info, When, and How.
 
 ━━━━━━
 
 **4. Tollgate Review**
-• **Tuckman's Team Stages:** Detailed in **Chapter 1, Module 1.3**.
+[[ref:mod_foundations_03]]
 • **Define Tollgate Checklist:** Before moving to Measure, ensure:
   1. Is the Charter signed?
   2. Are VOCs translated to CTQs?
